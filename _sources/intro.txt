@@ -17,7 +17,7 @@ Pynufft reimplements the MATLAB version of min-max NUFFT_, with the following fe
 
 - Provides 1D/2D/3D examples for further developments.
 
-- (Experimental) Supporting NUFFT on the NVIDIA's graphic processing unit (GPU).
+- New in version 3.2.9 (Experimental) Supporting NUFFT on the NVIDIA's graphic processing unit (GPU). It requires scikit-cuda and python-cuda-cffi.
 
 Users of pynufft should be familiar with discrete Fourier transform (DFT). More information can be found in the paper:
 
