@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A 2D example &mdash; pynufft 0.3.2.8 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="pynufft 0.3.2.8 documentation" href="../index.html"/>
+        <link rel="up" title="Quick start" href="../getstart.html"/>
+        <link rel="next" title="Miscellaneousness" href="../misc.html"/>
+        <link rel="prev" title="An 1D example" href="example.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> pynufft
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../getstart.html">Quick start</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example.html">An 1D example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">A 2D example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../misc.html">Miscellaneousness</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">pynufft</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../getstart.html">Quick start</a> &raquo;</li>
+      
+    <li>A 2D example</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/quickstart/more2D.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-2d-example">
+<h1>A 2D example<a class="headerlink" href="#a-2d-example" title="Permalink to this headline">¶</a></h1>
+<p><strong>Import pynufft module</strong></p>
+<p>In python environment, import pynufft module:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">pynufft.pynufft</span> <span class="kn">as</span> <span class="nn">pnft</span>
+</pre></div>
+</div>
+<p>Create a pynufft object NufftObj:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">NufftObj</span> <span class="o">=</span> <span class="n">pnft</span><span class="o">.</span><span class="n">NUFFT</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Loading the X-Y locations(&quot;om&quot;)</strong></p>
+<p>It requires the x-y coordinates of <span class="math">\(M\)</span> points to plan NufftObj.</p>
+<p>A 2D trajectory from my PROPELLER MRI research is provided in pynufft package.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># load the data folder</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="c1"># find the relative path of data folder</span>
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;pynufft&#39;</span><span class="p">,</span> <span class="s1">&#39;data/&#39;</span><span class="p">)</span>
+
+<span class="c1"># now load the path om</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="o">+</span><span class="s1">&#39;om2D.npz&#39;</span><span class="p">)[</span><span class="s1">&#39;arr_0&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The <span class="math">\(M\)</span> locations of non-uniform samples (<span class="math">\(om\)</span>) is an M x 2 numpy.ndarray</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>print(om)
+
+[[-3.12932086  0.28225246]
+[-3.1047771   0.28225246]
+[-3.08023357  0.28225246]
+ ....
+[-2.99815702  0.76063216]
+[-3.02239823  0.76447165]
+[-3.04663992  0.76831114]]
+</pre></div>
+</div>
+<p>You can see the 2D <span class="math">\(M\)</span> locations by plotting <span class="math">\(x\)</span> versus <span class="math">\(y\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">pyplot</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">om</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2D trajectory of M points&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As can be seen in <a class="reference internal" href="#propeller-trajectory"><span>Fig. 6</span></a>:</p>
+<div class="figure" id="id1">
+<span id="propeller-trajectory"></span><a class="reference internal image-reference" href="../_images/propeller_trajectory.png"><img alt="../_images/propeller_trajectory.png" src="../_images/propeller_trajectory.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">The 2D PROPELLER trajectory of M points.</span></p>
+</div>
+<p><strong>Planning</strong></p>
+<p>Provided <span class="math">\(om\)</span>, the size of time series (<span class="math">\(Nd\)</span>), oversampled grid (<span class="math">\(Kd\)</span>), and interpolatro size (<span class="math">\(Jd\)</span>) are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can plan NufftObj with these parameters:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Forward transform</strong></p>
+<p>Now NufftObj has been prepared and is ready for computations. Let continue with an example.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.misc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="kn">as</span> <span class="nn">cm</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">))</span>
+
+<span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="o">...</span><span class="p">])</span>
+
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This display the image <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a>.</p>
+<div class="figure" id="id2">
+<span id="d-example-image"></span><a class="reference internal image-reference" href="../_images/2d_example_image.png"><img alt="../_images/2d_example_image.png" src="../_images/2d_example_image.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">The 2D image from scipy.misc.face()</span></p>
+</div>
+<p>NufftObj transform the time_data to non-Cartesian locations:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The 2D non-Cartesian spectrum (<span class="math">\(y\)</span>) cannt be directly visualized. However, regular spectrum can be obtained by &quot;regridding&quot; of <span class="math">\(y\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span>   <span class="n">NufftObj</span><span class="o">.</span><span class="n">y2k</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span>
+<span class="n">k_show</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">k_show</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1e+3</span><span class="p">))</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This shows the pre-normalized spectrum. <a class="reference internal" href="#pre-compensated-spectrum"><span>Fig. 8</span></a>.</p>
+<div class="figure" id="id3">
+<span id="pre-compensated-spectrum"></span><a class="reference internal image-reference" href="../_images/pre_compensated.png"><img alt="../_images/pre_compensated.png" src="../_images/pre_compensated.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Pre-compensated spectrum of non-Cartesian spectrum of <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a></span></p>
+</div>
+<p>Note: A pre-compensated spectrum leads to adjoint nufft&quot;, which cannot recover the image. See below.</p>
+<p><strong>Adjoint transform</strong>: <em>adjoint()</em> method</p>
+<p>The adjoint transform is the reverse of forward transform:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure" id="id4">
+<span id="adjoint"></span><a class="reference internal image-reference" href="../_images/adjoint_2D.png"><img alt="../_images/adjoint_2D.png" src="../_images/adjoint_2D.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Adjoint transform of non-Cartesian spectrum does NOT recover <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a></span></p>
+</div>
+<p>There are some distortions in the adjoint operation <a class="reference internal" href="#adjoint"><span>Fig. 9</span></a>. It does NOT recover the original image in <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a>.</p>
+<p><strong>Inverse transform through density compensation</strong>: <em>inverse_DC()</em> method</p>
+<p>A more sensible computation is density compensated image. Using the inverse_DC() method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x3</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">inverse_DC</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">x3_display</span> <span class="o">=</span> <span class="n">x3</span><span class="o">*</span><span class="mf">1.0</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x3</span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x3_display</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure" id="id5">
+<span id="d-inverse-dc"></span><a class="reference internal image-reference" href="../_images/2D_inverse_DC.png"><img alt="../_images/2D_inverse_DC.png" src="../_images/2D_inverse_DC.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Inverse transform through density compensated spectrum.</span></p>
+</div>
+<p><a class="reference internal" href="#d-inverse-dc"><span>Fig. 10</span></a> is more close to <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a> as the uneven density of non-Cartesian samples has been corrected.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">pynufft.pynufft</span> <span class="kn">as</span> <span class="nn">pnft</span>
+<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">pnft</span><span class="o">.</span><span class="n">NUFFT</span><span class="p">()</span>
+<span class="c1"># load the data folder</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="c1"># find the relative path of data folder</span>
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;pynufft&#39;</span><span class="p">,</span> <span class="s1">&#39;data/&#39;</span><span class="p">)</span>
+
+<span class="c1"># now load the om locations</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="o">+</span><span class="s1">&#39;om2D.npz&#39;</span><span class="p">)[</span><span class="s1">&#39;arr_0&#39;</span><span class="p">]</span>
+
+<span class="c1"># om is an Mx2 numpy.ndarray</span>
+<span class="k">print</span><span class="p">(</span><span class="n">om</span><span class="p">)</span>
+
+<span class="c1"># display om</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">pyplot</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">om</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2D trajectory of M points&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span> <span class="c1"># image dimension</span>
+<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span> <span class="c1"># k-spectrum dimension</span>
+<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># interpolator size</span>
+
+<span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span> 
+
+
+<span class="c1"># load image from scipy.misc.face()</span>
+<span class="kn">import</span> <span class="nn">scipy.misc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="kn">as</span> <span class="nn">cm</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">))</span>
+<span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="o">...</span><span class="p">])</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Forward NUFFT transform</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Adjoint NUFFT</span>
+<span class="n">k</span> <span class="o">=</span>   <span class="n">NufftObj</span><span class="o">.</span><span class="n">y2k</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span>
+<span class="n">k_show</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">k_show</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1e+3</span><span class="p">))</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Inverse transform using density compensation inverse_DC()</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">inverse_DC</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">x3_display</span> <span class="o">=</span> <span class="n">x3</span><span class="o">*</span><span class="mf">1.0</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x3</span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x3_display</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../misc.html" class="btn btn-neutral float-right" title="Miscellaneousness" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="example.html" class="btn btn-neutral" title="An 1D example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jyh-Miin Lin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.2.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

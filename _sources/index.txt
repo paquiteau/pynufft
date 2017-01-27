@@ -1,0 +1,32 @@
+.. pynufft Documentation master file.
+
+##################################
+Welcome to pynufft's Documentation
+##################################
+
+.. toctree::
+   :maxdepth: 2
+   
+   intro
+   installation
+   getstart
+   misc
+
+
+Indices and tables
+==================
+
+   * :ref:`genindex`
+   * :ref:`modindex`
+   * :ref:`search`   
+   
+..
+
+   gridding_regridding
+   density_compensation
+   advance
+   QandA
+   
+   
+
+
