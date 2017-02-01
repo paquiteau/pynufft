@@ -82,7 +82,8 @@
             
             
                 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Introduction</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#what-s-new">What's new</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduction/nufft.html">Non-uniform fast Fourier transform (NUFFT)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="introduction/installation.html">Installation</a></li>
 </ul>
@@ -143,11 +144,33 @@
 <li>Based on numerical libraries, such as Numpy, Scipy (matplotlib for displaying examples).</li>
 <li>Provides the python interface including forward transform, adjoint transform and other routines.</li>
 <li>Provides 1D/2D/3D examples for further developments.</li>
-<li>New in version 3.2.9 (Experimental) Supporting NUFFT on the NVIDIA's graphic processing unit (GPU). It requires scikit-cuda and python-cuda-cffi.</li>
 </ul>
 <p>Users of pynufft should be familiar with discrete Fourier transform (DFT). More information can be found in the paper:</p>
 <p><em>Fessler JA, Sutton BP. Nonuniform fast Fourier transforms using min-max interpolation. IEEE Trans Signal Process 2003;51(2):560-574.</em></p>
 <p>which details the min-max interpolator for NUFFT.</p>
+</div>
+<div class="section" id="what-s-new">
+<h1>What's new<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>New in version 3.2.9: Experimentally support  NUFFT on the NVIDIA's graphic processing unit (GPU). It requires pycuda, scikit-cuda, and python-cuda-cffi.</li>
+</ul>
+<dl class="docutils">
+<dt>An experimental class gpuNUFFT supports 1D, 2D, and 3D nufft. Uninstall previous version and install the latest v0.3.2.9::</dt>
+<dd>pip uninstall pynufft
+pip install pynufft</dd>
+</dl>
+<p>Import the gpu class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pynufft.pynufft_gpu</span> <span class="kn">as</span> <span class="nn">pnft</span>
+<span class="n">NufftObj</span><span class="o">=</span><span class="n">pnft</span><span class="o">.</span><span class="n">gpuNUFFT</span><span class="p">()</span>
+<span class="n">NufftObj</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use the plan() as the same way as CPU pynufft. Forward and adjoint NUFFT work on Pycuda gpuarray.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pycuda.gpuarray</span>
+<span class="n">gpu_image</span><span class="o">=</span><span class="n">pycuda</span><span class="o">.</span><span class="n">gpuarray</span><span class="o">.</span><span class="n">to_gpu</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A tutorial document for gpuNUFFT will be provided soon.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction/nufft.html">Non-uniform fast Fourier transform (NUFFT)</a></li>
