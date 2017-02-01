@@ -20,8 +20,12 @@ Indices and tables
    * :ref:`modindex`
    * :ref:`search`   
    
-..
+Contact information
+===================
 
+jyhmiinlin@gmail.com
+   
+..
    gridding_regridding
    density_compensation
    advance
