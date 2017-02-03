@@ -83,6 +83,7 @@
             
             
                 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatnew.html">What's new</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../getstart.html">Quick start</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="">An 1D example</a></li>
@@ -177,10 +178,10 @@
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This generates a time series <a class="reference internal" href="#box-function"><span>Fig. 2</span></a>.</p>
+<p>This generates a time series <a class="reference internal" href="#box-function"><span>Fig. 1</span></a>.</p>
 <div class="figure" id="id1">
 <span id="box-function"></span><a class="reference internal image-reference" href="../_images/box_function.png"><img alt="../_images/box_function.png" src="../_images/box_function.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">A box function time series</span></p>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">A box function time series</span></p>
 </div>
 <p>NufftObj transform the time_data to non-Cartesian locations:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">time_data</span><span class="p">)</span>
@@ -193,7 +194,7 @@
 <p>This display the non-Cartesian spectrum <code class="xref std std-numref docutils literal"><span class="pre">non_Cartesian_spectrum</span></code>.</p>
 <div class="figure" id="id2">
 <span id="non-cartesian-spectrum"></span><a class="reference internal image-reference" href="../_images/non_Cartesian_spectrum.png"><img alt="../_images/non_Cartesian_spectrum.png" src="../_images/non_Cartesian_spectrum.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Non-Cartesian spectrum of box function in <a class="reference internal" href="#box-function"><span>Fig. 2</span></a>. Note the non-uniform density.</span></p>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Non-Cartesian spectrum of box function in <a class="reference internal" href="#box-function"><span>Fig. 1</span></a>. Note the non-uniform density.</span></p>
 </div>
 <p><strong>Adjoint transform</strong></p>
 <p>The adjoint transform is the reverse of forward transform:</p>
@@ -206,10 +207,10 @@
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>There are some distortions in the adjoint operation <a class="reference internal" href="more2D.html#adjoint"><span>Fig. 9</span></a>. It does NOT recover the rectangular function in <a class="reference internal" href="#box-function"><span>Fig. 2</span></a>.</p>
+<p>There are some distortions in the adjoint operation <a class="reference internal" href="more2D.html#adjoint"><span>Fig. 8</span></a>. It does NOT recover the rectangular function in <a class="reference internal" href="#box-function"><span>Fig. 1</span></a>.</p>
 <div class="figure" id="id3">
 <span id="adjoint"></span><a class="reference internal image-reference" href="../_images/adjoint.png"><img alt="../_images/adjoint.png" src="../_images/adjoint.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Adjoint transform of non-Cartesian spectrum.</span></p>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Adjoint transform of non-Cartesian spectrum.</span></p>
 </div>
 <p><strong>Inverse transform through density compensation</strong></p>
 <p>The inverse can be approximately given by inverse_DC() method</p>
@@ -224,9 +225,9 @@
 </div>
 <div class="figure" id="id4">
 <span id="inverse-dc"></span><a class="reference internal image-reference" href="../_images/inverse_DC.png"><img alt="../_images/inverse_DC.png" src="../_images/inverse_DC.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Inverse transform through density compensated spectrum.</span></p>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Inverse transform through density compensated spectrum.</span></p>
 </div>
-<p><code class="xref std std-numref docutils literal"><span class="pre">inverse_DC</span></code> is more close to <a class="reference internal" href="#box-function"><span>Fig. 2</span></a> as the uneven density of non-Cartesian samples has been corrected.</p>
+<p><code class="xref std std-numref docutils literal"><span class="pre">inverse_DC</span></code> is more close to <a class="reference internal" href="#box-function"><span>Fig. 1</span></a> as the uneven density of non-Cartesian samples has been corrected.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">pynufft.pynufft</span> <span class="kn">as</span> <span class="nn">pnft</span>
 

@@ -23,33 +23,4 @@ Users of pynufft should be familiar with discrete Fourier transform (DFT). More 
 
 which details the min-max interpolator for NUFFT. 
 
-**New in version 3.2.9**
-
-- Experimental support of NVIDIA's graphic processing unit (GPU). It requires pycuda, scikit-cuda, and python-cuda-cffi. More tests are required.
-
-The experimental class gpuNUFFT supports 1D, 2D, and 3D nufft. 
-
-Uninstall previous versions and install the latest v0.3.2.9::
-
-    pip uninstall pynufft
-    pip install pynufft
-    
-Import the gpu class::
-
-    import pynufft.pynufft_gpu as pnft
-    NufftObj=pnft.gpuNUFFT()
-    NufftObj(om, Nd, Kd, Jd) 
-    
-Use the plan() as the same way as CPU pynufft. Forward and adjoint NUFFT work on Pycuda gpuarray.::
-
-    import pycuda.gpuarray
-    gpu_image=pycuda.gpuarray.to_gpu(image)
-
-A tutorial document for gpuNUFFT will be provided soon.    
-
-.. toctree::
-   :maxdepth: 2
-   
-   introduction/nufft
-   introduction/installation
   
