@@ -24,3 +24,9 @@ Users of pynufft should be familiar with discrete Fourier transform (DFT). More 
 which details the min-max interpolator for NUFFT. 
 
   
+.. toctree::
+   :maxdepth: 2
+   
+   
+   introduction/installation
+   introduction/nufft

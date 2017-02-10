@@ -182,10 +182,10 @@
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>As can be seen in <a class="reference internal" href="#propeller-trajectory"><span>Fig. 5</span></a>:</p>
+<p>As can be seen in <a class="reference internal" href="#propeller-trajectory"><span>Fig. 6</span></a>:</p>
 <div class="figure" id="id1">
 <span id="propeller-trajectory"></span><a class="reference internal image-reference" href="../_images/propeller_trajectory.png"><img alt="../_images/propeller_trajectory.png" src="../_images/propeller_trajectory.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The 2D PROPELLER trajectory of M points.</span></p>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">The 2D PROPELLER trajectory of M points.</span></p>
 </div>
 <p><strong>Planning</strong></p>
 <p>Provided <span class="math">\(om\)</span>, the size of time series (<span class="math">\(Nd\)</span>), oversampled grid (<span class="math">\(Kd\)</span>), and interpolatro size (<span class="math">\(Jd\)</span>) are:</p>
@@ -212,10 +212,10 @@
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This display the image <a class="reference internal" href="#d-example-image"><span>Fig. 6</span></a>.</p>
+<p>This display the image <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a>.</p>
 <div class="figure" id="id2">
 <span id="d-example-image"></span><a class="reference internal image-reference" href="../_images/2d_example_image.png"><img alt="../_images/2d_example_image.png" src="../_images/2d_example_image.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">The 2D image from scipy.misc.face()</span></p>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">The 2D image from scipy.misc.face()</span></p>
 </div>
 <p>NufftObj transform the time_data to non-Cartesian locations:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
@@ -229,10 +229,10 @@
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This shows the pre-normalized spectrum. <a class="reference internal" href="#pre-compensated-spectrum"><span>Fig. 7</span></a>.</p>
+<p>This shows the pre-normalized spectrum. <a class="reference internal" href="#pre-compensated-spectrum"><span>Fig. 8</span></a>.</p>
 <div class="figure" id="id3">
 <span id="pre-compensated-spectrum"></span><a class="reference internal image-reference" href="../_images/pre_compensated.png"><img alt="../_images/pre_compensated.png" src="../_images/pre_compensated.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Pre-compensated spectrum of non-Cartesian spectrum of <a class="reference internal" href="#d-example-image"><span>Fig. 6</span></a></span></p>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Pre-compensated spectrum of non-Cartesian spectrum of <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a></span></p>
 </div>
 <p>Note: A pre-compensated spectrum leads to adjoint nufft&quot;, which cannot recover the image. See below.</p>
 <p><strong>Adjoint transform</strong>: <em>adjoint()</em> method</p>
@@ -244,9 +244,9 @@
 </div>
 <div class="figure" id="id4">
 <span id="adjoint"></span><a class="reference internal image-reference" href="../_images/adjoint_2D.png"><img alt="../_images/adjoint_2D.png" src="../_images/adjoint_2D.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Adjoint transform of non-Cartesian spectrum does NOT recover <a class="reference internal" href="#d-example-image"><span>Fig. 6</span></a></span></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Adjoint transform of non-Cartesian spectrum does NOT recover <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a></span></p>
 </div>
-<p>There are some distortions in the adjoint operation <a class="reference internal" href="#adjoint"><span>Fig. 8</span></a>. It does NOT recover the original image in <a class="reference internal" href="#d-example-image"><span>Fig. 6</span></a>.</p>
+<p>There are some distortions in the adjoint operation <a class="reference internal" href="#adjoint"><span>Fig. 9</span></a>. It does NOT recover the original image in <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a>.</p>
 <p><strong>Inverse transform through density compensation</strong>: <em>inverse_DC()</em> method</p>
 <p>A more sensible computation is density compensated image. Using the inverse_DC() method:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x3</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">inverse_DC</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -257,9 +257,9 @@
 </div>
 <div class="figure" id="id5">
 <span id="d-inverse-dc"></span><a class="reference internal image-reference" href="../_images/2D_inverse_DC.png"><img alt="../_images/2D_inverse_DC.png" src="../_images/2D_inverse_DC.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Inverse transform through density compensated spectrum.</span></p>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Inverse transform through density compensated spectrum.</span></p>
 </div>
-<p><a class="reference internal" href="#d-inverse-dc"><span>Fig. 9</span></a> is more close to <a class="reference internal" href="#d-example-image"><span>Fig. 6</span></a> as the uneven density of non-Cartesian samples has been corrected.</p>
+<p><a class="reference internal" href="#d-inverse-dc"><span>Fig. 10</span></a> is more close to <a class="reference internal" href="#d-example-image"><span>Fig. 7</span></a> as the uneven density of non-Cartesian samples has been corrected.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">pynufft.pynufft</span> <span class="kn">as</span> <span class="nn">pnft</span>
 <span class="n">NufftObj</span> <span class="o">=</span> <span class="n">pnft</span><span class="o">.</span><span class="n">NUFFT</span><span class="p">()</span>
