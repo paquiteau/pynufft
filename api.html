@@ -1,0 +1,803 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API documentaiton &mdash; PyNUFFT 0.3.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="PyNUFFT 0.3.3 documentation" href="index.html"/>
+        <link rel="prev" title="Version history" href="versionhistory.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="whatnew.html">What's new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstart.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneousness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="versionhistory.html">Version history</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API documentaiton</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#helper-functions">Helper functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-nufft-on-heterogeneous-platforms">Class NUFFT on heterogeneous platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-nufft-on-numpy-scipy">Class NUFFT on Numpy/Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpu-solvers">CPU solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hsa-solvers">HSA solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metaprogramming-subroutines-using-reikna-pyopencl-pycuda">Metaprogramming subroutines (using reikna, pyopencl, pycuda)</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyNUFFT</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>API documentaiton</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-src._helper">
+<span id="api-documentaiton"></span><h1>API documentaiton<a class="headerlink" href="#module-src._helper" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-src._helper.helper"></span><div class="section" id="helper-functions">
+<h2>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="src._helper.helper.block_outer_prod">
+<code class="descclassname">src._helper.helper.</code><code class="descname">block_outer_prod</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.block_outer_prod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiply x1 (J1 x M) and x2 (J2xM) and extend the dimension to 3D (J1xJ2xM)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.block_outer_sum">
+<code class="descclassname">src._helper.helper.</code><code class="descname">block_outer_sum</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.block_outer_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the new index after adding a new axis</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.create_laplacian_kernel">
+<code class="descclassname">src._helper.helper.</code><code class="descname">create_laplacian_kernel</code><span class="sig-paren">(</span><em>nufft</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.create_laplacian_kernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the multi-dimensional laplacian kernel in k-space</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>nufft</strong> -- the NUFFT object</dd>
+<dt class="field-name">Returns</dt><dd class="field-body">uker: the multi-dimensional laplacian kernel in k-space (no fft shift used)</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">numpy ndarray</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.crop_slice_ind">
+<code class="descclassname">src._helper.helper.</code><code class="descname">crop_slice_ind</code><span class="sig-paren">(</span><em>Nd</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.crop_slice_ind" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Deprecated in v.0.3.4) 
+Return the &quot;slice&quot; of Nd size to index multi-dimensional array.  &quot;Slice&quot; functions as the index of the array.
+Superseded by preindex_copy() which avoid run-time indexing.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.diagnose">
+<code class="descclassname">src._helper.helper.</code><code class="descname">diagnose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.diagnose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Diagnosis function
+Find available device when NUFFT.offload() failed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.indxmap_diff">
+<code class="descclassname">src._helper.helper.</code><code class="descname">indxmap_diff</code><span class="sig-paren">(</span><em>Nd</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.indxmap_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preindixing for rapid image gradient ()</p>
+<p>Diff(x) = x.flat[d_indx[0]] - x.flat</p>
+<p>Diff_t(x) =  x.flat[dt_indx[0]] - x.flat</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>Nd</strong> (<em>tuple with integers</em>) -- the dimension of the image</dd>
+<dt class="field-name">Returns d_indx</dt><dd class="field-body">iamge gradient</dd>
+<dt class="field-name">Returns dt_indx</dt><dd class="field-body">the transpose of the image gradient</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">d_indx: lists with numpy ndarray</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">dt_indx: lists with numpy ndarray</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.kaiser_bessel_ft">
+<code class="descclassname">src._helper.helper.</code><code class="descname">kaiser_bessel_ft</code><span class="sig-paren">(</span><em>u</em>, <em>J</em>, <em>alpha</em>, <em>kb_m</em>, <em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.kaiser_bessel_ft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolation weight for given J/alpha/kb-m</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_T">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_T</code><span class="sig-paren">(</span><em>N</em>, <em>J</em>, <em>K</em>, <em>alpha</em>, <em>beta</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_T" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Equation (29) and (26) in Fessler and Sutton 2003.
+Create the overlapping matrix CSSC (diagonal dominent matrix)
+of J points and find out the pseudo-inverse of CSSC</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_alpha_kb_fit">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_alpha_kb_fit</code><span class="sig-paren">(</span><em>N</em>, <em>J</em>, <em>K</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_alpha_kb_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find parameters alpha and beta for scaling factor st['sn']
+The alpha is hardwired as [1,0,0...] when J = 1 (uniform scaling factor)</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>N</strong> (<em>int</em>) -- the size of image</dd>
+</dl>
+<p>:param int J:the size of interpolator
+:param int K: the size of oversampled k-space</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_offset">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_offset</code><span class="sig-paren">(</span><em>om</em>, <em>J</em>, <em>K</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>For every om points(outside regular grids), find the nearest
+central grid (from Kd dimension)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_r">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_r</code><span class="sig-paren">(</span><em>om</em>, <em>N</em>, <em>J</em>, <em>K</em>, <em>alpha</em>, <em>beta</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_r" title="Permalink to this definition">¶</a></dt>
+<dd><p>equation (30) of Fessler's paper</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_scale1">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_scale1</code><span class="sig-paren">(</span><em>N</em>, <em>K</em>, <em>alpha</em>, <em>beta</em>, <em>Nmid</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_scale1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate image space scaling factor</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.outer_sum">
+<code class="descclassname">src._helper.helper.</code><code class="descname">outer_sum</code><span class="sig-paren">(</span><em>xx</em>, <em>yy</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.outer_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Superseded by numpy.add.outer() function</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.preindex_copy">
+<code class="descclassname">src._helper.helper.</code><code class="descname">preindex_copy</code><span class="sig-paren">(</span><em>Nd</em>, <em>Kd</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.preindex_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Building the array index for copying two arrays of sizes Nd and Kd</p>
+<p>Only the front part of the input/output arrays are copied.</p>
+<p>The oversize  parts of the input array are truncated (if Nd &gt; Kd).</p>
+<p>And the smaller size are zero-padded (if Nd &lt; Kd)</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
+<li><strong>Nd</strong> (<em>tuple with integer elements</em>) -- tuple, the dimensions of array1</li>
+<li><strong>Kd</strong> (<em>tuple with integer elements</em>) -- tuple, the dimensions of array2</li>
+</ul>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first">inlist: the index of the input array</p>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first">outlist: the index of the output array</p>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first">nelem: the length of the inlist and outlist (equal length)</p>
+</dd>
+<dt class="field-name">Return type</dt><dd class="field-body"><p class="first">inlist: list with integer elements</p>
+</dd>
+<dt class="field-name">Return type</dt><dd class="field-body"><p class="first">outlist: list with integer elements</p>
+</dd>
+<dt class="field-name">Return type</dt><dd class="field-body"><p class="first last">nelem: int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-src._transform"></span><span class="target" id="module-src._transform.transform_hsa"></span><div class="section" id="class-nufft-on-heterogeneous-platforms">
+<h2>Class NUFFT on heterogeneous platforms<a class="headerlink" href="#class-nufft-on-heterogeneous-platforms" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src._transform.transform_hsa.NUFFT">
+<em class="property">class </em><code class="descclassname">src._transform.transform_hsa.</code><code class="descname">NUFFT</code><a class="headerlink" href="#src._transform.transform_hsa.NUFFT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The class NUFFT belongs to pynufft_hsa, which offloads Non-Uniform Fast Fourier Transform (NUFFT) to heterogeneous devices.</p>
+<dl class="method">
+<dt id="src._transform.transform_hsa.NUFFT.adjoint">
+<code class="descname">adjoint</code><span class="sig-paren">(</span><em>gy</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_hsa.NUFFT.adjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjoint NUFFT on the heterogeneous device</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>gy</strong> -- The input gpu array, with size=(M,)</dd>
+<dt class="field-name">Type</dt><dd class="field-body">reikna gpu array with dtype =numpy.complex64</dd>
+<dt class="field-name">Returns</dt><dd class="field-body">gx: The output gpu array, with size=Nd</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">reikna gpu array with dtype =numpy.complex64</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_hsa.NUFFT.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>gx</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_hsa.NUFFT.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward NUFFT on the heterogeneous device</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>gx</strong> -- The input gpu array, with size=Nd</dd>
+<dt class="field-name">Type</dt><dd class="field-body">reikna gpu array with dtype =numpy.complex64</dd>
+<dt class="field-name">Returns</dt><dd class="field-body">gy: The output gpu array, with size=(M,)</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">reikna gpu array with dtype =numpy.complex64</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_hsa.NUFFT.offload">
+<code class="descname">offload</code><span class="sig-paren">(</span><em>API</em>, <em>platform_number=0</em>, <em>device_number=0</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_hsa.NUFFT.offload" title="Permalink to this definition">¶</a></dt>
+<dd><p>self.offload():</p>
+<p>Off-load NUFFT to the opencl or cuda device(s)</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
+<li><strong>API</strong> (<em>string</em>) -- define the device type, which can be 'cuda' or 'ocl'</li>
+<li><strong>platform_number</strong> (<em>int</em>) -- define which platform to be used. The default platform_number = 0.</li>
+<li><strong>device_number</strong> (<em>int</em>) -- define which device to be used. The default device_number = 0.</li>
+</ul>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first last">self: instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_hsa.NUFFT.selfadjoint">
+<code class="descname">selfadjoint</code><span class="sig-paren">(</span><em>gx</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_hsa.NUFFT.selfadjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>selfadjoint NUFFT (Teplitz) on the heterogeneous device</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>gx</strong> -- The input gpu array, with size=Nd</dd>
+<dt class="field-name">Type</dt><dd class="field-body">reikna gpu array with dtype =numpy.complex64</dd>
+<dt class="field-name">Returns</dt><dd class="field-body">gx: The output gpu array, with size=Nd</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">reikna gpu array with dtype =numpy.complex64</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_hsa.NUFFT.solve">
+<code class="descname">solve</code><span class="sig-paren">(</span><em>gy</em>, <em>solver=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_hsa.NUFFT.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>The solver of NUFFT_hsa</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
+<li><strong>gy</strong> (<em>reikna array</em><em>, </em><em>dtype = numpy.complex64</em>) -- data, reikna array, (M,) size</li>
+<li><strong>solver</strong> (<em>string</em>) -- could be 'cg', 'L1TVOLS', 'L1TVLAD'</li>
+<li><strong>maxiter</strong> (<em>int</em>) -- the number of iterations</li>
+</ul>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first last">reikna array with size Nd</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-src._transform.transform_cpu"></span><div class="section" id="class-nufft-on-numpy-scipy">
+<h2>Class NUFFT on Numpy/Scipy<a class="headerlink" href="#class-nufft-on-numpy-scipy" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src._transform.transform_cpu.NUFFT">
+<em class="property">class </em><code class="descclassname">src._transform.transform_cpu.</code><code class="descname">NUFFT</code><a class="headerlink" href="#src._transform.transform_cpu.NUFFT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The class NUFFT belongs to pynufft, which computes Non-Uniform Fast Fourier Transform (NUFFT) in Numpy/Scipy.</p>
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.adjoint">
+<code class="descname">adjoint</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.adjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjoint NUFFT on CPU</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>y</strong> -- The input numpy array, with size=(M,)</dd>
+<dt class="field-name">Type</dt><dd class="field-body">numpy array with dtype =numpy.complex64</dd>
+<dt class="field-name">Returns</dt><dd class="field-body">x: The output numpy array, with size=Nd</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">numpy array with dtype =numpy.complex64</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward NUFFT on CPU</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>x</strong> -- The input numpy array, with size=Nd</dd>
+<dt class="field-name">Type</dt><dd class="field-body">numpy array with dtype =numpy.complex64</dd>
+<dt class="field-name">Returns</dt><dd class="field-body">gy: The output numpy array, with size=(M,)</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">numpy array with dtype =numpy.complex64</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.k2xx">
+<code class="descname">k2xx</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.k2xx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private: the inverse FFT and image cropping (which is the reverse of _xx2k() method)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.k2y">
+<code class="descname">k2y</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.k2y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private: interpolation by the Sparse Matrix-Vector Multiplication</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.k2y2k">
+<code class="descname">k2y2k</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.k2y2k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private: the integrated interpolation-gridding by the Sparse Matrix-Vector Multiplication</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.plan">
+<code class="descname">plan</code><span class="sig-paren">(</span><em>om</em>, <em>Nd</em>, <em>Kd</em>, <em>Jd</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.plan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design the min-max interpolator.</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
+<li><strong>om</strong> (<em>numpy.float array</em><em>, </em><em>matrix size = M * ndims</em>) -- The M off-grid locations in the frequency domain. Normalized between [-pi, pi]</li>
+<li><strong>Nd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) -- The matrix size of equispaced image. Example: Nd=(256,256) for a 2D image; Nd = (128,128,128) for a 3D image</li>
+<li><strong>Kd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) -- The matrix size of the oversampled frequency grid. Example: Kd=(512,512) for 2D image; Kd = (256,256,256) for a 3D image</li>
+<li><strong>Jd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) -- The interpolator size. Example: Jd=(6,6) for 2D image; Jd = (6,6,6) for a 3D image</li>
+</ul>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first">0</p>
+</dd>
+<dt class="field-name">Return type</dt><dd class="field-body"><p class="first">int, float</p>
+</dd>
+<dt class="field-name">Example</dt><dd class="field-body"></dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pynufft</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NufftObj</span> <span class="o">=</span> <span class="n">pynufft_hsa</span><span class="o">.</span><span class="n">NUFFT</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span> 
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.selfadjoint">
+<code class="descname">selfadjoint</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.selfadjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>selfadjoint NUFFT (Teplitz) on CPU</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><strong>x</strong> -- The input numpy array, with size=Nd</dd>
+<dt class="field-name">Type</dt><dd class="field-body">numpy array with dtype =numpy.complex64</dd>
+<dt class="field-name">Returns</dt><dd class="field-body">x: The output numpy array, with size=Nd</dd>
+<dt class="field-name">Return type</dt><dd class="field-body">numpy array with dtype =numpy.complex64</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.solve">
+<code class="descname">solve</code><span class="sig-paren">(</span><em>y</em>, <em>solver=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve NUFFT_cpu</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>numpy array</em><em>, </em><em>dtype = numpy.complex64</em>) -- data, numpy array, (M,) size</li>
+<li><strong>solver</strong> (<em>string</em>) -- could be 'cg', 'L1TVOLS', 'L1TVLAD'</li>
+<li><strong>maxiter</strong> (<em>int</em>) -- the number of iterations</li>
+</ul>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first last">numpy array with size Nd</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.truncate_selfadjoint">
+<code class="descname">truncate_selfadjoint</code><span class="sig-paren">(</span><em>tol</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.truncate_selfadjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yet to be tested.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.vec2k">
+<code class="descname">vec2k</code><span class="sig-paren">(</span><em>k_vec</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.vec2k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorting the vector to k-spectrum Kd array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.vec2y">
+<code class="descname">vec2y</code><span class="sig-paren">(</span><em>k_vec</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.vec2y" title="Permalink to this definition">¶</a></dt>
+<dd><p>gridding:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.x2xx">
+<code class="descname">x2xx</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.x2xx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private: Scaling on CPU
+Inplace multiplication of self.x_Nd by the scaling factor self.sn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.xx2k">
+<code class="descname">xx2k</code><span class="sig-paren">(</span><em>xx</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.xx2k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private: oversampled FFT on CPU</p>
+<p>Firstly, zeroing the self.k_Kd array
+Second, copy self.x_Nd array to self.k_Kd array by cSelect
+Third: inplace FFT</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.xx2x">
+<code class="descname">xx2x</code><span class="sig-paren">(</span><em>xx</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.xx2x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private: rescaling, which is identical to the  _x2xx() method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.y2k">
+<code class="descname">y2k</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.y2k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private: gridding by the Sparse Matrix-Vector Multiplication</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src._transform.transform_cpu.NUFFT.y2vec">
+<code class="descname">y2vec</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#src._transform.transform_cpu.NUFFT.y2vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>regridding non-uniform data, (unsorted vector)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-src._nonlin"></span><span class="target" id="module-src._nonlin.solve_cpu"></span><div class="section" id="cpu-solvers">
+<h2>CPU solvers<a class="headerlink" href="#cpu-solvers" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="src._nonlin.solve_cpu.L1TVLAD">
+<code class="descclassname">src._nonlin.solve_cpu.</code><code class="descname">L1TVLAD</code><span class="sig-paren">(</span><em>nufft</em>, <em>y</em>, <em>maxiter</em>, <em>rho</em><span class="sig-paren">)</span><a class="headerlink" href="#src._nonlin.solve_cpu.L1TVLAD" title="Permalink to this definition">¶</a></dt>
+<dd><p>L1-total variation regularized least absolute deviation</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._nonlin.solve_cpu.L1TVOLS">
+<code class="descclassname">src._nonlin.solve_cpu.</code><code class="descname">L1TVOLS</code><span class="sig-paren">(</span><em>nufft</em>, <em>y</em>, <em>maxiter</em>, <em>rho</em><span class="sig-paren">)</span><a class="headerlink" href="#src._nonlin.solve_cpu.L1TVOLS" title="Permalink to this definition">¶</a></dt>
+<dd><p>L1-total variation regularized ordinary least square</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._nonlin.solve_cpu.cDiff">
+<code class="descclassname">src._nonlin.solve_cpu.</code><code class="descname">cDiff</code><span class="sig-paren">(</span><em>x</em>, <em>d_indx</em><span class="sig-paren">)</span><a class="headerlink" href="#src._nonlin.solve_cpu.cDiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute image gradient
+Work with indxmap_diff(Nd)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._nonlin.solve_cpu.solve">
+<code class="descclassname">src._nonlin.solve_cpu.</code><code class="descname">solve</code><span class="sig-paren">(</span><em>nufft</em>, <em>y</em>, <em>solver=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#src._nonlin.solve_cpu.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve NUFFT.
+The current version supports solvers = 'cg' or 'L1TVOLS' or 'L1TVLAD'.</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
+<li><strong>nufft</strong> -- NUFFT_cpu object</li>
+<li><strong>y</strong> -- (M,) array, non-uniform data</li>
+</ul>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first last">x: image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-src._nonlin.solve_hsa"></span><div class="section" id="hsa-solvers">
+<h2>HSA solvers<a class="headerlink" href="#hsa-solvers" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="src._nonlin.solve_hsa.L1TVLAD">
+<code class="descclassname">src._nonlin.solve_hsa.</code><code class="descname">L1TVLAD</code><span class="sig-paren">(</span><em>nufft</em>, <em>gy</em>, <em>maxiter</em>, <em>rho</em><span class="sig-paren">)</span><a class="headerlink" href="#src._nonlin.solve_hsa.L1TVLAD" title="Permalink to this definition">¶</a></dt>
+<dd><p>L1-total variation regularized least absolute deviation</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._nonlin.solve_hsa.L1TVOLS">
+<code class="descclassname">src._nonlin.solve_hsa.</code><code class="descname">L1TVOLS</code><span class="sig-paren">(</span><em>nufft</em>, <em>gy</em>, <em>maxiter</em>, <em>rho</em><span class="sig-paren">)</span><a class="headerlink" href="#src._nonlin.solve_hsa.L1TVOLS" title="Permalink to this definition">¶</a></dt>
+<dd><p>L1-total variation regularized ordinary least square</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._nonlin.solve_hsa.cDiff">
+<code class="descclassname">src._nonlin.solve_hsa.</code><code class="descname">cDiff</code><span class="sig-paren">(</span><em>x</em>, <em>d_indx</em><span class="sig-paren">)</span><a class="headerlink" href="#src._nonlin.solve_hsa.cDiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute image gradient
+Work with indxmap_diff(Nd)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._nonlin.solve_hsa.solve">
+<code class="descclassname">src._nonlin.solve_hsa.</code><code class="descname">solve</code><span class="sig-paren">(</span><em>nufft</em>, <em>gy</em>, <em>solver=None</em>, <em>maxiter=30</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#src._nonlin.solve_hsa.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve NUFFT.
+The current version supports solvers = 'cg' or 'L1TVOLS' or 'L1TVLAD'.</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
+<li><strong>nufft</strong> -- NUFFT_hsa object</li>
+<li><strong>y</strong> -- (M,) array, non-uniform data</li>
+</ul>
+</dd>
+<dt class="field-name">Returns</dt><dd class="field-body"><p class="first last">x: image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-src.re_subroutine"></span><div class="section" id="metaprogramming-subroutines-using-reikna-pyopencl-pycuda">
+<h2>Metaprogramming subroutines (using reikna, pyopencl, pycuda)<a class="headerlink" href="#metaprogramming-subroutines-using-reikna-pyopencl-pycuda" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">KERNEL void cAbsVec( GLOBAL_MEM const float2 <a href="#id1"><span class="problematic" id="id2">*</span></a>indata,  GLOBAL_MEM  float2 <a href="#id3"><span class="problematic" id="id4">*</span></a>outdata)</p>
+<blockquote>
+<div><p>Abs of indata.</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 <a href="#id5"><span class="problematic" id="id6">*</span></a>indata</dt><dd class="field-body"></dd>
+<dt class="field-name">return float2  <a href="#id7"><span class="problematic" id="id8">*</span></a>outdata</dt><dd class="field-body"></dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cAddScalar(const float2 CA,  GLOBAL_MEM float2 <a href="#id9"><span class="problematic" id="id10">*</span></a>CX)</p>
+<blockquote>
+<div><p>Offload add to heterogeneous devices.</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 CA</dt><dd class="field-body"></dd>
+<dt class="field-name">return float2 <a href="#id11"><span class="problematic" id="id12">*</span></a>CX</dt><dd class="field-body"></dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cAddVec(   GLOBAL_MEM float2 <a href="#id13"><span class="problematic" id="id14">*</span></a>a,  GLOBAL_MEM float2 <a href="#id15"><span class="problematic" id="id16">*</span></a>b, GLOBAL_MEM float2 <a href="#id17"><span class="problematic" id="id18">*</span></a>dest)</p>
+<blockquote>
+<div><p><a href="#id19"><span class="problematic" id="id20">*</span></a>dest = <a href="#id21"><span class="problematic" id="id22">*</span></a>a + <a href="#id23"><span class="problematic" id="id24">*</span></a>b</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input  float2 <a href="#id25"><span class="problematic" id="id26">*</span></a>a</dt><dd class="field-body"></dd>
+<dt class="field-name">input float2 <a href="#id27"><span class="problematic" id="id28">*</span></a>b</dt><dd class="field-body"></dd>
+<dt class="field-name">return float2 <a href="#id29"><span class="problematic" id="id30">*</span></a>dest</dt><dd class="field-body"></dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cAnisoShrink(const  float2 threshold, GLOBAL_MEM const float2 <a href="#id31"><span class="problematic" id="id32">*</span></a>indata, GLOBAL_MEM  float2 <a href="#id33"><span class="problematic" id="id34">*</span></a>outdata)</p>
+<blockquote>
+<div><p>Soft-thresholding of real and imaginery parts. The real part of threshold is used.</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 threshold</dt><dd class="field-body">threshold.x is the threshold; threshold.y is zero.</dd>
+<dt class="field-name">input float2 <a href="#id35"><span class="problematic" id="id36">*</span></a>indata</dt><dd class="field-body">input data</dd>
+<dt class="field-name">return float2 <a href="#id37"><span class="problematic" id="id38">*</span></a>outdata</dt><dd class="field-body"></dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cCopy( GLOBAL_MEM  const float2 <a href="#id39"><span class="problematic" id="id40">*</span></a>CX, GLOBAL_MEM float2 <a href="#id41"><span class="problematic" id="id42">*</span></a>CY)</p>
+<blockquote>
+<div><p>Copy array <a href="#id43"><span class="problematic" id="id44">*</span></a>CX to array <a href="#id45"><span class="problematic" id="id46">*</span></a>CY.</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 <a href="#id47"><span class="problematic" id="id48">*</span></a>CX</dt><dd class="field-body">input array</dd>
+<dt class="field-name">return float2 <a href="#id49"><span class="problematic" id="id50">*</span></a>CY</dt><dd class="field-body">output array</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cDiff(  GLOBAL_MEM const int <a href="#id51"><span class="problematic" id="id52">*</span></a>order2, GLOBAL_MEM const   float2 <a href="#id53"><span class="problematic" id="id54">*</span></a>indata, GLOBAL_MEM  float2 <a href="#id55"><span class="problematic" id="id56">*</span></a>outdata)</p>
+<blockquote>
+<div><p>Compute indata[order2[gid]] - indata[gid] (finite difference)</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input int <a href="#id57"><span class="problematic" id="id58">*</span></a>order2</dt><dd class="field-body">index of shifted pixel</dd>
+<dt class="field-name">input float2 <a href="#id59"><span class="problematic" id="id60">*</span></a>indata</dt><dd class="field-body">input image</dd>
+<dt class="field-name">return float2 <a href="#id61"><span class="problematic" id="id62">*</span></a>outdata</dt><dd class="field-body">return</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cMultiplyConjVec(GLOBAL_MEM float2 <a href="#id63"><span class="problematic" id="id64">*</span></a>a, GLOBAL_MEM float2 <a href="#id65"><span class="problematic" id="id66">*</span></a>b, GLOBAL_MEM float2 <a href="#id67"><span class="problematic" id="id68">*</span></a>dest)</p>
+<blockquote>
+<div><p>dest = conj(a) x b</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 <a href="#id69"><span class="problematic" id="id70">*</span></a>a</dt><dd class="field-body"></dd>
+<dt class="field-name">input float2 <a href="#id71"><span class="problematic" id="id72">*</span></a>b</dt><dd class="field-body"></dd>
+<dt class="field-name">return float2 <a href="#id73"><span class="problematic" id="id74">*</span></a>dest</dt><dd class="field-body"></dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cMultiplyScalar(const float2 CA, GLOBAL_MEM float2 <a href="#id75"><span class="problematic" id="id76">*</span></a>CX)</p>
+<blockquote>
+<div><p><a href="#id77"><span class="problematic" id="id78">*</span></a>CX <a href="#id79"><span class="problematic" id="id80">*</span></a>= CA</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 CA</dt><dd class="field-body"></dd>
+<dt class="field-name">input float2 <a href="#id81"><span class="problematic" id="id82">*</span></a>CX</dt><dd class="field-body"></dd>
+<dt class="field-name">return float2 <a href="#id83"><span class="problematic" id="id84">*</span></a>CX</dt><dd class="field-body"></dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cMultiplyVec( GLOBAL_MEM float2 <a href="#id85"><span class="problematic" id="id86">*</span></a>a, GLOBAL_MEM float2 <a href="#id87"><span class="problematic" id="id88">*</span></a>b, GLOBAL_MEM float2 <a href="#id89"><span class="problematic" id="id90">*</span></a>dest)</p>
+<blockquote>
+<div><p>Array multiplication (<a href="#id91"><span class="problematic" id="id92">*</span></a>dest = <a href="#id93"><span class="problematic" id="id94">*</span></a>a x <a href="#id95"><span class="problematic" id="id96">*</span></a>b)</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 <a href="#id97"><span class="problematic" id="id98">*</span></a>a</dt><dd class="field-body">array1</dd>
+<dt class="field-name">input float2 <a href="#id99"><span class="problematic" id="id100">*</span></a>b</dt><dd class="field-body">array2</dd>
+<dt class="field-name">return float2 <a href="#id101"><span class="problematic" id="id102">*</span></a>dest</dt><dd class="field-body">output array</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cMultiplyVecInplace(GLOBAL_MEM float2 <a href="#id103"><span class="problematic" id="id104">*</span></a>a, GLOBAL_MEM float2 <a href="#id105"><span class="problematic" id="id106">*</span></a>outb)</p>
+<blockquote>
+<div><p>Inplace multiplciation (<a href="#id107"><span class="problematic" id="id108">*</span></a>outb <a href="#id109"><span class="problematic" id="id110">*</span></a>= <a href="#id111"><span class="problematic" id="id112">*</span></a>a)</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 <a href="#id113"><span class="problematic" id="id114">*</span></a>a</dt><dd class="field-body">array1</dd>
+<dt class="field-name">input float2 <a href="#id115"><span class="problematic" id="id116">*</span></a>outb</dt><dd class="field-body">array2</dd>
+<dt class="field-name">return float2 <a href="#id117"><span class="problematic" id="id118">*</span></a>outb</dt><dd class="field-body">array2</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first">KERNEL void cSelect( GLOBAL_MEM const  int <a href="#id119"><span class="problematic" id="id120">*</span></a>order1, GLOBAL_MEM const  int <a href="#id121"><span class="problematic" id="id122">*</span></a>order2, GLOBAL_MEM const float2 <a href="#id123"><span class="problematic" id="id124">*</span></a>indata, GLOBAL_MEM       float2 <a href="#id125"><span class="problematic" id="id126">*</span></a>outdata)</p>
+<blockquote>
+<div><p>Copy indata[order1] to outdata[order2]. outdata[order2[gid]] = indata[order1[gid]]</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input int <a href="#id127"><span class="problematic" id="id128">*</span></a>order1</dt><dd class="field-body">index of indata</dd>
+<dt class="field-name">input int <a href="#id129"><span class="problematic" id="id130">*</span></a>order2</dt><dd class="field-body">index of outdata</dd>
+<dt class="field-name">input float2 <a href="#id131"><span class="problematic" id="id132">*</span></a>indata</dt><dd class="field-body"></dd>
+<dt class="field-name">return float2 <a href="#id133"><span class="problematic" id="id134">*</span></a>outdata</dt><dd class="field-body"></dd>
+</dl>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>KERNEL void cSparseMatVec(    </dt>
+<dd><p class="first">const    uint    dim,
+GLOBAL_MEM const uint <a href="#id135"><span class="problematic" id="id136">*</span></a>rowDelimiters, 
+GLOBAL_MEM const uint <a href="#id137"><span class="problematic" id="id138">*</span></a>cols,
+GLOBAL_MEM const float2 <a href="#id139"><span class="problematic" id="id140">*</span></a>val,
+GLOBAL_MEM const float2 <a href="#id141"><span class="problematic" id="id142">*</span></a>vec, 
+GLOBAL_MEM float2 <a href="#id143"><span class="problematic" id="id144">*</span></a>out)</p>
+<p>CSR matrix Sparse Matrix Vector Multiplication on heterogeneous devices.</p>
+<dl class="last docutils field-list" frame="void" rules="none">
+<dt class="field-name">input uint dim</dt><dd class="field-body">number of rows</dd>
+<dt class="field-name">input uint <a href="#id145"><span class="problematic" id="id146">*</span></a>rowDelimiters</dt><dd class="field-body"></dd>
+<dt class="field-name">input uint <a href="#id147"><span class="problematic" id="id148">*</span></a>cols</dt><dd class="field-body"></dd>
+<dt class="field-name">input float2 <a href="#id149"><span class="problematic" id="id150">*</span></a>val</dt><dd class="field-body"></dd>
+<dt class="field-name">input float2 <a href="#id151"><span class="problematic" id="id152">*</span></a>vec</dt><dd class="field-body"></dd>
+<dt class="field-name">return float2 <a href="#id153"><span class="problematic" id="id154">*</span></a>out</dt><dd class="field-body"></dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><p class="first">KERNEL void cSqrt( GLOBAL_MEM  float2 <a href="#id155"><span class="problematic" id="id156">*</span></a>CX)</p>
+<blockquote>
+<div><p>Inplace Sqrt</p>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">input float2 <a href="#id157"><span class="problematic" id="id158">*</span></a>CX</dt><dd class="field-body"></dd>
+<dt class="field-name">return float2 <a href="#id159"><span class="problematic" id="id160">*</span></a>CX</dt><dd class="field-body"></dd>
+</dl>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="versionhistory.html" class="btn btn-neutral" title="Version history" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jyh-Miin Lin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

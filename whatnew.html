@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>What&#39;s new &mdash; pynufft 0.3.2.8 documentation</title>
+  <title>What&#39;s new &mdash; PyNUFFT 0.3.3 documentation</title>
   
 
   
@@ -30,7 +30,10 @@
   
 
   
-    <link rel="top" title="pynufft 0.3.2.8 documentation" href="index.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="PyNUFFT 0.3.3 documentation" href="index.html"/>
         <link rel="next" title="Introduction" href="intro.html"/>
         <link rel="prev" title="Welcome to pynufft&#39;s Documentation" href="index.html"/> 
 
@@ -50,7 +53,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pynufft
+            <a href="index.html" class="icon icon-home"> PyNUFFT
           
 
           
@@ -82,10 +85,12 @@
             
             
                 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">What's new</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">What's new</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getstart.html">Quick start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneousness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API documentaiton</a></li>
 </ul>
 
             
@@ -99,7 +104,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">pynufft</a>
+        <a href="index.html">PyNUFFT</a>
       </nav>
 
 
@@ -108,7 +113,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -120,7 +125,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/whatnew.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/whatnew.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -132,41 +137,19 @@
             
   <div class="section" id="what-s-new">
 <h1>What's new<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h1>
-<p><strong>New in version 0.3.2.9</strong></p>
+<p><strong>New in version 0.3.3</strong></p>
 <ul class="simple">
-<li>Experimental support of NVIDIA's graphic processing unit (GPU).</li>
+<li>Note: GPU support is superseded by the Heterogeneous System Architecture (HSA).</li>
+<li>A variety of nonlinear solvers are provided, including conjugate gradient method (cg), L1 total-variation ordinary least square (L1OLS), and L1 total-variation least absolute deviation (L1LAD).</li>
+<li>The CPU version support other nonlinear solvers, e.g. lsmr, lsqr, gmr, etc.</li>
+<li>Support multi-dimensional transform and reconstruction</li>
 </ul>
-<p>The experimental class gpuNUFFT requires pycuda, scikit-cuda, and python-cuda-cffi.</p>
-<p>scikit-cuda could be installed from standard command:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>pip install scikit-cuda
+<p><strong>Install the latest pynufft-0.3.3</strong></p>
+<p>Uninstall previous versions and install the latest v0.3.3:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">pynufft</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pynufft</span>
 </pre></div>
 </div>
-<p>python-cuda-cffi requires source and CUDA 8.0:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git clone https://github.com/grlee77/python-cuda-cffi.git
-cd python-cuda-cffi
-python3 setup.py install
-</pre></div>
-</div>
-<p>gpuNUFFT class has been tested on Linux but hasn't been tested on Windows.</p>
-<p>The results of 1D and 2D are identical to results of CPU pynufft. However, the 3D pynufft is yet to be tested.</p>
-<p><strong>Install the latest pynufft-0.3.2.9</strong></p>
-<p>Uninstall previous versions and install the latest v0.3.2.9:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>pip uninstall pynufft
-pip install pynufft
-</pre></div>
-</div>
-<p>Import the gpu class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pynufft.pynufft_gpu</span> <span class="kn">as</span> <span class="nn">pnft</span>
-<span class="n">NufftObj</span><span class="o">=</span><span class="n">pnft</span><span class="o">.</span><span class="n">gpuNUFFT</span><span class="p">()</span>
-<span class="n">NufftObj</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Use the plan() as the same way as CPU pynufft. Forward and adjoint NUFFT work on Pycuda gpuarray.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pycuda.gpuarray</span>
-<span class="n">gpu_image</span><span class="o">=</span><span class="n">pycuda</span><span class="o">.</span><span class="n">gpuarray</span><span class="o">.</span><span class="n">to_gpu</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>A tutorial document for gpuNUFFT will be provided soon.</p>
 </div>
 
 
@@ -210,7 +193,7 @@ pip install pynufft
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.3.2.8',
+            VERSION:'0.3.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

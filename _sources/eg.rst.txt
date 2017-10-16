@@ -1,0 +1,11 @@
+Eg documentaiton
+================
+
+.. automodule:: tests
+    :members:
+
+.. automodule:: tests.1D_example
+    :members:
+.. literalinclude::  ../../tests/1D_example.py
+.. literalinclude::  ../../tests/2D_example.py
+

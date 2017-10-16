@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Helper functions &mdash; PyNUFFT 0.3.4 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 0.3.4 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../whatnew.html">What's new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc.html">Miscellaneousness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eg.html">Eg documentaiton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API documentaiton</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">PyNUFFT</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Helper functions</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/apis/helper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-src._helper"></span><span class="target" id="module-src._helper.helper"></span><div class="section" id="helper-functions">
+<h1>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="src._helper.helper.block_outer_prod">
+<code class="descclassname">src._helper.helper.</code><code class="descname">block_outer_prod</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.block_outer_prod" title="Permalink to this definition">¶</a></dt>
+<dd><p>multiply the amplitudes along different axes</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.block_outer_sum">
+<code class="descclassname">src._helper.helper.</code><code class="descname">block_outer_sum</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.block_outer_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>update the new index after adding a new axis</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.crop_slice_ind">
+<code class="descclassname">src._helper.helper.</code><code class="descname">crop_slice_ind</code><span class="sig-paren">(</span><em>Nd</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.crop_slice_ind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the &quot;slice&quot; of Nd size.
+In Python language, &quot;slice&quot; means the index of a matrix.
+Slice can provide a smaller &quot;view&quot; of a larger matrix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.kaiser_bessel_ft">
+<code class="descclassname">src._helper.helper.</code><code class="descname">kaiser_bessel_ft</code><span class="sig-paren">(</span><em>u</em>, <em>J</em>, <em>alpha</em>, <em>kb_m</em>, <em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.kaiser_bessel_ft" title="Permalink to this definition">¶</a></dt>
+<dd><p>interpolation weight for given J/alpha/kb-m</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_T">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_T</code><span class="sig-paren">(</span><em>N</em>, <em>J</em>, <em>K</em>, <em>alpha</em>, <em>beta</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_T" title="Permalink to this definition">¶</a></dt>
+<dd><p>equation (29) and (26)Fessler's paper
+create the overlapping matrix CSSC (diagonal dominent matrix)
+of J points
+and then find out the pseudo-inverse of CSSC</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_alpha_kb_fit">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_alpha_kb_fit</code><span class="sig-paren">(</span><em>N</em>, <em>J</em>, <em>K</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_alpha_kb_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>find out parameters alpha and beta
+of scaling factor st['sn']
+Note, when J = 1 , alpha is hardwired as [1,0,0...]
+(uniform scaling factor)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_offset">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_offset</code><span class="sig-paren">(</span><em>om</em>, <em>J</em>, <em>K</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>For every om points(outside regular grids), find the nearest
+central grid (from Kd dimension)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_r">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_r</code><span class="sig-paren">(</span><em>om</em>, <em>N</em>, <em>J</em>, <em>K</em>, <em>alpha</em>, <em>beta</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_r" title="Permalink to this definition">¶</a></dt>
+<dd><p>equation (30) of Fessler's paper</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.nufft_scale1">
+<code class="descclassname">src._helper.helper.</code><code class="descname">nufft_scale1</code><span class="sig-paren">(</span><em>N</em>, <em>K</em>, <em>alpha</em>, <em>beta</em>, <em>Nmid</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.nufft_scale1" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate image space scaling factor</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src._helper.helper.preindex_copy">
+<code class="descclassname">src._helper.helper.</code><code class="descname">preindex_copy</code><span class="sig-paren">(</span><em>Nd</em>, <em>Kd</em><span class="sig-paren">)</span><a class="headerlink" href="#src._helper.helper.preindex_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Building the array index for copying two arrays of sizes Nd and Kd</p>
+<p>The output array2 is either truncated (if Nd &gt; Kd) or zero-padded (if Nd &lt; Kd)</p>
+<dl class="docutils">
+<dt>input: Nd: tuple, the dimensions of array1</dt>
+<dd>Kd: tuple, the dimensions of array2</dd>
+<dt>output: inlist: the index of the input array1</dt>
+<dd>outlist: the index of the output array2
+nelem: the product of all the smaller lengths along each dimension</dd>
+</dl>
+<p>example:</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jyh-Miin Lin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

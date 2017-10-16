@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>A 3D example &mdash; pynufft 0.3.2.8 documentation</title>
+  <title>Multi-dimensional NUFFT &mdash; PyNUFFT 0.3.3 documentation</title>
   
 
   
@@ -30,7 +30,13 @@
   
 
   
-    <link rel="top" title="pynufft 0.3.2.8 documentation" href="../index.html"/> 
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 0.3.3 documentation" href="../index.html"/>
+        <link rel="up" title="Quick start" href="../getstart.html"/>
+        <link rel="next" title="Miscellaneousness" href="../misc.html"/>
+        <link rel="prev" title="A 2D example" href="more2D.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -48,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> pynufft
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
           
 
           
@@ -79,9 +85,19 @@
           
             
             
-                <ul>
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatnew.html">What's new</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getstart.html">Quick start</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../getstart.html">Quick start</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html">An 1D example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="more2D.html">A 2D example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Multi-dimensional NUFFT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../misc.html">Miscellaneousness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API documentaiton</a></li>
 </ul>
 
             
@@ -95,7 +111,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">pynufft</a>
+        <a href="../index.html">PyNUFFT</a>
       </nav>
 
 
@@ -104,7 +120,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -112,11 +128,13 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>A 3D example</li>
+          <li><a href="../getstart.html">Quick start</a> &raquo;</li>
+      
+    <li>Multi-dimensional NUFFT</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/quickstart/more3D.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/quickstart/more3D.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -126,14 +144,182 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="a-3d-example">
-<h1>A 3D example<a class="headerlink" href="#a-3d-example" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="multi-dimensional-nufft">
+<h1>Multi-dimensional NUFFT<a class="headerlink" href="#multi-dimensional-nufft" title="Permalink to this headline">¶</a></h1>
+<p>Multi-dimensional transforms are supported in PyNUFFT.</p>
+<p><strong>Import pynufft module</strong></p>
+<p>In python environment, import pynufft module and other packages:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy.misc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+
+<span class="kn">from</span> <span class="nn">pynufft.pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span>
+</pre></div>
+</div>
+<p><strong>Planning</strong>
+Create a pynufft object NufftObj:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynufft.pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
+<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Provided <span class="math">\(om\)</span>, the size of time series (<span class="math">\(Nd\)</span>), oversampled grid (<span class="math">\(Kd\)</span>), and interpolatro size (<span class="math">\(Jd\)</span>) are:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span> <span class="c1"># time grid, tuple</span>
+<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span> <span class="c1"># frequency grid, tuple</span>
+<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># interpolator</span>
+<span class="c1">#     om=       numpy.load(DATA_PATH+&#39;om3D.npz&#39;)[&#39;arr_0&#39;]</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">15120</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can plan NufftObj with these parameters:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Forward transform</strong></p>
+<p>Now NufftObj has been prepared and is ready for computations. Let continue with an example.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;pynufft&#39;</span><span class="p">,</span> <span class="s1">&#39;./src/data/&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">DATA_PATH</span> <span class="o">+</span><span class="s1">&#39;phantom_3D_128_128_128.npz&#39;</span><span class="p">)[</span><span class="s1">&#39;arr_0&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">special_license</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This display the image <a class="reference internal" href="#d-example-image"><span class="std std-numref">Fig. 9</span></a>.</p>
+<div class="figure" id="id1">
+<span id="d-example-image"></span><a class="reference internal image-reference" href="../_images/3D_phantom.png"><img alt="../_images/3D_phantom.png" src="../_images/3D_phantom.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">The 3D phantom</span></p>
+</div>
+<p>NufftObj transform the time_data to non-Cartesian locations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Image restoration with solve()</strong>:</p>
+<p>The image can be restored from non-Cartesian samples y:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">restore_image</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;cg&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">restore_image1</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">restore_image2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image1</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image2</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CG&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CG&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure" id="id2">
+<span id="d-restore"></span><a class="reference internal image-reference" href="../_images/3D_restore.png"><img alt="../_images/3D_restore.png" src="../_images/3D_restore.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Image restoration using'cg', 'L1TVOLS', 'L1TVLAD'.</span></p>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">special_license</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">The license of the 3D Shepp-Logan phantom:</span>
+<span class="s1">Copyright (c) 2006, Matthias Schabel </span>
+<span class="s1">All rights reserved.</span>
+
+<span class="s1">Redistribution and use in source and binary forms, with or without </span>
+<span class="s1">modification, are permitted provided that the following conditions are </span>
+<span class="s1">met:</span>
+
+<span class="s1">* Redistributions of source code must retain the above copyright </span>
+<span class="s1">notice, this list of conditions and the following disclaimer. </span>
+<span class="s1">* Redistributions in binary form must reproduce the above copyright </span>
+<span class="s1">notice, this list of conditions and the following disclaimer in </span>
+<span class="s1">the documentation and/or other materials provided with the distribution </span>
+<span class="s1">* Neither the name of the University of Utah Department of Radiology nor the names </span>
+<span class="s1">of its contributors may be used to endorse or promote products derived </span>
+<span class="s1">from this software without specific prior written permission.</span>
+
+<span class="s1">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; </span>
+<span class="s1">AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE </span>
+<span class="s1">IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE </span>
+<span class="s1">ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE </span>
+<span class="s1">LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
+<span class="s1">CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF </span>
+<span class="s1">SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS </span>
+<span class="s1">INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN </span>
+<span class="s1">CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) </span>
+<span class="s1">ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE </span>
+<span class="s1">POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pyplot</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">cm</span>
+<span class="n">gray</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">gray</span>
+    
+  
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;pynufft&#39;</span><span class="p">,</span> <span class="s1">&#39;./src/data/&#39;</span><span class="p">)</span>   
+<span class="n">image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">DATA_PATH</span> <span class="o">+</span><span class="s1">&#39;phantom_3D_128_128_128.npz&#39;</span><span class="p">)[</span><span class="s1">&#39;arr_0&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">special_license</span><span class="p">)</span>
+
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+ 
+<span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span> <span class="c1"># time grid, tuple</span>
+<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span> <span class="c1"># frequency grid, tuple</span>
+<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># interpolator </span>
+<span class="c1">#     om=       numpy.load(DATA_PATH+&#39;om3D.npz&#39;)[&#39;arr_0&#39;]</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">15120</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pynufft.pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
+<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
+
+
+<span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+
+<span class="n">kspace</span> <span class="o">=</span><span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="n">restore_image</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;cg&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">restore_image1</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># </span>
+<span class="n">restore_image2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>    
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image1</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">)</span>
+
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image2</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">)</span>
+    
+
+
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CG&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CG&#39;</span><span class="p">)</span>
+<span class="c1">#     pyplot.legend([im1, im im4])</span>
+
+
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+</pre></div>
+</div>
 </div>
 
 
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../misc.html" class="btn btn-neutral float-right" title="Miscellaneousness" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="more2D.html" class="btn btn-neutral" title="A 2D example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -162,7 +348,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.8',
+            VERSION:'0.3.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

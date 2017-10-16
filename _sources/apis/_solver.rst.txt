@@ -1,0 +1,7 @@
+
+.. automodule:: src._solver
+    :members:
+.. automodule:: src._solver.solver_cpu
+    :members:
+.. automodule:: src._solver.solver_hsa
+    :members:

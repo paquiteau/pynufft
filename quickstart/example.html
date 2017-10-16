@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>An 1D example &mdash; pynufft 0.3.2.8 documentation</title>
+  <title>An 1D example &mdash; PyNUFFT 0.3.3 documentation</title>
   
 
   
@@ -30,10 +30,13 @@
   
 
   
-    <link rel="top" title="pynufft 0.3.2.8 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 0.3.3 documentation" href="../index.html"/>
         <link rel="up" title="Quick start" href="../getstart.html"/>
         <link rel="next" title="A 2D example" href="more2D.html"/>
-        <link rel="prev" title="Quick start" href="../getstart.html"/> 
+        <link rel="prev" title="Installation" href="installation.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -51,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> pynufft
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
           
 
           
@@ -86,11 +89,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../whatnew.html">What's new</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../getstart.html">Quick start</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">An 1D example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">An 1D example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="more2D.html">A 2D example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="more3D.html">Multi-dimensional NUFFT</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../misc.html">Miscellaneousness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API documentaiton</a></li>
 </ul>
 
             
@@ -104,7 +111,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">pynufft</a>
+        <a href="../index.html">PyNUFFT</a>
       </nav>
 
 
@@ -113,7 +120,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -127,7 +134,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/quickstart/example.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/quickstart/example.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -141,36 +148,35 @@
 <h1>An 1D example<a class="headerlink" href="#an-1d-example" title="Permalink to this headline">¶</a></h1>
 <p><strong>Import pynufft module</strong></p>
 <p>In python environment, import pynufft module:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pynufft.pynufft</span> <span class="kn">as</span> <span class="nn">pnft</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynufft.pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
 </pre></div>
 </div>
 <p>Create a pynufft object NufftObj:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">NufftObj</span> <span class="o">=</span> <span class="n">pnft</span><span class="o">.</span><span class="n">NUFFT</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>We provide the required information in the next sections.</p>
 <p><strong>Planning</strong></p>
 <p>The <span class="math">\(M\)</span> locations of non-uniform samples (<span class="math">\(om\)</span>) must be provided:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1512</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1"># om is an M x 1 ndarray: locations of M points. *om* is normalized between [-pi, pi]</span>
 <span class="c1"># Here M = 1512</span>
 </pre></div>
 </div>
 <p>Also, the size of time series (<span class="math">\(Nd\)</span>), oversampled grid (<span class="math">\(Kd\)</span>), and interpolatro size (<span class="math">\(Jd\)</span>) are:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,)</span>
 <span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,)</span>
 <span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,)</span>
 </pre></div>
 </div>
 <p>Now provide NufftObj with these parameters:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Forward transform</strong></p>
 <p>Now NufftObj has been prepared and is ready for computations. Let continue with an example.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">pyplot</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pyplot</span>
 <span class="n">time_data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">)</span>
 <span class="n">time_data</span><span class="p">[</span><span class="mi">96</span><span class="p">:</span><span class="mi">128</span><span class="o">+</span><span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_data</span><span class="p">)</span>
@@ -178,113 +184,87 @@
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This generates a time series <a class="reference internal" href="#box-function"><span>Fig. 2</span></a>.</p>
+<p>This generates a time series <a class="reference internal" href="#box-function"><span class="std std-numref">Fig. 2</span></a>.</p>
 <div class="figure" id="id1">
-<span id="box-function"></span><a class="reference internal image-reference" href="../_images/box_function.png"><img alt="../_images/box_function.png" src="../_images/box_function.png" style="width: 50%;" /></a>
+<span id="box-function"></span><a class="reference internal image-reference" href="../_images/box_function.png"><img alt="../_images/box_function.png" src="../_images/box_function.png" style="width: 75%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">A box function time series</span></p>
 </div>
 <p>NufftObj transform the time_data to non-Cartesian locations:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">time_data</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="s1">&#39;r.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;imag&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nufft_freq_data</span> <span class="o">=</span><span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">time_data</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">nufft_freq_data</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">nufft_freq_data</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="s1">&#39;r.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;imag&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This display the non-Cartesian spectrum <code class="xref std std-numref docutils literal"><span class="pre">non_Cartesian_spectrum</span></code>.</p>
+<p>This display the non-Cartesian spectrum <a class="reference internal" href="#non-cartesian-spectrum"><span class="std std-numref">Fig. 3</span></a>.</p>
 <div class="figure" id="id2">
-<span id="non-cartesian-spectrum"></span><a class="reference internal image-reference" href="../_images/non_Cartesian_spectrum.png"><img alt="../_images/non_Cartesian_spectrum.png" src="../_images/non_Cartesian_spectrum.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Non-Cartesian spectrum of box function in <a class="reference internal" href="#box-function"><span>Fig. 2</span></a>. Note the non-uniform density.</span></p>
+<span id="non-cartesian-spectrum"></span><a class="reference internal image-reference" href="../_images/non_Cartesian_spectrum.png"><img alt="../_images/non_Cartesian_spectrum.png" src="../_images/non_Cartesian_spectrum.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Non-Cartesian spectrum of box function in <a class="reference internal" href="#box-function"><span class="std std-numref">Fig. 2</span></a>. Note the non-uniform density.</span></p>
 </div>
-<p><strong>Adjoint transform</strong></p>
-<p>The adjoint transform is the reverse of forward transform:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="s1">&#39;.-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="s1">&#39;r.-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;imag&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<p><strong>Signal restoration through &quot;solve()&quot;</strong></p>
+<p>The signal can be solved by the solve() method</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">restore_time</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">nufft_freq_data</span><span class="p">,</span><span class="s1">&#39;cg&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">restore_time1</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">nufft_freq_data</span><span class="p">,</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">restore_time2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">nufft_freq_data</span><span class="p">,</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now display the restored signals:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">im1</span><span class="p">,</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">time_data</span><span class="p">),</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">)</span>
+<span class="n">im2</span><span class="p">,</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">restore_time1</span><span class="p">),</span><span class="s1">&#39;b:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">)</span>
+<span class="n">im3</span><span class="p">,</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">restore_time2</span><span class="p">),</span><span class="s1">&#39;k--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">)</span>
+<span class="n">im4</span><span class="p">,</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">restore_time</span><span class="p">),</span><span class="s1">&#39;r:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;conjugate_gradient_method&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">im1</span><span class="p">,</span> <span class="n">im2</span><span class="p">,</span> <span class="n">im3</span><span class="p">,</span><span class="n">im4</span><span class="p">])</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>There are some distortions in the adjoint operation <a class="reference internal" href="more2D.html#adjoint"><span>Fig. 9</span></a>. It does NOT recover the rectangular function in <a class="reference internal" href="#box-function"><span>Fig. 2</span></a>.</p>
 <div class="figure" id="id3">
-<span id="adjoint"></span><a class="reference internal image-reference" href="../_images/adjoint.png"><img alt="../_images/adjoint.png" src="../_images/adjoint.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Adjoint transform of non-Cartesian spectrum.</span></p>
+<span id="solve"></span><a class="reference internal image-reference" href="../_images/script_1D_solve.png"><img alt="../_images/script_1D_solve.png" src="../_images/script_1D_solve.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Signals restored by &quot;solve()&quot;. L1TVOLS and L1TVOLS are more close to <a class="reference internal" href="#box-function"><span class="std std-numref">Fig. 2</span></a> as cg suffers from distortions.</span></p>
 </div>
-<p><strong>Inverse transform through density compensation</strong></p>
-<p>The inverse can be approximately given by inverse_DC() method</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x3</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">inverse_DC</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x3</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="s1">&#39;.-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x3</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="s1">&#39;r.-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;imag&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="figure" id="id4">
-<span id="inverse-dc"></span><a class="reference internal image-reference" href="../_images/inverse_DC.png"><img alt="../_images/inverse_DC.png" src="../_images/inverse_DC.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Inverse transform through density compensated spectrum.</span></p>
-</div>
-<p><code class="xref std std-numref docutils literal"><span class="pre">inverse_DC</span></code> is more close to <a class="reference internal" href="#box-function"><span>Fig. 2</span></a> as the uneven density of non-Cartesian samples has been corrected.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">pynufft.pynufft</span> <span class="kn">as</span> <span class="nn">pnft</span>
+<p>The complete code is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pyplot</span>
+    
+<span class="kn">from</span> <span class="nn">pynufft.pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
 
-<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">pnft</span><span class="o">.</span><span class="n">NUFFT</span><span class="p">()</span>
 
-<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1512</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
-<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1512</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
-<span class="c1"># om is an M x 1 ndarray: locations of M points. *om* is normalized between [-pi, pi]</span>
-<span class="c1"># Here M = 1512</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1512</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+ 
+<span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,)</span> <span class="c1"># time grid, tuple</span>
+<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,)</span> <span class="c1"># frequency grid, tuple</span>
+<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,)</span> <span class="c1"># interpolator </span>
 
-<span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,)</span>
-<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,)</span>
-<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,)</span>
+<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
 
-<span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span> 
+<span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
 
-<span class="c1"># Now test 1D case</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">pyplot</span>
-<span class="c1"># Now build a box function</span>
 <span class="n">time_data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">)</span>
-<span class="n">time_data</span><span class="p">[</span><span class="mi">96</span><span class="p">:</span><span class="mi">128</span><span class="o">+</span><span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="c1"># Now display the function</span>
+<span class="n">time_data</span><span class="p">[</span><span class="mi">64</span><span class="p">:</span><span class="mi">192</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_data</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
-<span class="c1"># Forward NUFFT</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">time_data</span><span class="p">)</span>
-
-<span class="c1"># Display the nonuniform spectrum </span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span> 
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="s1">&#39;r.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;imag&#39;</span><span class="p">)</span> 
+<span class="n">nufft_freq_data</span> <span class="o">=</span><span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">time_data</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">nufft_freq_data</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">nufft_freq_data</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="s1">&#39;r.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;imag&#39;</span><span class="p">)</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
+<span class="n">restore_time</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">nufft_freq_data</span><span class="p">,</span><span class="s1">&#39;cg&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">restore_time1</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">nufft_freq_data</span><span class="p">,</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">restore_time2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">nufft_freq_data</span><span class="p">,</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Adjoint NUFFT</span>
-<span class="n">x2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> 
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="s1">&#39;.-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span> 
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="s1">&#39;r.-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;imag&#39;</span><span class="p">)</span> 
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
-
-
-<span class="c1"># Test inverse method using density compensation (inverse DC)</span>
-<span class="n">x3</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">inverse_DC</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> 
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x3</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="s1">&#39;.-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span> 
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x3</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="s1">&#39;r.-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;imag&#39;</span><span class="p">)</span> 
-<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">im1</span><span class="p">,</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">time_data</span><span class="p">),</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">)</span>
+<span class="n">im2</span><span class="p">,</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">restore_time1</span><span class="p">),</span><span class="s1">&#39;b:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">)</span>
+<span class="n">im3</span><span class="p">,</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">restore_time2</span><span class="p">),</span><span class="s1">&#39;k--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">)</span>
+<span class="n">im4</span><span class="p">,</span><span class="o">=</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">restore_time</span><span class="p">),</span><span class="s1">&#39;r:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;conjugate_gradient_method&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">im1</span><span class="p">,</span> <span class="n">im2</span><span class="p">,</span> <span class="n">im3</span><span class="p">,</span><span class="n">im4</span><span class="p">])</span>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
 </pre></div>
 </div>
 </div>
@@ -299,7 +279,7 @@
         <a href="more2D.html" class="btn btn-neutral float-right" title="A 2D example" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../getstart.html" class="btn btn-neutral" title="Quick start" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -330,7 +310,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.8',
+            VERSION:'0.3.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

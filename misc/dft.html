@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Discrete Fourier transform (DFT) &mdash; pynufft 0.3.2.8 documentation</title>
+  <title>Discrete Fourier transform (DFT) &mdash; PyNUFFT 0.3.3 documentation</title>
   
 
   
@@ -30,7 +30,13 @@
   
 
   
-    <link rel="top" title="pynufft 0.3.2.8 documentation" href="../index.html"/> 
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 0.3.3 documentation" href="../index.html"/>
+        <link rel="up" title="Miscellaneousness" href="../misc.html"/>
+        <link rel="next" title="Fast Fourier transform (FFT)" href="fft.html"/>
+        <link rel="prev" title="Install MATLAB NUFFT from Michigan Image Reconstruction Toolbox (MIRT), by Professor Jeff Fessler and his students" href="matlab.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -48,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> pynufft
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
           
 
           
@@ -79,9 +85,19 @@
           
             
             
-                <ul>
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatnew.html">What's new</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getstart.html">Quick start</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../misc.html">Miscellaneousness</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="matlab.html">Install MATLAB NUFFT from Michigan Image Reconstruction Toolbox (MIRT), by Professor Jeff Fessler and his students</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Discrete Fourier transform (DFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html">Fast Fourier transform (FFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fftw.html">FFTW support (Compile Numpy with FFTW in Linux)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API documentaiton</a></li>
 </ul>
 
             
@@ -95,7 +111,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">pynufft</a>
+        <a href="../index.html">PyNUFFT</a>
       </nav>
 
 
@@ -104,7 +120,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -112,11 +128,13 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
+          <li><a href="../misc.html">Miscellaneousness</a> &raquo;</li>
+      
     <li>Discrete Fourier transform (DFT)</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/misc/dft.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/misc/dft.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -133,13 +151,13 @@
 <p><span class="math">\(X(k)=\sum_{n=0}^{N-1} x(n)e^{-2 \pi i k n/N}\)</span></p>
 <p>DFT incurs a complexity of <span class="math">\(O(N^2)\)</span>.</p>
 <p>A naive Python program can be easily done. Save the following python code as <em>dft_test.py</em> (However, the efficiency is not satisfactory. Python has provided an FFT which is faster than naive DFT.)</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="k">def</span> <span class="nf">naive_DFT</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,),</span><span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>    
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span> 
-            <span class="n">X</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">2j</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+            <span class="n">X</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">2</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">X</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,)</span>
@@ -148,11 +166,11 @@
 <span class="c1"># compute FFT using numpy&#39;s fft function</span>
 <span class="n">X2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="c1"># now compare DFT with numpy fft</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Is DFT close to fft?&#39;</span><span class="p">,</span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X2</span><span class="p">,</span><span class="mf">1e-12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Is DFT close to fft?&#39;</span><span class="p">,</span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X2</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Now run <em>dft_test.py</em> program in command line:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ python3 dft_test.py
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python3 dft_test.py
 $ Is DFT close to fft? True
 </pre></div>
 </div>
@@ -160,14 +178,14 @@ $ Is DFT close to fft? True
 <p>Inverse discrete Fourier transform (IDFT)</p>
 <p><span class="math">\(x(n)= \frac{1}{N}\sum_{k=0}^{N-1} X(k)e^{2 \pi i k n/N}\)</span></p>
 <p>Now test a function of IDFT <em>idft_test.py</em></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># An example file of inverse Discrete Fourier transform (IDFT)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># An example file of inverse Discrete Fourier transform (IDFT)</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="k">def</span> <span class="nf">naive_IDFT</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,),</span><span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span> 
-            <span class="n">X</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">2j</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+            <span class="n">X</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">2</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">X</span><span class="o">/</span><span class="n">N</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,)</span>
 <span class="c1"># compute FFT</span>
@@ -175,11 +193,11 @@ $ Is DFT close to fft? True
 <span class="c1"># compute IDFT using IDFT</span>
 <span class="n">x2</span> <span class="o">=</span> <span class="n">naive_IDFT</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="c1"># now compare DFT with numpy fft</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Is IDFT close to original?&#39;</span><span class="p">,</span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x2</span><span class="p">,</span><span class="mf">1e-12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Is IDFT close to original?&#39;</span><span class="p">,</span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x2</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Now run <em>idft_test.py</em> program in command line:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ python3 idft_test.py
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python3 idft_test.py
 $ Is IDFT close to original? True
 </pre></div>
 </div>
@@ -189,6 +207,15 @@ $ Is IDFT close to original? True
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fft.html" class="btn btn-neutral float-right" title="Fast Fourier transform (FFT)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="matlab.html" class="btn btn-neutral" title="Install MATLAB NUFFT from Michigan Image Reconstruction Toolbox (MIRT), by Professor Jeff Fessler and his students" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -217,7 +244,7 @@ $ Is IDFT close to original? True
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.8',
+            VERSION:'0.3.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

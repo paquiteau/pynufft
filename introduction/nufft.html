@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Non-uniform fast Fourier transform (NUFFT) &mdash; pynufft 0.3.2.8 documentation</title>
+  <title>Non-uniform fast Fourier transform (NUFFT) &mdash; PyNUFFT 0.3.3 documentation</title>
   
 
   
@@ -30,10 +30,13 @@
   
 
   
-    <link rel="top" title="pynufft 0.3.2.8 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 0.3.3 documentation" href="../index.html"/>
         <link rel="up" title="Introduction" href="../intro.html"/>
         <link rel="next" title="Quick start" href="../getstart.html"/>
-        <link rel="prev" title="Installation" href="installation.html"/> 
+        <link rel="prev" title="Introduction" href="../intro.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -51,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> pynufft
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
           
 
           
@@ -85,12 +88,13 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../whatnew.html">What's new</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../intro.html">Introduction</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Non-uniform fast Fourier transform (NUFFT)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Non-uniform fast Fourier transform (NUFFT)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../getstart.html">Quick start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc.html">Miscellaneousness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API documentaiton</a></li>
 </ul>
 
             
@@ -104,7 +108,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">pynufft</a>
+        <a href="../index.html">PyNUFFT</a>
       </nav>
 
 
@@ -113,7 +117,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -127,7 +131,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/introduction/nufft.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/introduction/nufft.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -143,7 +147,7 @@
 <p>Fast Fourier transform (FFT) has become one of the most important algorithms in signal processing. FFT delivers a fast and exact discrete Fourier transform (DFT) in a much shorter computation time than direct DFT does.</p>
 <p>However, FFT does not allow for efficient non-Cartesian DFT, and non-uniform fast Fourier transform (NUFFT) attempts to accelerate non-Cartesian DFT.</p>
 <p><strong>Flow diagram of pynufft</strong></p>
-<p>The flow diagram of pynufft can be found in <a class="reference internal" href="#flow-diagram"><span>Fig. 1</span></a>, which includes the following three steps:</p>
+<p>The flow diagram of pynufft can be found in <a class="reference internal" href="#flow-diagram"><span class="std std-numref">Fig. 1</span></a>, which includes the following three steps:</p>
 <ol class="arabic simple">
 <li>Scaling to extend the range of interpolation.</li>
 <li>Oversampled FFT.</li>
@@ -153,6 +157,10 @@
 <span id="flow-diagram"></span><a class="reference internal image-reference" href="../_images/flow_diagram.png"><img alt="../_images/flow_diagram.png" src="../_images/flow_diagram.png" style="width: 30%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Flow diagram of pynufft</span></p>
 </div>
+<p><strong>Original NUFFT paper</strong></p>
+<p>More information can be found in the original NUFFT paper:</p>
+<p><em>Fessler JA, Sutton BP. Nonuniform fast Fourier transforms using min-max interpolation. IEEE Trans Signal Process 2003;51(2):560-574.</em></p>
+<p>which details the min-max interpolator for NUFFT.</p>
 </div>
 
 
@@ -165,7 +173,7 @@
         <a href="../getstart.html" class="btn btn-neutral float-right" title="Quick start" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../intro.html" class="btn btn-neutral" title="Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -196,7 +204,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.8',
+            VERSION:'0.3.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
