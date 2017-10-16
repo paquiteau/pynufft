@@ -33,7 +33,7 @@ Now provide NufftObj with these parameters::
 
 **Forward transform**
 
-Now NufftObj has been prepared and is ready for computations. Let continue with an example.::
+Now NufftObj has been prepared and is ready for computations. Continue with an example.::
    
    import numpy
    import matplotlib.pyplot as pyplot

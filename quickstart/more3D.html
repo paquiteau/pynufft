@@ -176,7 +176,7 @@ Create a pynufft object NufftObj:</p>
 </pre></div>
 </div>
 <p><strong>Forward transform</strong></p>
-<p>Now NufftObj has been prepared and is ready for computations. Let continue with an example.:</p>
+<p>Now NufftObj has been prepared and is ready for computations. Continue with an example.:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pkg_resources</span>
 <span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;pynufft&#39;</span><span class="p">,</span> <span class="s1">&#39;./src/data/&#39;</span><span class="p">)</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">DATA_PATH</span> <span class="o">+</span><span class="s1">&#39;phantom_3D_128_128_128.npz&#39;</span><span class="p">)[</span><span class="s1">&#39;arr_0&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>

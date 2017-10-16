@@ -9,7 +9,7 @@ Installation
 
 - Numpy-1.13.3 and Scipy-0.19.1.
 
-- Matplotlib is required for image display.
+- Matplotlib is required for displaying images.
 
 - Continuum's Anaconda_ environment should provide all the above packages. 
 
