@@ -35,7 +35,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="PyNUFFT 0.3.3 documentation" href="../index.html"/>
         <link rel="up" title="Miscellaneousness" href="../misc.html"/>
-        <link rel="next" title="Version history" href="../versionhistory.html"/>
+        <link rel="next" title="PyCall: using PyNUFFT in Julia" href="julia.html"/>
         <link rel="prev" title="Fast Fourier transform (FFT)" href="fft.html"/> 
 
   
@@ -94,6 +94,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dft.html">Discrete Fourier transform (DFT)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fft.html">Fast Fourier transform (FFT)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">FFTW support (Compile Numpy with FFTW in Linux)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="julia.html">PyCall: using PyNUFFT in Julia</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
@@ -146,11 +147,11 @@
             
   <div class="section" id="fftw-support-compile-numpy-with-fftw-in-linux">
 <h1>FFTW support (Compile Numpy with FFTW in Linux)<a class="headerlink" href="#fftw-support-compile-numpy-with-fftw-in-linux" title="Permalink to this headline">¶</a></h1>
-<p>FFTW is one of the fastest FFT library, which is licensed under GPL, which is imcompatible with the license used in Numpy.</p>
-<p>However, FFTW is unofficially supported. The trick is to compile Numpy from pip, with a configuration file telling Numpy to use FFTW.</p>
+<p>The original Numpy source includes fftpack as its FFT implementation.</p>
+<p>However, FFTW is unofficially supported in Numpy. The trick is to compile Numpy with a configuration file ~/.numpy-site.cfg.</p>
 <p>Create a Numpy configuration file in user's home directory:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ echo &quot;[fftw]&quot; &gt;  ~/.numpy-site.cfg
-$ echo &quot;&quot;libraries = fftw3 &gt;&gt;  ~/.numpy-site.cfg
+$ echo &quot;libraries = fftw3&quot; &gt;&gt;  ~/.numpy-site.cfg
 </pre></div>
 </div>
 <p>Then  install Numpy from pip:</p>
@@ -167,7 +168,7 @@ $ pip install numpy
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../versionhistory.html" class="btn btn-neutral float-right" title="Version history" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="julia.html" class="btn btn-neutral float-right" title="PyCall: using PyNUFFT in Julia" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="fft.html" class="btn btn-neutral" title="Fast Fourier transform (FFT)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

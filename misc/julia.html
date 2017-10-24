@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Install MATLAB NUFFT from Michigan Image Reconstruction Toolbox (MIRT), by Professor Jeff Fessler and his students &mdash; PyNUFFT 0.3.3 documentation</title>
+  <title>PyCall: using PyNUFFT in Julia &mdash; PyNUFFT 0.3.3 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="PyNUFFT 0.3.3 documentation" href="../index.html"/>
         <link rel="up" title="Miscellaneousness" href="../misc.html"/>
-        <link rel="next" title="Discrete Fourier transform (DFT)" href="dft.html"/>
-        <link rel="prev" title="Miscellaneousness" href="../misc.html"/> 
+        <link rel="next" title="Version history" href="../versionhistory.html"/>
+        <link rel="prev" title="FFTW support (Compile Numpy with FFTW in Linux)" href="fftw.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -90,11 +90,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getstart.html">Quick start</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../misc.html">Miscellaneousness</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Install MATLAB NUFFT from Michigan Image Reconstruction Toolbox (MIRT), by Professor Jeff Fessler and his students</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab.html">Install MATLAB NUFFT from Michigan Image Reconstruction Toolbox (MIRT), by Professor Jeff Fessler and his students</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dft.html">Discrete Fourier transform (DFT)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fft.html">Fast Fourier transform (FFT)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fftw.html">FFTW support (Compile Numpy with FFTW in Linux)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="julia.html">Importing PyNUFFT in Julia</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PyCall: using PyNUFFT in Julia</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
@@ -131,11 +131,11 @@
       
           <li><a href="../misc.html">Miscellaneousness</a> &raquo;</li>
       
-    <li>Install MATLAB NUFFT from Michigan Image Reconstruction Toolbox (MIRT), by Professor Jeff Fessler and his students</li>
+    <li>PyCall: using PyNUFFT in Julia</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/misc/matlab.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/misc/julia.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -145,57 +145,75 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="install-matlab-nufft-from-michigan-image-reconstruction-toolbox-mirt-by-professor-jeff-fessler-and-his-students">
-<h1>Install MATLAB NUFFT from Michigan Image Reconstruction Toolbox (MIRT), by Professor Jeff Fessler and his students<a class="headerlink" href="#install-matlab-nufft-from-michigan-image-reconstruction-toolbox-mirt-by-professor-jeff-fessler-and-his-students" title="Permalink to this headline">¶</a></h1>
-<p>MATLAB NUFFT can be downloaded from <a class="reference external" href="http://web.eecs.umich.edu/~fessler/irt/fessler.tgz">http://web.eecs.umich.edu/~fessler/irt/fessler.tgz</a> .</p>
-<p><strong>Installing NUFFT</strong></p>
-<ul>
-<li><p class="first">Unpack the package.</p>
-</li>
-<li><p class="first">Change directory into &quot;irt&quot;:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">irt</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Enter octave program:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">octave</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">If you have matlab, type matlab instead of octave:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">matlab</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Setup the environment in octave or matlab using the setup script:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">The following message shows that everything is ready:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">variable</span> <span class="s2">&quot;irtdir&quot;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">,</span> <span class="n">so</span> <span class="n">trying</span> <span class="n">default</span><span class="p">,</span> <span class="n">assuming</span>
-<span class="n">that</span> <span class="n">you</span> <span class="n">launched</span> <span class="n">matlab</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">irt</span> <span class="n">install</span> <span class="n">directory</span><span class="o">.</span>
-<span class="n">You</span> <span class="n">may</span> <span class="n">need</span> <span class="n">to</span> <span class="n">edit</span> <span class="n">setup</span><span class="o">.</span><span class="n">m</span> <span class="ow">or</span> <span class="n">adjust</span> <span class="n">your</span> <span class="n">path</span> <span class="n">otherwise</span><span class="o">.</span>
-<span class="o">...</span>
-<span class="n">Path</span> <span class="n">setup</span> <span class="k">for</span> <span class="n">irt</span> <span class="n">appears</span> <span class="n">to</span> <span class="n">have</span> <span class="n">succeeded</span><span class="o">.</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Run all of the tests:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">example</span>
-<span class="n">test_all_example</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Everything is fine if all tests passed:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>all 24 tests passed!
-</pre></div>
-</div>
-</li>
-<li><p class="first">Using st=nufft_init(om, Nd, Jd, Kd, nshifts) to build a structure. Then use y=nufft(image, st) to transform the image to k-space.</p>
-</li>
+  <div class="section" id="pycall-using-pynufft-in-julia">
+<h1>PyCall: using PyNUFFT in Julia<a class="headerlink" href="#pycall-using-pynufft-in-julia" title="Permalink to this headline">¶</a></h1>
+<p>Julia is a new high performance language for numerical analysis.
+Julia scripts are dynamically compiled by LLVM compiler.</p>
+<p>The following steps explain how to import pynufft in Julia:</p>
+<ul class="simple">
+<li>Install PyCall</li>
 </ul>
-<hr class="docutils" />
+<p>In Julia environment, install PyCall:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;PyCall&quot;</span><span class="p">)</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">using</span> <span class="n">PyCall</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Import PyNUFFT</li>
+</ul>
+<p>Then import pynufft:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>julia&gt;  @pyimport pynufft.tests as tests
+julia&gt; tests.test_installation()
+
+Does pynufft.py exist?  True
+Does om1D.npz exist? True
+Does om2D.npz exist? True
+Does om3D.npz exist? True
+Does phantom_3D_128_128_128.npz exist? True
+Does phantom_256_256.npz exist? True
+Does example_1D.py exist? True
+Does example_2D.py exist? True
+reikna  has been installed.
+pyopencl  has been installed.
+pycuda  has been installed.
+</pre></div>
+</div>
+<ul class="simple">
+<li>Import NUFFT_cpu and NUFFT_hsa classes:</li>
+</ul>
+<p>Now the NUFFT classes can be easily imported as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>julia&gt; @pyimport pynufft.pynufft as pynufft
+julia&gt; N_c = pynufft.NUFFT_cpu
+PyObject &lt;class &#39;pynufft.src._transform.transform_cpu.NUFFT&#39;&gt;
+julia&gt; N_h = pynufft.NUFFT_hsa
+PyObject &lt;class &#39;pynufft.src._transform.transform_hsa.NUFFT&#39;&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Plan NUFFT</li>
+</ul>
+<p>Please refer to the examples in <a class="reference internal" href="../getstart.html"><span class="doc">Quick start</span></a>.</p>
+<ul class="simple">
+<li>Load Julia images and tests</li>
+</ul>
+<p>Install Julia TestImages:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>julia&gt; Pkg.add(&quot;TestImages&quot;)
+...
+INFO: Download Completed.
+INFO: Package database updated
+INFO: METADATA is out-of-date — you may not have the latest version of TestImages
+INFO: Use `Pkg.update()` to get the latest versions of your packages
+
+julia&gt; using TestImages
+INFO: Precompiling module TestImages.
+
+julia&gt; Pkg.add(&quot;ImageView&quot;)
+julia&gt; using ImageView
+
+julia&gt; img = testimage(&quot;cameraman&quot;)
+julia&gt; imshow(img)
+</pre></div>
+</div>
 </div>
 
 
@@ -205,10 +223,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dft.html" class="btn btn-neutral float-right" title="Discrete Fourier transform (DFT)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../versionhistory.html" class="btn btn-neutral float-right" title="Version history" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../misc.html" class="btn btn-neutral" title="Miscellaneousness" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="fftw.html" class="btn btn-neutral" title="FFTW support (Compile Numpy with FFTW in Linux)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
