@@ -34,8 +34,8 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="PyNUFFT 0.3.3 documentation" href="index.html"/>
-        <link rel="next" title="API documentaiton" href="api.html"/>
-        <link rel="prev" title="Importing PyNUFFT in Julia" href="misc/julia.html"/> 
+        <link rel="next" title="API documentation" href="api.html"/>
+        <link rel="prev" title="PyCall: using PyNUFFT in Julia" href="misc/julia.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -88,9 +88,9 @@
 <li class="toctree-l1"><a class="reference internal" href="whatnew.html">What's new</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getstart.html">Quick start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneousness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Misc</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Version history</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API documentaiton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API documentation</a></li>
 </ul>
 
             
@@ -147,23 +147,19 @@
 <p><strong>v0.3.2.9</strong></p>
 <ul class="simple">
 <li>Experimental support of NVIDIA's graphic processing unit (GPU).</li>
+<li>The experimental class gpuNUFFT requires pycuda, scikit-cuda, and python-cuda-cffi.</li>
+<li>scikit-cuda could be installed from standard command.</li>
 </ul>
-<blockquote>
-<div><p>The experimental class gpuNUFFT requires pycuda, scikit-cuda, and python-cuda-cffi.</p>
-<p>scikit-cuda could be installed from standard command.</p>
-</div></blockquote>
 <p><strong>v0.3.2.8</strong></p>
-<ul>
-<li><p class="first">Tested under Linux and Windows Anaconda3</p>
-<p>add scipy.misc.face().</p>
-</li>
+<ul class="simple">
+<li>Tested under Linux and Windows Anaconda3</li>
+<li>add scipy.misc.face().</li>
 </ul>
 <p><strong>v0.3</strong></p>
 <ul class="simple">
 <li>Update setup.py</li>
+<li>Remove pyfftw due to segfault under some Linux distributions</li>
 </ul>
-<blockquote>
-<div>remove pyfftw due to segfault under some Linux distributions</div></blockquote>
 </div>
 
 
@@ -173,10 +169,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api.html" class="btn btn-neutral float-right" title="API documentaiton" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API documentation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="misc/julia.html" class="btn btn-neutral" title="Importing PyNUFFT in Julia" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="misc/julia.html" class="btn btn-neutral" title="PyCall: using PyNUFFT in Julia" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
