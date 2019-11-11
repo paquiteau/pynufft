@@ -1,6 +1,0 @@
-
-.. automodule:: pynufft_hsa
-    :members:
-    :class: NUFFT
-    
-    
