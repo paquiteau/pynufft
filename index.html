@@ -1,11 +1,9 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
   
   <!-- Licensed under the Apache 2.0 License -->
   <link rel="stylesheet" type="text/css" href="_static/fonts/open-sans/stylesheet.css" />
@@ -15,14 +13,16 @@
   <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>PyNUFFT 2019.2.3rc2 documentation</title>
+    <title>PyNUFFT 2020.1.0 documentation</title>
     <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   
@@ -32,7 +32,7 @@
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
-        <li class="nav-item nav-item-0"><a href="index.html#document-index">PyNUFFT 2019.2.3rc2  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html#document-index">PyNUFFT 2020.1.0  documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -116,7 +116,7 @@
             <ol class="breadcrumb">
               <li><a href="index.html#document-index">Docs</a></li>
               
-              <li>PyNUFFT 2019.2.3rc2  documentation</li>
+              <li>PyNUFFT 2020.1.0  documentation</li>
             </ol>
           </div>
           
@@ -132,35 +132,29 @@
 <h3>The Python Non-uniform fast Fourier transform (PyNUFFT)<a class="headerlink" href="#the-python-non-uniform-fast-fourier-transform-pynufft" title="Permalink to this headline">¶</a></h3>
 <p><strong>Purpose</strong></p>
 <p>The PyNUFFT user manual documents the <em>Python non-uniform fast Fourier transform</em>, a Python package for non-uniform fast Fourier transform.</p>
+<p>PyNUFFT was created for fun. The content may not reflect the views of funding bodies, former or current partners, and contributors.</p>
 <p>If you find PyNUFFT useful, please cite:</p>
 <p><em>Lin, Jyh-Miin. “Python Non-Uniform Fast Fourier Transform (PyNUFFT): An Accelerated Non-Cartesian MRI Package on a Heterogeneous Platform (CPU/GPU).” Journal of Imaging 4.3 (2018): 51.</em></p>
+<p>or</p>
+<p><em>J.-M. Lin and H.-W. Chung, Pynufft: python non-uniform fast Fourier transform for MRI Building Bridges in Medical Sciences 2017, St John’s College, CB2 1TP Cambridge, UK</em></p>
 <p>Users of PyNUFFT should be familiar with discrete Fourier transform (DFT).</p>
 <p><strong>The min-max interpolator</strong></p>
 <ul class="simple">
-<li>PyNUFFT reimplements the min-max interpolator, which is described in the literature:</li>
+<li><p>PyNUFFT translates the min-max interpolator to Python. The min-max interpolator is described in the literature:</p></li>
 </ul>
 <p><em>Fessler JA, Sutton BP. Nonuniform fast Fourier transforms using min-max interpolation. IEEE Trans Signal Process 2003;51(2):560-574.</em></p>
 <p><strong>Background</strong></p>
 <ul class="simple">
-<li>Fast Fourier transform (FFT) is one of the most important algorithms in signal processing. FFT delivers a fast and exact discrete Fourier transform (DFT) in a much shorter computation time than direct DFT does.</li>
-<li>However, FFT does not handle non-Cartesian DFT.</li>
-<li>Thus, NUFFT is proposed as a way to compute the spectrum, by leveraging the speed of FFT and fast interpolation.</li>
+<li><p>Fast Fourier transform (FFT) is one of the most important algorithms in signal processing. FFT delivers a fast and exact discrete Fourier transform (DFT) in a much shorter computation time than direct DFT does.</p></li>
+<li><p>However, FFT does not handle non-Cartesian DFT.</p></li>
+<li><p>Thus, NUFFT is proposed as a way to compute the spectrum, by leveraging the speed of FFT and fast interpolation.</p></li>
 </ul>
 <p><strong>Current status of PyNUFFT</strong></p>
 <ul class="simple">
-<li>The current PyNUFFT relies on Numpy/Scipy (NUFFT_cpu) and Reikan/PyCUDA/PyOpenCL (NUFFT_hsa).</li>
-<li>PyNUFFT provides two NUFFT classes: (1) NUFFT_cpu and (2) NUFFT_hsa (HSA: heterogeneous system architecture).</li>
-<li>Unlike TensorFlow for AI, the current PyNUFFT does NOT recommend any single solver for a wide range of reconstruction problems, especially in medical imaging applications.</li>
-<li>However, it does provide some referenced solvers for a limited number of problems, but without any warranty.</li>
+<li><p>The current PyNUFFT relies on Numpy/Scipy (NUFFT_cpu) and Reikan/PyCUDA/PyOpenCL (NUFFT_hsa).</p></li>
+<li><p>PyNUFFT provides 3 NUFFT classes: (1) NUFFT_cpu, (2) NUFFT_hsa (HSA: heterogeneous system architecture), (3) NUFFT (mixed CPU/HSA classes without warranty)</p></li>
+<li><p>LGPLv3.</p></li>
 </ul>
-<p><strong>Technology overview</strong></p>
-<ul class="simple">
-<li>NUFFT_cpu is the generic NUFFT class built on Numpy/Scipy.</li>
-<li>NUFFT_hsa transplants the NUFFT class to  PyCUDA/PyOpenCL, using the Reikna package to support both platforms.</li>
-</ul>
-<p>The full toolchain is open-source.
-The FFT kernel is from Reikna, which is independent of CUDA.
-PyNUFFT has its own multi-dimensional interpolator and scaling factor, which are also independent of CUDA.</p>
 </div>
 <span id="document-overview/Nd_NUFFT"></span><div class="section" id="multi-dimensional-nufft">
 <h3>Multi-dimensional NUFFT<a class="headerlink" href="#multi-dimensional-nufft" title="Permalink to this headline">¶</a></h3>
@@ -175,7 +169,7 @@ Kd = (512,512) is appropriate for the above Nd = (256,256) problem.</p>
 This will not affect the dimensionality of the image reconstruction problem.
 The batch model will be detailed in the ‘batched NUFFT’ section.</p>
 <p><a class="reference internal" href="#configuration-nufft"><span class="std std-numref">Fig. 1</span></a> illustrates the variables for 1D, 2D, 3D NUFFT.</p>
-<div class="figure" id="id1">
+<div class="figure align-center" id="id1">
 <span id="configuration-nufft"></span><a class="reference internal image-reference" href="_images/configuration_nufft.png"><img alt="_images/configuration_nufft.png" src="_images/configuration_nufft.png" style="width: 60%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Configuration of 1D, 2D, and 3D NUFFT.
 (A) 1D NUFFT: om is a numpy.array of the shape (M,1).
@@ -189,7 +183,7 @@ Jd = (6, 6 ) is the interpolator size.
 (C) 3D NUFFT: om is a numpy.array of the shape (M,3).
 M is the number of non-Cartesian points.
 Nd = (8, 8, 8 ) is the image domain grid size and Kd = (16, 16, 16 ) is the oversampled grid size.
-Jd = (6, 6, 6 ) is the interpolator size.</span></p>
+Jd = (6, 6, 6 ) is the interpolator size.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <span id="document-overview/CPU_GPU"></span><div class="section" id="cpu-and-gpu-hsa">
@@ -198,182 +192,182 @@ Jd = (6, 6, 6 ) is the interpolator size.</span></p>
 <p>Later it was ported to PyCUDA and PyOpenCL, which allows us to leverage the speed of multi-core CPU and GPU.</p>
 <p>Mixing NUFFT_cpu and NUFFT_hsa, or multiple NUFFT_cpu or multiple NUFFT_hsa is possible but has no warranty.</p>
 <p>The class methods are listed in <a class="reference internal" href="#dimension-table"><span class="std std-numref">Table 1</span></a></p>
-<span id="dimension-table"></span><table border="1" class="colwidths-given docutils" id="id1">
+<span id="dimension-table"></span><table class="colwidths-given docutils align-center" id="id1">
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">Methods implemented in NUFFT_cpu and NUFFT_hsa</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col width="32%" />
-<col width="15%" />
-<col width="15%" />
-<col width="38%" />
+<col style="width: 32%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 38%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">method name</th>
-<th class="head">NUFFT_cpu</th>
-<th class="head">NUFFT_hsa</th>
-<th class="head">References</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>method name</p></th>
+<th class="head"><p>NUFFT_cpu</p></th>
+<th class="head"><p>NUFFT_hsa</p></th>
+<th class="head"><p>References</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>__init__()</td>
-<td>✓</td>
-<td>✓</td>
-<td>Constructor</td>
+<tbody>
+<tr class="row-even"><td><p>__init__()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Constructor</p></td>
 </tr>
-<tr class="row-odd"><td>plan()</td>
-<td>✓</td>
-<td>✓</td>
-<td>Planning the instance</td>
+<tr class="row-odd"><td><p>plan()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Planning the instance</p></td>
 </tr>
-<tr class="row-even"><td>forward()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Forward NUFFT <span class="math notranslate nohighlight">\(A\)</span></td>
+<tr class="row-even"><td><p>forward()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Forward NUFFT <span class="math notranslate nohighlight">\(A\)</span></p></td>
 </tr>
-<tr class="row-odd"><td>adjoint()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Adjoint NUFFT <span class="math notranslate nohighlight">\(A^H\)</span></td>
+<tr class="row-odd"><td><p>adjoint()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Adjoint NUFFT <span class="math notranslate nohighlight">\(A^H\)</span></p></td>
 </tr>
-<tr class="row-even"><td>forward_one2many()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(batch mode) Single image -&gt; multi-coil data forward NUFFT <span class="math notranslate nohighlight">\(A\)</span></td>
+<tr class="row-even"><td><p>forward_one2many()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(batch mode) Single image -&gt; multi-coil data forward NUFFT <span class="math notranslate nohighlight">\(A\)</span></p></td>
 </tr>
-<tr class="row-odd"><td>adjoint_many2one()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(batch mode) Multi-coil data -&gt; single image adjoint NUFFT <span class="math notranslate nohighlight">\(A^H\)</span></td>
+<tr class="row-odd"><td><p>adjoint_many2one()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(batch mode) Multi-coil data -&gt; single image adjoint NUFFT <span class="math notranslate nohighlight">\(A^H\)</span></p></td>
 </tr>
-<tr class="row-even"><td>selfadjoint_one2many2one()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(batch mode)  Single image -&gt; multi-coil data -&gt; single image selfadjoint  <span class="math notranslate nohighlight">\(A^H A\)</span></td>
+<tr class="row-even"><td><p>selfadjoint_one2many2one()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(batch mode)  Single image -&gt; multi-coil data -&gt; single image selfadjoint  <span class="math notranslate nohighlight">\(A^H A\)</span></p></td>
 </tr>
-<tr class="row-odd"><td>set_sense()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(batch mode) Set the coil sensitivities</td>
+<tr class="row-odd"><td><p>set_sense()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(batch mode) Set the coil sensitivities</p></td>
 </tr>
-<tr class="row-even"><td>reset_sense()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(batch mode) Reset the coil sensitivities to ones</td>
+<tr class="row-even"><td><p>reset_sense()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(batch mode) Reset the coil sensitivities to ones</p></td>
 </tr>
-<tr class="row-odd"><td>offload()</td>
-<td>×</td>
-<td>✓</td>
-<td>Offload the NUFFT_hsa() to device.</td>
+<tr class="row-odd"><td><p>offload()</p></td>
+<td><p>×</p></td>
+<td><p>✓</p></td>
+<td><p>Offload the NUFFT_hsa() to device.</p></td>
 </tr>
-<tr class="row-even"><td>x2xx()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Apply the scaling factor</td>
+<tr class="row-even"><td><p>x2xx()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Apply the scaling factor</p></td>
 </tr>
-<tr class="row-odd"><td>xx2k()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Oversampled FFT</td>
+<tr class="row-odd"><td><p>xx2k()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Oversampled FFT</p></td>
 </tr>
-<tr class="row-even"><td>k2y()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Interpolation</td>
+<tr class="row-even"><td><p>k2y()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Interpolation</p></td>
 </tr>
-<tr class="row-odd"><td>k2vec()</td>
-<td>✓</td>
-<td>×</td>
-<td>(Normal and batch mode) Reshape the k-space to the vector</td>
+<tr class="row-odd"><td><p>k2vec()</p></td>
+<td><p>✓</p></td>
+<td><p>×</p></td>
+<td><p>(Normal and batch mode) Reshape the k-space to the vector</p></td>
 </tr>
-<tr class="row-even"><td>vec2y()</td>
-<td>✓</td>
-<td>×</td>
-<td>(Normal and batch mode) Multiply the vector to generate the data</td>
+<tr class="row-even"><td><p>vec2y()</p></td>
+<td><p>✓</p></td>
+<td><p>×</p></td>
+<td><p>(Normal and batch mode) Multiply the vector to generate the data</p></td>
 </tr>
-<tr class="row-odd"><td>vec2k()</td>
-<td>✓</td>
-<td>×</td>
-<td>(Normal and batch mode) Reshape the vector to k-space</td>
+<tr class="row-odd"><td><p>vec2k()</p></td>
+<td><p>✓</p></td>
+<td><p>×</p></td>
+<td><p>(Normal and batch mode) Reshape the vector to k-space</p></td>
 </tr>
-<tr class="row-even"><td>y2vec()</td>
-<td>✓</td>
-<td>×</td>
-<td>(Normal and batch mode) Multiply the data to get the vector</td>
+<tr class="row-even"><td><p>y2vec()</p></td>
+<td><p>✓</p></td>
+<td><p>×</p></td>
+<td><p>(Normal and batch mode) Multiply the data to get the vector</p></td>
 </tr>
-<tr class="row-odd"><td>y2k()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Adjoint of k2y()</td>
+<tr class="row-odd"><td><p>y2k()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Adjoint of k2y()</p></td>
 </tr>
-<tr class="row-even"><td>k2xx()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Inverse FFT (excessive parts are cropped)</td>
+<tr class="row-even"><td><p>k2xx()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Inverse FFT (excessive parts are cropped)</p></td>
 </tr>
-<tr class="row-odd"><td>xx2x()</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Apply the scaling factor</td>
+<tr class="row-odd"><td><p>xx2x()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Apply the scaling factor</p></td>
 </tr>
-<tr class="row-even"><td>_precompute</td>
-<td>✓</td>
-<td>✓</td>
-<td>(Normal and batch mode) Apply the scaling factor</td>
+<tr class="row-even"><td><p>_precompute</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>(Normal and batch mode) Apply the scaling factor</p></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="parameters-of-pynufft">
 <h4>Parameters of PyNUFFT<a class="headerlink" href="#parameters-of-pynufft" title="Permalink to this headline">¶</a></h4>
 <p>Below we summarize the required variables in <a class="reference internal" href="#parameter-table"><span class="std std-numref">Table 2</span></a></p>
-<span id="parameter-table"></span><table border="1" class="colwidths-given docutils" id="id2">
+<span id="parameter-table"></span><table class="colwidths-given docutils align-center" id="id2">
 <caption><span class="caption-number">Table 2 </span><span class="caption-text">Parameters of the plan() method</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col width="32%" />
-<col width="15%" />
-<col width="15%" />
-<col width="38%" />
+<col style="width: 32%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 38%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">NUFFT_cpu</th>
-<th class="head">NUFFT_hsa</th>
-<th class="head">References</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>NUFFT_cpu</p></th>
+<th class="head"><p>NUFFT_hsa</p></th>
+<th class="head"><p>References</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>om (Numpy Array)</td>
-<td>✓</td>
-<td>✓</td>
-<td>Non-Cartesian coordinates (M, dim)</td>
+<tbody>
+<tr class="row-even"><td><p>om (Numpy Array)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Non-Cartesian coordinates (M, dim)</p></td>
 </tr>
-<tr class="row-odd"><td>Nd (tuple)</td>
-<td>✓</td>
-<td>✓</td>
-<td>Size of the image grid</td>
+<tr class="row-odd"><td><p>Nd (tuple)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Size of the image grid</p></td>
 </tr>
-<tr class="row-even"><td>Kd (tuple)</td>
-<td>✓</td>
-<td>✓</td>
-<td>Size of the oversampled Fourier grid</td>
+<tr class="row-even"><td><p>Kd (tuple)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Size of the oversampled Fourier grid</p></td>
 </tr>
-<tr class="row-odd"><td>Jd (tuple)</td>
-<td>✓</td>
-<td>✓</td>
-<td>Size of the interpolator</td>
+<tr class="row-odd"><td><p>Jd (tuple)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Size of the interpolator</p></td>
 </tr>
-<tr class="row-even"><td>ft_axes (tuple)</td>
-<td>optional</td>
-<td>optional</td>
-<td>FFT on the given axes (default = None (all axes))</td>
+<tr class="row-even"><td><p>ft_axes (tuple)</p></td>
+<td><p>optional</p></td>
+<td><p>optional</p></td>
+<td><p>FFT on the given axes (default = None (all axes))</p></td>
 </tr>
-<tr class="row-odd"><td>batch (int)</td>
-<td>optional</td>
-<td>optional</td>
-<td>Batch NUFFT (default = None)</td>
+<tr class="row-odd"><td><p>batch (int)</p></td>
+<td><p>optional</p></td>
+<td><p>optional</p></td>
+<td><p>Batch NUFFT (default = None)</p></td>
 </tr>
-<tr class="row-even"><td>radix (int)</td>
-<td>×</td>
-<td>optional</td>
-<td>radix (default = 1)</td>
+<tr class="row-even"><td><p>radix (int)</p></td>
+<td><p>×</p></td>
+<td><p>optional</p></td>
+<td><p>radix (default = 1)</p></td>
 </tr>
 </tbody>
 </table>
@@ -391,7 +385,7 @@ Jd = (6, 6, 6 ) is the interpolator size.</span></p>
 <h4>Initiating a PyNUFFT object<a class="headerlink" href="#initiating-a-pynufft-object" title="Permalink to this headline">¶</a></h4>
 <p>We can initiate a PyNUFFT by importing the NUFFT_cpu object:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import NUFFT_cpu class</span>
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
 
 <span class="c1"># Initiate the NufftObj object</span>
 <span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
@@ -442,7 +436,7 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 <h3>The 1D example<a class="headerlink" href="#the-1d-example" title="Permalink to this headline">¶</a></h3>
 <p><strong>Import pynufft module</strong></p>
 <p>In python environment, import pynufft module:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
 </pre></div>
 </div>
 <p>Create a pynufft object NufftObj:</p>
@@ -479,9 +473,9 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 </pre></div>
 </div>
 <p>This generates a time series <a class="reference internal" href="#box-function"><span class="std std-numref">Fig. 2</span></a>.</p>
-<div class="figure" id="id1">
+<div class="figure align-center" id="id1">
 <span id="box-function"></span><a class="reference internal image-reference" href="_images/box_function.png"><img alt="_images/box_function.png" src="_images/box_function.png" style="width: 75%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">A box function time series</span></p>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">A box function time series</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>NufftObj transform the time_data to non-Cartesian locations:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nufft_freq_data</span> <span class="o">=</span><span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">time_data</span><span class="p">)</span>
@@ -492,9 +486,9 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 </pre></div>
 </div>
 <p>This displays the non-Cartesian spectrum <a class="reference internal" href="#non-cartesian-spectrum"><span class="std std-numref">Fig. 3</span></a>.</p>
-<div class="figure" id="id2">
+<div class="figure align-center" id="id2">
 <span id="non-cartesian-spectrum"></span><a class="reference internal image-reference" href="_images/non_Cartesian_spectrum.png"><img alt="_images/non_Cartesian_spectrum.png" src="_images/non_Cartesian_spectrum.png" style="width: 75%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Non-Cartesian spectrum of box function in <a class="reference internal" href="#box-function"><span class="std std-numref">Fig. 2</span></a>. Note the non-uniform density.</span></p>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Non-Cartesian spectrum of box function in <a class="reference internal" href="#box-function"><span class="std std-numref">Fig. 2</span></a>. Note the non-uniform density.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p><strong>Signal restoration through “solve()”</strong></p>
 <p>The signal can be solved by the solve() method</p>
@@ -512,15 +506,15 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="figure" id="id3">
+<div class="figure align-center" id="id3">
 <span id="solve"></span><a class="reference internal image-reference" href="_images/script_1D_solve.png"><img alt="_images/script_1D_solve.png" src="_images/script_1D_solve.png" style="width: 75%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Signals restored by “solve()”. L1TVOLS and L1TVOLS are close to <a class="reference internal" href="#box-function"><span class="std std-numref">Fig. 2</span></a>, whereas cg is subject to distortion.</span></p>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Signals restored by “solve()”. L1TVOLS and L1TVOLS are close to <a class="reference internal" href="#box-function"><span class="std std-numref">Fig. 2</span></a>, whereas cg is subject to distortion.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>The complete code is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pyplot</span>
     
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
 
 
 <span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1512</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -570,7 +564,7 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 <span class="kn">import</span> <span class="nn">scipy.misc</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
 
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
 </pre></div>
 </div>
 <p><strong>Loading the X-Y locations(“om”)</strong></p>
@@ -602,9 +596,9 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 </pre></div>
 </div>
 <p>As can be seen in <a class="reference internal" href="#propeller-trajectory"><span class="std std-numref">Fig. 5</span></a>:</p>
-<div class="figure" id="id1">
+<div class="figure align-center" id="id1">
 <span id="propeller-trajectory"></span><a class="reference internal image-reference" href="_images/propeller_trajectory.png"><img alt="_images/propeller_trajectory.png" src="_images/propeller_trajectory.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The 2D PROPELLER trajectory of M points.</span></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The 2D PROPELLER trajectory of M points.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p><strong>Planning</strong>
 Create a pynufft object NufftObj:</p>
@@ -626,8 +620,7 @@ Create a pynufft object NufftObj:</p>
 </div>
 <p><strong>Forward transform</strong></p>
 <p>Now NufftObj has been prepared and is ready for computations. We continue with an example.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="o">...</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;loading image...&#39;</span><span class="p">)</span>
@@ -637,9 +630,9 @@ Create a pynufft object NufftObj:</p>
 </pre></div>
 </div>
 <p>This displays the image <a class="reference internal" href="#d-example-image"><span class="std std-numref">Fig. 6</span></a>.</p>
-<div class="figure" id="id2">
+<div class="figure align-center" id="id2">
 <span id="d-example-image"></span><a class="reference internal image-reference" href="_images/2d_example_image.png"><img alt="_images/2d_example_image.png" src="_images/2d_example_image.png" style="width: 75%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">The 2D image from scipy.misc.ascent()</span></p>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">The 2D image from scipy.misc.ascent()</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>NufftObj transform the time_data to non-Cartesian locations:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
@@ -673,20 +666,20 @@ Create a pynufft object NufftObj:</p>
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="figure" id="id3">
+<div class="figure align-center" id="id3">
 <span id="d-restore"></span><a class="reference internal image-reference" href="_images/2D_restoration.png"><img alt="_images/2D_restoration.png" src="_images/2D_restoration.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Image restoration through solve() ‘cg’, ‘L1TVOLS’, ‘L1TVLAD’ and adjoint().</span></p>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Image restoration through solve() ‘cg’, ‘L1TVOLS’, ‘L1TVLAD’ and adjoint().</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>The spectrum of the restored image:</p>
-<div class="figure" id="id4">
+<div class="figure align-center" id="id4">
 <span id="d-spectrum"></span><a class="reference internal image-reference" href="_images/2D_spectrum.png"><img alt="_images/2D_spectrum.png" src="_images/2D_spectrum.png" style="width: 75%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">The spectrum of the restored image solved by cg.</span></p>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">The spectrum of the restored image solved by cg.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> 
 <span class="kn">import</span> <span class="nn">scipy.misc</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> 
 
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
 
 
 
@@ -812,12 +805,12 @@ Create a pynufft object NufftObj:</p>
 <span class="kn">import</span> <span class="nn">scipy.misc</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
 
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
 </pre></div>
 </div>
 <p><strong>Planning</strong></p>
 <p>Create a pynufft object NufftObj:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
 <span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -843,9 +836,9 @@ Create a pynufft object NufftObj:</p>
 </pre></div>
 </div>
 <p>This displays the image <a class="reference internal" href="#d-example-image"><span class="std std-numref">Fig. 9</span></a>.</p>
-<div class="figure" id="id1">
+<div class="figure align-center" id="id1">
 <span id="d-example-image"></span><a class="reference internal image-reference" href="_images/3D_phantom1.png"><img alt="_images/3D_phantom1.png" src="_images/3D_phantom1.png" style="width: 75%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">The 3D phantom</span></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">The 3D phantom</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>NufftObj transform the time_data to non-Cartesian locations:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
@@ -872,9 +865,9 @@ Create a pynufft object NufftObj:</p>
 <span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CG&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure" id="id2">
+<div class="figure align-center" id="id2">
 <span id="d-restore"></span><a class="reference internal image-reference" href="_images/3D_restore1.png"><img alt="_images/3D_restore1.png" src="_images/3D_restore1.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Image restoration using’cg’, ‘L1TVOLS’, ‘L1TVLAD’.</span></p>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Image restoration using’cg’, ‘L1TVOLS’, ‘L1TVLAD’.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">special_license</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">The license of the 3D Shepp-Logan phantom:</span>
@@ -908,7 +901,7 @@ Create a pynufft object NufftObj:</p>
 <span class="s1">&#39;&#39;&#39;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pyplot</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">cm</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
 <span class="n">gray</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">gray</span>
 <span class="k">def</span> <span class="nf">indxmap_diff</span><span class="p">(</span><span class="n">Nd</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1121,7 +1114,7 @@ Create a pynufft object NufftObj:</p>
 <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">5e+5</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span><span class="p">,</span> <span class="n">NUFFT_hsa_legacy</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span><span class="p">,</span> <span class="n">NUFFT_hsa_legacy</span>
 <span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_hsa</span><span class="p">(</span><span class="n">API</span> <span class="o">=</span> <span class="s1">&#39;ocl&#39;</span><span class="p">,</span>   <span class="n">platform_number</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">device_number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
@@ -1180,75 +1173,75 @@ So far, I have tested Anaconda, intel-python, intel-numpy and open-source python
 <p>Defining the equispaced to non-Cartesian transform as  operator <span class="math notranslate nohighlight">\(A\)</span>, the
 NUFFT_cpu class provides the following methods:</p>
 <ul class="simple">
-<li><dl class="first docutils">
-<dt>forward() method computes the single-coil to single-coil, or multi-coil to</dt>
-<dd>multi-coil (batch mode) forward operation <span class="math notranslate nohighlight">\(A\)</span>.</dd>
+<li><dl class="simple">
+<dt>forward() method computes the single-coil to single-coil, or multi-coil to</dt><dd><p>multi-coil (batch mode) forward operation <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>adjoint() method computes the single-coil to single-coil, or multi-coil to</dt>
-<dd>multi-coil  (batch mode) adjoint operation  <span class="math notranslate nohighlight">\(A^H\)</span>.</dd>
+<li><dl class="simple">
+<dt>adjoint() method computes the single-coil to single-coil, or multi-coil to</dt><dd><p>multi-coil  (batch mode) adjoint operation  <span class="math notranslate nohighlight">\(A^H\)</span>.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>selfadjoint() method computes the single-coil to single-coil, or multi-coil</dt>
-<dd>to multi-coil (batch mode) selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span>.</dd>
+<li><dl class="simple">
+<dt>selfadjoint() method computes the single-coil to single-coil, or multi-coil</dt><dd><p>to multi-coil (batch mode) selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span>.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>forward_one2many() method computes the single-coil to multi-coil forward</dt>
-<dd>operation <span class="math notranslate nohighlight">\(A\)</span> in batch mode. The single-coil image is copied to
+<li><dl class="simple">
+<dt>forward_one2many() method computes the single-coil to multi-coil forward</dt><dd><p>operation <span class="math notranslate nohighlight">\(A\)</span> in batch mode. The single-coil image is copied to
 multi-coil images before transform. If set_sense() is called first,
 multi-coil images will be implicitly multiplied by the coil
 sensitivities before transform. If set_sense() is never called,
 multi-coil images will not be changed by the coil sensitivities before
-transform.</dd>
+transform.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>adjoint_many2one() method computes the multi-coil to single-coil adjoint</dt>
-<dd>operation  <span class="math notranslate nohighlight">\(A^H\)</span> in batch mode.
+<li><dl class="simple">
+<dt>adjoint_many2one() method computes the multi-coil to single-coil adjoint</dt><dd><p>operation  <span class="math notranslate nohighlight">\(A^H\)</span> in batch mode.
 The final reduction will divide the summed image by the number of
 coils. If set_sense() is called first, multi-coil images will be
 implicitly multiplied by the conjugate of coil sensitivities before
 reduction. If set_sense() is never called, multi-coil images will not
-be changed by the coil sensitivities before reduction.</dd>
+be changed by the coil sensitivities before reduction.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>selfadjoint_one2many2one () method computes the single-coil to single-coil</dt>
-<dd>selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span> in batch mode.
+<li><dl class="simple">
+<dt>selfadjoint_one2many2one () method computes the single-coil to single-coil</dt><dd><p>selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span> in batch mode.
 It connects forward_one2many() and adjoint_many2one() methods.
 If set_sense() is called first, coil sensitivities and the conjugate
-are used during forward_one2many() and adjoint_many2one().</dd>
+are used during forward_one2many() and adjoint_many2one().</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>solve() method links many solvers in pynufft.linalg.solver_cpu,</dt>
-<dd>which is based on the solvers of scipy.sparse.linalg.cg,
+<li><dl class="simple">
+<dt>solve() method links many solvers in pynufft.linalg.solver_cpu,</dt><dd><p>which is based on the solvers of scipy.sparse.linalg.cg,
 scipy.sparse.linalg. ‘lsqr’, ‘dc’, ‘bicg’, ‘bicgstab’, ‘cg’,
-‘gmres’, ‘lgmres’</dd>
+‘gmres’, ‘lgmres’</p>
+</dd>
 </dl>
 </li>
 </ul>
 <p><strong>Attributes</strong></p>
 <ul class="simple">
-<li>NUFFT_cpu.ndims: the dimension</li>
-<li>NUFFT_cpu.ft_axes: the axes where the FFT takes place</li>
-<li><dl class="first docutils">
-<dt>NUFFT_cpu.parallel_flag: 1 for parallel transform.</dt>
-<dd>0 for single channel.
-If 1, the additional axis is batch.</dd>
+<li><p>NUFFT_cpu.ndims: the dimension</p></li>
+<li><p>NUFFT_cpu.ft_axes: the axes where the FFT takes place</p></li>
+<li><dl class="simple">
+<dt>NUFFT_cpu.parallel_flag: 1 for parallel transform.</dt><dd><p>0 for single channel.
+If 1, the additional axis is batch.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>NUFFT_cpu.batch: internal attribute saving the number of channels.</dt>
-<dd>If parallel_flag is 0, the batch is 1.
-Otherwise, the batch must be given explictly during planning.</dd>
+<li><dl class="simple">
+<dt>NUFFT_cpu.batch: internal attribute saving the number of channels.</dt><dd><p>If parallel_flag is 0, the batch is 1.
+Otherwise, the batch must be given explictly during planning.</p>
+</dd>
 </dl>
 </li>
-<li>NUFFT_cpu.Nd: Tuple, the dimensions of the image</li>
-<li>NUFFT_cpu.Kd: Tuple, the dimensions of the oversampled k-space</li>
+<li><p>NUFFT_cpu.Nd: Tuple, the dimensions of the image</p></li>
+<li><p>NUFFT_cpu.Kd: Tuple, the dimensions of the oversampled k-space</p></li>
 </ul>
 <p><strong>The life-cycle of an NUFFT_cpu object</strong></p>
 <p>NUFFT_cpu employs the plan-execution two-stage model.
@@ -1267,75 +1260,75 @@ See <a class="reference external" href="https://docs.scipy.org/doc/scipy/referen
 <p>Defining the equispaced to non-Cartesian transform as  operator <span class="math notranslate nohighlight">\(A\)</span>, the
 NUFFT_hsa class provides the following methods:</p>
 <ul class="simple">
-<li><dl class="first docutils">
-<dt>forward() method computes the single-coil to single-coil, or multi-coil to</dt>
-<dd>multi-coil (batch mode) forward operation <span class="math notranslate nohighlight">\(A\)</span>.</dd>
+<li><dl class="simple">
+<dt>forward() method computes the single-coil to single-coil, or multi-coil to</dt><dd><p>multi-coil (batch mode) forward operation <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>adjoint() method computes the single-coil to single-coil, or multi-coil to</dt>
-<dd>multi-coil  (batch mode) adjoint operation  <span class="math notranslate nohighlight">\(A^H\)</span>.</dd>
+<li><dl class="simple">
+<dt>adjoint() method computes the single-coil to single-coil, or multi-coil to</dt><dd><p>multi-coil  (batch mode) adjoint operation  <span class="math notranslate nohighlight">\(A^H\)</span>.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>selfadjoint() method computes the single-coil to single-coil, or multi-coil</dt>
-<dd>to multi-coil (batch mode) selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span>.</dd>
+<li><dl class="simple">
+<dt>selfadjoint() method computes the single-coil to single-coil, or multi-coil</dt><dd><p>to multi-coil (batch mode) selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span>.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>forward_one2many() method computes the single-coil to multi-coil forward</dt>
-<dd>operation <span class="math notranslate nohighlight">\(A\)</span> in batch mode. The single-coil image is copied to
+<li><dl class="simple">
+<dt>forward_one2many() method computes the single-coil to multi-coil forward</dt><dd><p>operation <span class="math notranslate nohighlight">\(A\)</span> in batch mode. The single-coil image is copied to
 multi-coil images before transform. If set_sense() is called first,
 multi-coil images will be implicitly multiplied by the coil
 sensitivities before transform. If set_sense() is never called,
 multi-coil images will not be changed by the coil sensitivities before
-transform.</dd>
+transform.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>adjoint_many2one() method computes the multi-coil to single-coil adjoint</dt>
-<dd>operation  <span class="math notranslate nohighlight">\(A^H\)</span> in batch mode.
+<li><dl class="simple">
+<dt>adjoint_many2one() method computes the multi-coil to single-coil adjoint</dt><dd><p>operation  <span class="math notranslate nohighlight">\(A^H\)</span> in batch mode.
 The final reduction will divide the summed image by the number of
 coils. If set_sense() is called first, multi-coil images will be
 implicitly multiplied by the conjugate of coil sensitivities before
 reduction. If set_sense() is never called, multi-coil images will not
-be changed by the coil sensitivities before reduction.</dd>
+be changed by the coil sensitivities before reduction.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>selfadjoint_one2many2one () method computes the single-coil to single-coil</dt>
-<dd>selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span> in batch mode.
+<li><dl class="simple">
+<dt>selfadjoint_one2many2one () method computes the single-coil to single-coil</dt><dd><p>selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span> in batch mode.
 It connects forward_one2many() and adjoint_many2one() methods.
 If set_sense() is called first, coil sensitivities and the conjugate
-are used during forward_one2many() and adjoint_many2one().</dd>
+are used during forward_one2many() and adjoint_many2one().</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>solve() method links many solvers in pynufft.linalg.solver_cpu,</dt>
-<dd>which is based on the solvers of scipy.sparse.linalg.cg,
+<li><dl class="simple">
+<dt>solve() method links many solvers in pynufft.linalg.solver_cpu,</dt><dd><p>which is based on the solvers of scipy.sparse.linalg.cg,
 scipy.sparse.linalg.’lsqr’, ‘dc’, ‘bicg’, ‘bicgstab’, ‘cg’,
-‘gmres’, ‘lgmres’</dd>
+‘gmres’, ‘lgmres’</p>
+</dd>
 </dl>
 </li>
 </ul>
 <p><strong>Attributes</strong></p>
 <ul class="simple">
-<li>NUFFT_hsa.ndims: the dimension</li>
-<li>NUFFT_hsa.ft_axes: the axes where the FFT takes place</li>
-<li><dl class="first docutils">
-<dt>NUFFT_hsa.parallel_flag: 1 for parallel transform.</dt>
-<dd>0 for single channel.
-If 1, the additional axis is batch.</dd>
+<li><p>NUFFT_hsa.ndims: the dimension</p></li>
+<li><p>NUFFT_hsa.ft_axes: the axes where the FFT takes place</p></li>
+<li><dl class="simple">
+<dt>NUFFT_hsa.parallel_flag: 1 for parallel transform.</dt><dd><p>0 for single channel.
+If 1, the additional axis is batch.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>NUFFT_hsa.batch: internal attribute saving the number of channels.</dt>
-<dd>If parallel_flag is 0, the batch is 1.
-Otherwise, the batch must be given explicitly during planning.</dd>
+<li><dl class="simple">
+<dt>NUFFT_hsa.batch: internal attribute saving the number of channels.</dt><dd><p>If parallel_flag is 0, the batch is 1.
+Otherwise, the batch must be given explicitly during planning.</p>
+</dd>
 </dl>
 </li>
-<li>NUFFT_hsa.Nd: Tuple, the dimensions of the image</li>
-<li>NUFFT_hsa.Kd: Tuple, the dimensions of oversampled k-space</li>
+<li><p>NUFFT_hsa.Nd: Tuple, the dimensions of the image</p></li>
+<li><p>NUFFT_hsa.Kd: Tuple, the dimensions of oversampled k-space</p></li>
 </ul>
 <p><strong>Acceleration on PyCUDA/PyOpenCL</strong></p>
 <p>The NUFFT_hsa was designed to accelerate the NUFFT function
@@ -1447,115 +1440,6 @@ each NUFFT_hsa instance should be created and then executed in a separate proces
 <p>One example of working with multiprocessing (mixed CUDA and OpenCL backends) is as follows.
 In this example, an “atomic_NUFFT” class is created as a high-level wrapper for the creation and execution of NUFFT_hsa.
 This example has only been tested in Linux because parallel computing is highly platform dependent.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">An example of multiprocessing with NUFFT_hsa using PyCUDA backend, </span>
-<span class="sd">wrapped inside the atomic_NUFFT wrapper class.  </span>
-<span class="sd">The two processes are running on two CPU cores.</span>
-<span class="sd">Each process creates one NUFFT_hsa and offloads the computations to GPU.</span>
-<span class="sd">nvidia-smi confirms that two python programs are using the GPU.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_hsa</span><span class="p">,</span> <span class="n">NUFFT_cpu</span>
-<span class="kn">import</span> <span class="nn">scipy.misc</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
-<span class="kn">import</span> <span class="nn">multiprocessing</span>
-<span class="kn">import</span> <span class="nn">os</span> 
-    
-
-
-<span class="k">class</span> <span class="nc">atomic_NUFFT</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="n">API</span><span class="p">,</span> <span class="n">device_number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This caches the parameters only.</span>
-<span class="sd">        Any other GPU related stuffs are carried out in run()</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">om</span> <span class="o">=</span> <span class="n">om</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Nd</span> <span class="o">=</span> <span class="n">Nd</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Kd</span> <span class="o">=</span> <span class="n">Kd</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Jd</span> <span class="o">=</span> <span class="n">Jd</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">API</span> <span class="o">=</span> <span class="n">API</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">device_number</span> <span class="o">=</span> <span class="n">device_number</span>
-        
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">cpu_core</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        In this method, the NUFFT_hsa are created and executed on a fixed CPU core.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">pid</span><span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pid=&#39;</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;taskset -p -c </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cpu_core</span><span class="p">,</span> <span class="n">pid</span><span class="p">))</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Control the CPU affinity. Otherwise the process on one core can be switched to another core.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="c1"># create NUFFT</span>
-        <span class="n">NUFFT</span> <span class="o">=</span> <span class="n">NUFFT_hsa</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">API</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">device_number</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-        
-        <span class="c1"># plan the NUFFT</span>
-        <span class="n">NUFFT</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">om</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nd</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Kd</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Jd</span><span class="p">)</span>
-
-        <span class="c1"># send the image to device</span>
-        <span class="n">gx</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        
-        <span class="c1"># carry out 10000 forward transform</span>
-        <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
-            <span class="n">gy</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">gx</span><span class="p">)</span>
-
-        <span class="c1"># return the object</span>
-        <span class="k">return</span> <span class="n">gy</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-
-<span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
-<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
-<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
-<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">35636</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> 
-<span class="n">x</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">(),</span> <span class="n">Nd</span><span class="p">)</span>
-<span class="n">om1</span> <span class="o">=</span> <span class="n">om</span><span class="p">[</span><span class="n">om</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
-<span class="n">om2</span> <span class="o">=</span> <span class="n">om</span><span class="p">[</span><span class="n">om</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
-
-<span class="c1"># create pool</span>
-<span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1"># create the list to receive the return values</span>
-<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Now enter the first process</span>
-<span class="c1"># This is the standard multiprocessing Pool</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">atomic_NUFFT</span><span class="p">(</span><span class="n">om1</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="s1">&#39;cuda&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="c1"># async won&#39;t obstruct the next line of code</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">run</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="c1"># the result is appended</span>
-<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-<span class="c1"># Now enter the second process</span>
-<span class="c1"># This is the standard multiprocessing Pool</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">atomic_NUFFT</span><span class="p">(</span><span class="n">om2</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="s1">&#39;cuda&#39;</span><span class="p">,</span>   <span class="mi">0</span><span class="p">)</span>
-<span class="c1"># Non-obstructive</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">run</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-<span class="c1"># closing the pool </span>
-<span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-
-<span class="c1"># results are appended</span>
-<span class="c1"># Now print the outputs</span>
-<span class="n">result1</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="n">result2</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-
-<span class="c1"># check CPU results</span>
-
-<span class="n">NUFFT_cpu1</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
-<span class="n">NUFFT_cpu1</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om1</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="n">NUFFT_cpu1</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;norm = &#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">result1</span><span class="p">)</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span>
-
-<span class="n">NUFFT_cpu2</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
-<span class="n">NUFFT_cpu2</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om2</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
-<span class="n">y2</span> <span class="o">=</span> <span class="n">NUFFT_cpu2</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;norm = &#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">result2</span><span class="p">)</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y2</span><span class="p">))</span>
-
-</pre></div>
-</div>
 </div>
 <span id="document-manu/batch_mode"></span><div class="section" id="batched-nufft">
 <h3>Batched NUFFT<a class="headerlink" href="#batched-nufft" title="Permalink to this headline">¶</a></h3>
@@ -1574,14 +1458,14 @@ OpenCL allows a single buffer which is 1/4 of the total memory.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_batch_NUFFT</span><span class="p">():</span>
     
     <span class="kn">import</span> <span class="nn">scipy.misc</span>
-    <span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
+    <span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT</span>
     
     <span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
     <span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
     <span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
     
-    <span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">Nd</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="c1">#     image = scipy.misc.imresize(image, Nd).astype(numpy.complex64)</span>
     <span class="n">om</span> <span class="o">=</span> <span class="n">fake_Cartesian</span><span class="p">(</span><span class="n">Nd</span><span class="p">)</span>
     
     <span class="n">batch</span> <span class="o">=</span> <span class="mi">3</span>
@@ -1592,14 +1476,14 @@ OpenCL allows a single buffer which is 1/4 of the total memory.</p>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jd = &#39;</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
      
 <span class="c1">#     NufftObj = NUFFT_cpu()</span>
-    <span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_hsa</span><span class="p">()</span>
+    <span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="p">()</span>
     <span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="n">ft_axes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>  <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
     
     <span class="c1"># Now transform 1 image to multiple channels using forward_one2many() method</span>
 <span class="c1">#     y = NufftObj.forward_one2many(image) # for NUFFT_cpu()</span>
     <span class="n">multi_image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">Nd</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)),</span> <span class="n">Nd</span> <span class="o">+</span> <span class="p">(</span><span class="n">batch</span><span class="p">,))</span>
     <span class="n">y0</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">multi_image</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">y0</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y0</span>
 
 <span class="c1">#     y = NufftObj.forward_one2many(image).get() # for NUFFT_hsa()</span>
     
@@ -1614,7 +1498,7 @@ OpenCL allows a single buffer which is 1/4 of the total memory.</p>
 <span class="c1">#                 ), axes = (0,1)</span>
 <span class="c1">#             )</span>
     
-    <span class="n">x2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
     
     
     <span class="c1"># display the result</span>
@@ -1646,14 +1530,14 @@ ones and it is a batch NUFFT.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_senselike_NUFFT</span><span class="p">():</span>
     
     <span class="kn">import</span> <span class="nn">scipy.misc</span>
-    <span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
+    <span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT</span><span class="p">,</span> <span class="n">helper</span>
     
     <span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
     <span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
     <span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
     
-    <span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">Nd</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()[::</span><span class="mi">2</span><span class="p">,::</span><span class="mi">2</span><span class="p">]</span>
+<span class="c1">#     image = scipy.misc.imresize(image, Nd).astype(numpy.complex64)</span>
     <span class="n">om</span> <span class="o">=</span> <span class="n">fake_Cartesian</span><span class="p">(</span><span class="n">Nd</span><span class="p">)</span>
     
     <span class="n">batch</span> <span class="o">=</span> <span class="mi">3</span>
@@ -1664,7 +1548,8 @@ ones and it is a batch NUFFT.</p>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jd = &#39;</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
      
 <span class="c1">#     NufftObj = NUFFT_cpu()</span>
-    <span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_hsa</span><span class="p">()</span>
+    <span class="n">device_list</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">device_list</span><span class="p">()</span>
+    <span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="p">(</span><span class="n">device_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">legacy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="n">ft_axes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
     
     <span class="c1"># Now create fake coil sensitivity profiles</span>
@@ -1682,7 +1567,7 @@ ones and it is a batch NUFFT.</p>
 <span class="c1">#     y = NufftObj.forward(multi_image).get()</span>
 
     <span class="n">y0</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward_one2many</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="c1"># for NUFFT_hsa()</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">y0</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y0</span>
     <span class="c1"># Now reshape the data for IFFT</span>
 <span class="c1">#     y2 = y.reshape(Nd +(batch, ) , order=&#39;C&#39;) </span>
 <span class="c1">#     </span>
@@ -1694,7 +1579,7 @@ ones and it is a batch NUFFT.</p>
 <span class="c1">#                 ), axes = (0,1)</span>
 <span class="c1">#             )</span>
     
-    <span class="n">x2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
     
     <span class="c1"># display the result</span>
     <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
@@ -1739,15 +1624,14 @@ ones and it is a batch NUFFT.</p>
 
 <span class="kn">import</span> <span class="nn">scipy.misc</span>
 
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
 
 
 <span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
 <span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
 <span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
 
-<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">Nd</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()[::</span><span class="mi">2</span><span class="p">,::</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">om</span> <span class="o">=</span> <span class="n">fake_Cartesian</span><span class="p">(</span><span class="n">Nd</span><span class="p">)</span>
 
 
@@ -1776,9 +1660,9 @@ ones and it is a batch NUFFT.</p>
 </pre></div>
 </div>
 <p>As you can see, the resulting images (<a class="reference internal" href="#fake-cartesian"><span class="std std-numref">Fig. 11</span></a>) confirm that NUFFT + IFFT can restore the original image.</p>
-<div class="figure" id="id1">
+<div class="figure align-center" id="id1">
 <span id="fake-cartesian"></span><a class="reference internal image-reference" href="_images/fake_Cartesian.png"><img alt="_images/fake_Cartesian.png" src="_images/fake_Cartesian.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">A Cartesian example generates the contrived Cartesian data using NUFFT, followed by IFFT.</span></p>
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">A Cartesian example generates the contrived Cartesian data using NUFFT, followed by IFFT.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="radial-k-space">
@@ -1786,11 +1670,11 @@ ones and it is a batch NUFFT.</p>
 <p>We can generate the radial spokes on the 2D plane.
 Each radial spoke spans the range of  <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> at the angle <span class="math notranslate nohighlight">\(\theta\)</span> and each point is fully determined by the  polar coordinate (R, <span class="math notranslate nohighlight">\(\theta\)</span>).
 See <a class="reference internal" href="#radial-spoke"><span class="std std-numref">Fig. 12</span></a> for more information.</p>
-<div class="figure" id="id2">
+<div class="figure align-center" id="id2">
 <span id="radial-spoke"></span><a class="reference internal image-reference" href="_images/radial_spoke.png"><img alt="_images/radial_spoke.png" src="_images/radial_spoke.png" style="width: 30%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Illustration of five radial spokes.
 Each point of the spoke can be described by the polar coordinate (R, <span class="math notranslate nohighlight">\(\theta\)</span>),
-which can be transformed to Cartesian coordinates (R cos(<span class="math notranslate nohighlight">\(\theta\)</span>), R sin(<span class="math notranslate nohighlight">\(\theta\)</span>)).</span></p>
+which can be transformed to Cartesian coordinates (R cos(<span class="math notranslate nohighlight">\(\theta\)</span>), R sin(<span class="math notranslate nohighlight">\(\theta\)</span>)).</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>The following code generates 360 radial spokes:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># generating 2D radial coordinates</span>
@@ -1840,21 +1724,20 @@ which can be transformed to Cartesian coordinates (R cos(<span class="math notra
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>None</strong> (<em>Python NoneType</em>) – </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">NUFFT: the pynufft_hsa.NUFFT instance</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">NUFFT: the pynufft_hsa.NUFFT class</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> (<em>Python NoneType</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>NUFFT: the pynufft_hsa.NUFFT instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>NUFFT: the pynufft_hsa.NUFFT class</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1869,41 +1752,39 @@ which can be transformed to Cartesian coordinates (R cos(<span class="math notra
 <dl class="method">
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu._precompute_sp">
 <code class="descname">_precompute_sp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu._precompute_sp" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Private: Precompute adjoint (gridding) and Toepitz interpolation</dt>
-<dd>matrix.</dd>
+<dd><dl class="simple">
+<dt>Private: Precompute adjoint (gridding) and Toepitz interpolation</dt><dd><p>matrix.</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>None</strong> (<em>Python Nonetype</em>) – </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">self: instance</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> (<em>Python Nonetype</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self: instance</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu.adjoint">
 <code class="descname">adjoint</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu.adjoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adjoint NUFFT on CPU</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> – The input numpy array, with the size of (M,) or (M, batch)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">numpy array with the dtype of numpy.complex64</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">x: The output numpy array,
-with the size of Nd or Nd + (batch, )</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy array with the dtype of numpy.complex64</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>y</strong> – The input numpy array, with the size of (M,) or (M, batch)</p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>numpy array with the dtype of numpy.complex64</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>x: The output numpy array,
+with the size of Nd or Nd + (batch, )</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>numpy array with the dtype of numpy.complex64</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1922,20 +1803,20 @@ with the size of Nd or Nd + (batch, )</td>
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu.forward">
 <code class="descname">forward</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward NUFFT on CPU</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> – The input numpy array, with the size of Nd or Nd + (batch,)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">numpy array with the dtype of numpy.complex64</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">y: The output numpy array, with the size of (M,) or (M, batch)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy array with the dtype of numpy.complex64</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – The input numpy array, with the size of Nd or Nd + (batch,)</p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>numpy array with the dtype of numpy.complex64</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>y: The output numpy array, with the size of (M,) or (M, batch)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>numpy array with the dtype of numpy.complex64</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1947,18 +1828,18 @@ with the size of Nd or Nd + (batch, )</td>
 <dl class="method">
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu.k2xx">
 <code class="descname">k2xx</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu.k2xx" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Private: the inverse FFT and image cropping (which is the reverse of</dt>
-<dd>_xx2k() method)</dd>
+<dd><dl class="simple">
+<dt>Private: the inverse FFT and image cropping (which is the reverse of</dt><dd><p>_xx2k() method)</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu.k2xx_one2one">
 <code class="descname">k2xx_one2one</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu.k2xx_one2one" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Private: the inverse FFT and image cropping</dt>
-<dd>(which is the reverse of _xx2k() method)</dd>
+<dd><dl class="simple">
+<dt>Private: the inverse FFT and image cropping</dt><dd><p>(which is the reverse of _xx2k() method)</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1971,9 +1852,9 @@ with the size of Nd or Nd + (batch, )</td>
 <dl class="method">
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu.k2y2k">
 <code class="descname">k2y2k</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu.k2y2k" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Private: the integrated interpolation-gridding by the Sparse</dt>
-<dd>Matrix-Vector Multiplication</dd>
+<dd><dl class="simple">
+<dt>Private: the integrated interpolation-gridding by the Sparse</dt><dd><p>Matrix-Vector Multiplication</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1981,57 +1862,56 @@ with the size of Nd or Nd + (batch, )</td>
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu.plan">
 <code class="descname">plan</code><span class="sig-paren">(</span><em>om</em>, <em>Nd</em>, <em>Kd</em>, <em>Jd</em>, <em>ft_axes=None</em>, <em>batch=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu.plan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plan the NUFFT_cpu object with the geometry provided.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>om</strong> (<em>numpy.float array</em><em>, </em><em>matrix size = M * ndims</em>) – The M off-grid locates in the frequency domain,
-which is normalized between [-pi, pi]</li>
-<li><strong>Nd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – <p>The matrix size of the equispaced image.
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>om</strong> (<em>numpy.float array</em><em>, </em><em>matrix size = M * ndims</em>) – The M off-grid locates in the frequency domain,
+which is normalized between [-pi, pi]</p></li>
+<li><p><strong>Nd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – <p>The matrix size of the equispaced image.
 Example: Nd=(256,256) for a 2D image;</p>
 <blockquote>
-<div>Nd = (128,128,128) for a 3D image</div></blockquote>
-</li>
-<li><strong>Kd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – <p>The matrix size of the oversampled frequency grid.
+<div><p>Nd = (128,128,128) for a 3D image</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>Kd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – <p>The matrix size of the oversampled frequency grid.
 Example: Kd=(512,512) for 2D image;</p>
 <blockquote>
-<div>Kd = (256,256,256) for a 3D image</div></blockquote>
-</li>
-<li><strong>Jd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – <p>The interpolator size.
+<div><p>Kd = (256,256,256) for a 3D image</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>Jd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – <p>The interpolator size.
 Example: Jd=(6,6) for 2D image;</p>
 <blockquote>
-<div>Jd = (6,6,6) for a 3D image</div></blockquote>
-</li>
-<li><strong>ft_axes</strong> (<em>None</em><em>, or </em><em>tuple with optional integer elements.</em>) – (Optional) The axes for Fourier transform.
-The default is all axes if ‘None’ is given.</li>
-<li><strong>batch</strong> (<em>None</em><em>, or </em><em>integer</em>) – (Optional) Batch mode.
+<div><p>Jd = (6,6,6) for a 3D image</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>ft_axes</strong> (<em>None</em><em>, or </em><em>tuple with optional integer elements.</em>) – (Optional) The axes for Fourier transform.
+The default is all axes if ‘None’ is given.</p></li>
+<li><p><strong>batch</strong> (<em>None</em><em>, or </em><em>integer</em>) – (Optional) Batch mode.
 If the batch is provided, the last appended axis is the number
 of identical NUFFT to be transformed.
-The default is ‘None’.</li>
+The default is ‘None’.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">0</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">int, float</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first simple">
-<li><strong>Nd</strong> – initial value: Nd</li>
-<li><strong>Kd</strong> – initial value: Kd</li>
-<li><a class="reference internal" href="index.html#pynufft.linalg.nufft_cpu.NUFFT_cpu.Jd" title="pynufft.linalg.nufft_cpu.NUFFT_cpu.Jd"><strong>Jd</strong></a> – initial value: Jd</li>
-<li><strong>ft_axes</strong> – initial value: None</li>
-<li><strong>batch</strong> – initial value: None</li>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int, float</p>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Nd</strong> – initial value: Nd</p></li>
+<li><p><strong>Kd</strong> – initial value: Kd</p></li>
+<li><p><a class="reference internal" href="index.html#pynufft.linalg.nufft_cpu.NUFFT_cpu.Jd" title="pynufft.linalg.nufft_cpu.NUFFT_cpu.Jd"><strong>Jd</strong></a> – initial value: Jd</p></li>
+<li><p><strong>ft_axes</strong> – initial value: None</p></li>
+<li><p><strong>batch</strong> – initial value: None</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_cpu</span>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
 </pre></div>
@@ -2046,20 +1926,20 @@ The default is ‘None’.</li>
 <dt id="pynufft.linalg.nufft_cpu.NUFFT_cpu.selfadjoint">
 <code class="descname">selfadjoint</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_cpu.NUFFT_cpu.selfadjoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>selfadjoint NUFFT (Toeplitz) on CPU</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> – The input numpy array, with size=Nd</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">numpy array with dtype =numpy.complex64</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">x: The output numpy array, with size=Nd</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy array with dtype =numpy.complex64</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – The input numpy array, with size=Nd</p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>numpy array with dtype =numpy.complex64</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>x: The output numpy array, with size=Nd</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>numpy array with dtype =numpy.complex64</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2069,19 +1949,18 @@ The default is ‘None’.</li>
 :param y: data, numpy.complex64. The shape = (M,) or (M, batch)
 :param solver: ‘cg’, ‘L1TVOLS’, ‘lsmr’, ‘lsqr’, ‘dc’, ‘bicg’,</p>
 <blockquote>
-<div>‘bicgstab’, ‘cg’, ‘gmres’,’lgmres’</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>maxiter</strong> (<em>int</em>) – the number of iterations</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy array with size.
+<div><p>‘bicgstab’, ‘cg’, ‘gmres’,’lgmres’</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>maxiter</strong> (<em>int</em>) – the number of iterations</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>numpy array with size.
 The shape = Nd (‘L1TVOLS’) or  Nd + (batch,)
-(‘lsmr’, ‘lsqr’, ‘dc’,’bicg’,’bicgstab’,’cg’, ‘gmres’,’lgmres’)</td>
-</tr>
-</tbody>
-</table>
+(‘lsmr’, ‘lsqr’, ‘dc’,’bicg’,’bicgstab’,’cg’, ‘gmres’,’lgmres’)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2153,30 +2032,26 @@ Multi-coil or single-coil memory reduced NUFFT.</p>
 <dt id="pynufft.linalg.nufft_hsa.NUFFT_hsa.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>API=None</em>, <em>platform_number=None</em>, <em>device_number=None</em>, <em>verbosity=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_hsa.NUFFT_hsa.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>API</strong> (<em>string</em>) – The API for the heterogeneous system. API=’cuda’
-or API=’ocl’</li>
-<li><strong>platform_number</strong> (<em>integer</em>) – The number of the platform found by the API.</li>
-<li><strong>device_number</strong> (<em>integer</em>) – The number of the device found on the platform.</li>
-<li><strong>verbosity</strong> (<em>integer</em>) – Defines the verbosity level, default value is 0</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>API</strong> (<em>string</em>) – The API for the heterogeneous system. API=’cuda’
+or API=’ocl’</p></li>
+<li><p><strong>platform_number</strong> (<em>integer</em>) – The number of the platform found by the API.</p></li>
+<li><p><strong>device_number</strong> (<em>integer</em>) – The number of the device found on the platform.</p></li>
+<li><p><strong>verbosity</strong> (<em>integer</em>) – Defines the verbosity level, default value is 0</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">0</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">int, float</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_hsa</span>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int, float</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_hsa</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_hsa</span><span class="p">(</span><span class="n">API</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span> <span class="n">platform_number</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="go">                                 device_number=0, verbosity=0)</span>
 </pre></div>
@@ -2193,38 +2068,37 @@ or API=’ocl’</li>
 <dt id="pynufft.linalg.nufft_hsa.NUFFT_hsa.adjoint">
 <code class="descname">adjoint</code><span class="sig-paren">(</span><em>gy</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_hsa.NUFFT_hsa.adjoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adjoint NUFFT on the heterogeneous device</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>gy</strong> – The input gpu array, with size=(M,)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">reikna gpu array with dtype =numpy.complex64</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">gx: The output gpu array, with size=Nd</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">reikna gpu array with dtype =numpy.complex64</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gy</strong> – The input gpu array, with size=(M,)</p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>reikna gpu array with dtype =numpy.complex64</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>gx: The output gpu array, with size=Nd</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>reikna gpu array with dtype =numpy.complex64</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pynufft.linalg.nufft_hsa.NUFFT_hsa.forward">
 <code class="descname">forward</code><span class="sig-paren">(</span><em>gx</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_hsa.NUFFT_hsa.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward NUFFT on the heterogeneous device</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>gx</strong> (<em>reikna gpu array with dtype = numpy.complex64</em>) – The input gpu array, with size = Nd</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">gy: The output gpu array, with size = (M,)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">reikna gpu array with dtype = numpy.complex64</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gx</strong> (<em>reikna gpu array with dtype = numpy.complex64</em>) – The input gpu array, with size = Nd</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>gy: The output gpu array, with size = (M,)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>reikna gpu array with dtype = numpy.complex64</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2245,74 +2119,67 @@ _xx2k() method)</p>
 <code class="descname">offload</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_hsa.NUFFT_hsa.offload" title="Permalink to this definition">¶</a></dt>
 <dd><p>self.offload():</p>
 <p>Off-load NUFFT to the opencl or cuda device(s)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>API</strong> (<em>string</em>) – define the device type, which can be ‘cuda’ or ‘ocl’</li>
-<li><strong>platform_number</strong> (<em>int</em>) – define which platform to be used.
-The default platform_number = 0.</li>
-<li><strong>device_number</strong> (<em>int</em>) – define which device to be used.
-The default device_number = 0.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>API</strong> (<em>string</em>) – define the device type, which can be ‘cuda’ or ‘ocl’</p></li>
+<li><p><strong>platform_number</strong> (<em>int</em>) – define which platform to be used.
+The default platform_number = 0.</p></li>
+<li><p><strong>device_number</strong> (<em>int</em>) – define which device to be used.
+The default device_number = 0.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">self: instance</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self: instance</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pynufft.linalg.nufft_hsa.NUFFT_hsa.plan">
 <code class="descname">plan</code><span class="sig-paren">(</span><em>om</em>, <em>Nd</em>, <em>Kd</em>, <em>Jd</em>, <em>ft_axes=None</em>, <em>batch=None</em>, <em>radix=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_hsa.NUFFT_hsa.plan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Design the multi-coil or single-coil memory reduced interpolator.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>om</strong> (<em>numpy.float array</em><em>, </em><em>matrix size =</em><em> (</em><em>M</em><em>, </em><em>ndims</em><em>)</em>) – The M off-grid locations in the frequency domain.
-Normalized between [-pi, pi]</li>
-<li><strong>Nd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – <p>The matrix size of equispaced image.
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>om</strong> (<em>numpy.float array</em><em>, </em><em>matrix size =</em><em> (</em><em>M</em><em>, </em><em>ndims</em><em>)</em>) – The M off-grid locations in the frequency domain.
+Normalized between [-pi, pi]</p></li>
+<li><p><strong>Nd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – <p>The matrix size of equispaced image.
 Example: Nd=(256, 256) for a 2D image;</p>
 <blockquote>
-<div>Nd = (128, 128, 128) for a 3D image</div></blockquote>
-</li>
-<li><strong>Kd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – The matrix size of the oversampled frequency grid.
+<div><p>Nd = (128, 128, 128) for a 3D image</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>Kd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – The matrix size of the oversampled frequency grid.
 Example: Kd=(512,512) for 2D image;
-Kd = (256,256,256) for a 3D image</li>
-<li><strong>Jd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – The interpolator size.
+Kd = (256,256,256) for a 3D image</p></li>
+<li><p><strong>Jd</strong> (<em>tuple</em><em>, </em><em>ndims integer elements.</em>) – The interpolator size.
 Example: Jd=(6,6) for 2D image;
-Jd = (6,6,6) for a 3D image</li>
-<li><strong>ft_axes</strong> (<em>tuple</em><em>, </em><em>selected axes to be transformed.</em>) – The dimensions to be transformed by FFT.
+Jd = (6,6,6) for a 3D image</p></li>
+<li><p><strong>ft_axes</strong> (<em>tuple</em><em>, </em><em>selected axes to be transformed.</em>) – The dimensions to be transformed by FFT.
 Example: ft_axes = (0, 1) for 2D,
 ft_axes = (0, 1, 2) for 3D;
-ft_axes = None for all dimensions.</li>
-<li><strong>batch</strong> (<em>int</em><em> or </em><em>None</em>) – Batch NUFFT.
+ft_axes = None for all dimensions.</p></li>
+<li><p><strong>batch</strong> (<em>int</em><em> or </em><em>None</em>) – Batch NUFFT.
 If provided, the shape is Nd + (batch, ).
 The last axis is the number of parallel coils.
-batch = None for single coil.</li>
-<li><strong>radix</strong> – ????.
+batch = None for single coil.</p></li>
+<li><p><strong>radix</strong> – ????.
 If provided, the shape is Nd + (batch, ).
 The last axis is the number of parallel coils.
-batch = None for single coil.</li>
+batch = None for single coil.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">0</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">int, float</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">NUFFT_hsa</span>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int, float</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_hsa</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_hsa</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
 </pre></div>
@@ -2323,58 +2190,52 @@ batch = None for single coil.</li>
 <dt id="pynufft.linalg.nufft_hsa.NUFFT_hsa.selfadjoint">
 <code class="descname">selfadjoint</code><span class="sig-paren">(</span><em>gx</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_hsa.NUFFT_hsa.selfadjoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>selfadjoint NUFFT (Toeplitz) on the heterogeneous device</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>gx</strong> (<em>reikna gpu array with dtype =numpy.complex64</em>) – The input gpu array, with size=Nd</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">gx: The output gpu array, with size=Nd</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">reikna gpu array with dtype =numpy.complex64</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gx</strong> (<em>reikna gpu array with dtype =numpy.complex64</em>) – The input gpu array, with size=Nd</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>gx: The output gpu array, with size=Nd</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>reikna gpu array with dtype =numpy.complex64</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pynufft.linalg.nufft_hsa.NUFFT_hsa.selfadjoint_one2many2one">
 <code class="descname">selfadjoint_one2many2one</code><span class="sig-paren">(</span><em>gx</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_hsa.NUFFT_hsa.selfadjoint_one2many2one" title="Permalink to this definition">¶</a></dt>
 <dd><p>selfadjoint_one2many2one NUFFT (Teplitz) on the heterogeneous device</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>gx</strong> (<em>reikna gpu array with dtype =numpy.complex64</em>) – The input gpu array, with size=Nd</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">gx: The output gpu array, with size=Nd</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">reikna gpu array with dtype =numpy.complex64</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gx</strong> (<em>reikna gpu array with dtype =numpy.complex64</em>) – The input gpu array, with size=Nd</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>gx: The output gpu array, with size=Nd</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>reikna gpu array with dtype =numpy.complex64</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pynufft.linalg.nufft_hsa.NUFFT_hsa.solve">
 <code class="descname">solve</code><span class="sig-paren">(</span><em>gy</em>, <em>solver=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.nufft_hsa.NUFFT_hsa.solve" title="Permalink to this definition">¶</a></dt>
 <dd><p>The solver of NUFFT_hsa</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>gy</strong> (<em>reikna array</em><em>, </em><em>dtype = numpy.complex64</em>) – data, reikna array, (M,) size</li>
-<li><strong>solver</strong> (<em>string</em>) – could be ‘cg’, ‘L1TVOLS’, ‘L1TVLAD’</li>
-<li><strong>maxiter</strong> (<em>int</em>) – the number of iterations</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gy</strong> (<em>reikna array</em><em>, </em><em>dtype = numpy.complex64</em>) – data, reikna array, (M,) size</p></li>
+<li><p><strong>solver</strong> (<em>string</em>) – could be ‘cg’, ‘L1TVOLS’, ‘L1TVLAD’</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em>) – the number of iterations</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">reikna array with size Nd</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>reikna array with size Nd</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2441,21 +2302,17 @@ Generate pHp matrix</p>
 <code class="descclassname">pynufft.linalg.solve_cpu.</code><code class="descname">solve</code><span class="sig-paren">(</span><em>nufft</em>, <em>y</em>, <em>solver=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.solve_cpu.solve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solve NUFFT.
 The current version supports solvers = ‘cg’ or ‘L1TVOLS’ or ‘L1TVLAD’.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>nufft</strong> – NUFFT_cpu object</li>
-<li><strong>y</strong> – (M,) array, non-uniform data</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nufft</strong> – NUFFT_cpu object</p></li>
+<li><p><strong>y</strong> – (M,) array, non-uniform data</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">x: image</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>x: image</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -2499,24 +2356,20 @@ Work with indxmap_diff(Nd).
 <code class="descclassname">pynufft.linalg.solve_hsa.</code><code class="descname">solve</code><span class="sig-paren">(</span><em>nufft</em>, <em>gy</em>, <em>solver=None</em>, <em>maxiter=30</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.linalg.solve_hsa.solve" title="Permalink to this definition">¶</a></dt>
 <dd><p>The solve function of NUFFT_hsa.
 The current version supports solvers = ‘cg’ or ‘L1TVOLS’.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>nufft</strong> – NUFFT_hsa object</li>
-<li><strong>y</strong> (<em>numpy.complex64 reikna array</em>) – (M,) or (M, batch) array, non-uniform data. If batch is provided, ‘cg’ and ‘L1TVOLS’ returns different image shape.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nufft</strong> – NUFFT_hsa object</p></li>
+<li><p><strong>y</strong> (<em>numpy.complex64 reikna array</em>) – (M,) or (M, batch) array, non-uniform data. If batch is provided, ‘cg’ and ‘L1TVOLS’ returns different image shape.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">x: Nd or Nd + (batch, ) image. L1TVOLS always returns Nd. ‘cg’ returns Nd + (batch, ) in batch mode.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">x: reikna array, complex64.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>x: Nd or Nd + (batch, ) image. L1TVOLS always returns Nd. ‘cg’ returns Nd + (batch, ) in batch mode.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>x: reikna array, complex64.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -2550,21 +2403,17 @@ The current version supports solvers = ‘cg’ or ‘L1TVOLS’.</p>
 <dt id="pynufft.src._helper.helper.QR_process">
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">QR_process</code><span class="sig-paren">(</span><em>om</em>, <em>N</em>, <em>J</em>, <em>K</em>, <em>sn</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.QR_process" title="Permalink to this definition">¶</a></dt>
 <dd><p>1D QR method for generating min-max interpolator</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>om</strong> (<em>numpy.float32</em>) – non-Cartesian coordinate. shape = (M, dims)</li>
-<li><strong>N</strong> (<em>int</em>) – length</li>
-<li><strong>J</strong> (<em>int</em>) – size of interpolator</li>
-<li><strong>K</strong> (<em>int</em>) – size of oversampled grid</li>
-<li><strong>sn</strong> (<em>numpy.float32 shape =</em><em> (</em><em>N</em><em>,</em><em>)</em>) – scaling factor as a length-N vector</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>om</strong> (<em>numpy.float32</em>) – non-Cartesian coordinate. shape = (M, dims)</p></li>
+<li><p><strong>N</strong> (<em>int</em>) – length</p></li>
+<li><p><strong>J</strong> (<em>int</em>) – size of interpolator</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – size of oversampled grid</p></li>
+<li><p><strong>sn</strong> (<em>numpy.float32 shape =</em><em> (</em><em>N</em><em>,</em><em>)</em>) – scaling factor as a length-N vector</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">
@@ -2606,61 +2455,55 @@ The current version supports solvers = ‘cg’ or ‘L1TVOLS’.</p>
 <dl class="function">
 <dt id="pynufft.src._helper.helper.cat_snd">
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">cat_snd</code><span class="sig-paren">(</span><em>snd</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.cat_snd" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>snd</strong> (<em>tuple</em>) – tuple of input 1D vectors</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tensor_sn: vector of concatenated scaling factor, shape = (numpy.sum(Nd), )</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tensor_sn: numpy.float32</td>
-</tr>
-</tbody>
-</table>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>snd</strong> (<em>tuple</em>) – tuple of input 1D vectors</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tensor_sn: vector of concatenated scaling factor, shape = (numpy.sum(Nd), )</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tensor_sn: numpy.float32</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="pynufft.src._helper.helper.create_laplacian_kernel">
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">create_laplacian_kernel</code><span class="sig-paren">(</span><em>nufft</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.create_laplacian_kernel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the multi-dimensional laplacian kernel in k-space</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nufft</strong> – the NUFFT object</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">uker: the multi-dimensional laplacian kernel in k-space (no fft shift used)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy ndarray</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nufft</strong> – the NUFFT object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>uker: the multi-dimensional laplacian kernel in k-space (no fft shift used)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="pynufft.src._helper.helper.create_partialELL">
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">create_partialELL</code><span class="sig-paren">(</span><em>ud</em>, <em>kd</em>, <em>Jd</em>, <em>M</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.create_partialELL" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ud</strong> (<em>tuple of numpy.complex64 arrays</em>) – tuple of all 1D interpolators</li>
-<li><strong>kd</strong> (<em>tuple of numpy.int32 arrays</em>) – tuple of all 1D indices</li>
-<li><strong>Jd</strong> (<em>tuple of int32</em>) – tuple of interpolation sizes</li>
-<li><strong>M</strong> (<em>int</em>) – number of samples</li>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ud</strong> (<em>tuple of numpy.complex64 arrays</em>) – tuple of all 1D interpolators</p></li>
+<li><p><strong>kd</strong> (<em>tuple of numpy.int32 arrays</em>) – tuple of all 1D indices</p></li>
+<li><p><strong>Jd</strong> (<em>tuple of int32</em>) – tuple of interpolation sizes</p></li>
+<li><p><strong>M</strong> (<em>int</em>) – number of samples</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">partialELL:</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">partialELL: pELL instance</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>partialELL:</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>partialELL: pELL instance</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -2669,6 +2512,13 @@ The current version supports solvers = ‘cg’ or ‘L1TVOLS’.</p>
 <dd><p>(Deprecated in v.0.3.4)
 Return the “slice” of Nd size to index multi-dimensional array.  “Slice” functions as the index of the array.
 This function is superseded by preindex_copy(), which avoid run-time indexing.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pynufft.src._helper.helper.device_list">
+<code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">device_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.device_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>device_list() returns available devices for acceleration as a tuple.
+If no device is available, it returns an empty tuple.</p>
 </dd></dl>
 
 <dl class="function">
@@ -2682,25 +2532,21 @@ Find available devices when NUFFT.offload() fails.</p>
 <dt id="pynufft.src._helper.helper.get_sn">
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">get_sn</code><span class="sig-paren">(</span><em>J</em>, <em>K</em>, <em>N</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.get_sn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the 1D scaling factor for the given J, K, N</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>J</strong> (<em>int</em>) – size of interpolator</li>
-<li><strong>K</strong> (<em>int</em>) – size of oversampled grid</li>
-<li><strong>N</strong> (<em>int</em>) – length</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>J</strong> (<em>int</em>) – size of interpolator</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – size of oversampled grid</p></li>
+<li><p><strong>N</strong> (<em>int</em>) – length</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">sn:  scaling factor as a length-N vector</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rtype sn:</th><td class="field-body"><p class="first last">numpy.float32 shape = (N,)</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>sn:  scaling factor as a length-N vector</p>
+</dd>
+<dt class="field-odd">Rtype sn</dt>
+<dd class="field-odd"><p>numpy.float32 shape = (N,)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -2709,22 +2555,23 @@ Find available devices when NUFFT.offload() fails.</p>
 <dd><p>Preindixing for rapid image gradient.
 Diff(x) = x.flat[d_indx[0]] - x.flat
 Diff_t(x) =  x.flat[dt_indx[0]] - x.flat</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Nd</strong> (<em>tuple with integers</em>) – the dimension of the image</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">d_indx: image gradient</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dt_indx:  the transpose of the image gradient</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">d_indx: lists with numpy ndarray</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dt_indx: lists with numpy ndarray</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Nd</strong> (<em>tuple with integers</em>) – the dimension of the image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>d_indx: image gradient</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dt_indx:  the transpose of the image gradient</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>d_indx: lists with numpy ndarray</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dt_indx: lists with numpy ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -2737,24 +2584,20 @@ Diff_t(x) =  x.flat[dt_indx[0]] - x.flat</p>
 <dt id="pynufft.src._helper.helper.kronecker_scale">
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">kronecker_scale</code><span class="sig-paren">(</span><em>snd</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.kronecker_scale" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Kronecker product of the scaling factor.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>snd</strong> (<em>tuple of 1D numpy.array</em>) – Tuple of 1D scaling factors</li>
-<li><strong>dd</strong> – Number of dimensions</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snd</strong> (<em>tuple of 1D numpy.array</em>) – Tuple of 1D scaling factors</p></li>
+<li><p><strong>dd</strong> – Number of dimensions</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">sn: The multi-dimensional Kronecker of the scaling factors</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Nd array</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>sn: The multi-dimensional Kronecker of the scaling factors</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Nd array</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -2770,31 +2613,27 @@ of J points, then find the pseudo-inverse of CSSC</p>
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">nufft_alpha_kb_fit</code><span class="sig-paren">(</span><em>N</em>, <em>J</em>, <em>K</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.nufft_alpha_kb_fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find parameters alpha and beta for scaling factor st[‘sn’]
 The alpha is hardwired as [1,0,0…] when J = 1 (uniform scaling factor)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>N</strong> (<em>int</em>) – size of image</li>
-<li><strong>J</strong> (<em>int</em>) – size of interpolator</li>
-<li><strong>K</strong> (<em>int</em>) – size of oversampled k-space</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<em>int</em>) – size of image</p></li>
+<li><p><strong>J</strong> (<em>int</em>) – size of interpolator</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – size of oversampled k-space</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">alphas:</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">beta:</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">alphas: list of float</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">beta:</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>alphas:</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>beta:</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>alphas: list of float</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>beta:</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -2830,28 +2669,24 @@ central grid (from Kd dimension)</p>
 <dt id="pynufft.src._helper.helper.pELL.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>M</em>, <em>Jd</em>, <em>curr_sumJd</em>, <em>meshindex</em>, <em>kindx</em>, <em>udata</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.pELL.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>M</strong> (<em>int</em>) – Number of samples</li>
-<li><strong>Jd</strong> (<em>tuple of int</em>) – Interpolator size</li>
-<li><strong>curr_sumJd</strong> (<em>tuple of int</em>) – Summation of Jd[0:d-1], for fast shift computing</li>
-<li><strong>meshindex</strong> (<em>numpy.uint32</em><em>, </em><em>shape =</em><em>  (</em><em>numpy.prod</em><em>(</em><em>Jd</em><em>)</em><em>,  </em><em>dd</em><em>)</em>) – The tensor indices to all interpolation points</li>
-<li><strong>kindx</strong> (<em>numpy.uint32</em><em>, </em><em>shape =</em><em> (</em><em>M</em><em>, </em><em>numpy.sum</em><em>(</em><em>Jd</em><em>)</em><em>)</em>) – Premixed k-indices to be combined</li>
-<li><strong>udata</strong> (<em>numpy.complex64</em><em>, </em><em>shape =</em><em> (</em><em>M</em><em>, </em><em>numpy.sum</em><em>(</em><em>Jd</em><em>)</em><em>)</em>) – Premixed interpolation data values</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<em>int</em>) – Number of samples</p></li>
+<li><p><strong>Jd</strong> (<em>tuple of int</em>) – Interpolator size</p></li>
+<li><p><strong>curr_sumJd</strong> (<em>tuple of int</em>) – Summation of Jd[0:d-1], for fast shift computing</p></li>
+<li><p><strong>meshindex</strong> (<em>numpy.uint32</em><em>, </em><em>shape =</em><em>  (</em><em>numpy.prod</em><em>(</em><em>Jd</em><em>)</em><em>,  </em><em>dd</em><em>)</em>) – The tensor indices to all interpolation points</p></li>
+<li><p><strong>kindx</strong> (<em>numpy.uint32</em><em>, </em><em>shape =</em><em> (</em><em>M</em><em>, </em><em>numpy.sum</em><em>(</em><em>Jd</em><em>)</em><em>)</em>) – Premixed k-indices to be combined</p></li>
+<li><p><strong>udata</strong> (<em>numpy.complex64</em><em>, </em><em>shape =</em><em> (</em><em>M</em><em>, </em><em>numpy.sum</em><em>(</em><em>Jd</em><em>)</em><em>)</em>) – Premixed interpolation data values</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pELL: partial ELLpack class with the given values</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pELL: partial ELLpack class</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pELL: partial ELLpack class with the given values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pELL: partial ELLpack class</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -2866,27 +2701,23 @@ central grid (from Kd dimension)</p>
 <dt id="pynufft.src._helper.helper.plan">
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">plan</code><span class="sig-paren">(</span><em>om</em>, <em>Nd</em>, <em>Kd</em>, <em>Jd</em>, <em>ft_axes=None</em>, <em>format='CSR'</em>, <em>radix=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.plan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plan for the NUFFT object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>om</strong> (<em>numpy.float</em>) – Coordinate</li>
-<li><strong>Nd</strong> (<em>tuple of int</em>) – Image shape</li>
-<li><strong>Kd</strong> (<em>tuple of int</em>) – Oversampled grid shape</li>
-<li><strong>Jd</strong> (<em>tuple of int</em>) – Interpolator size</li>
-<li><strong>ft_axes</strong> (<em>tuple of int</em>) – Axes where FFT takes place</li>
-<li><strong>format</strong> (<em>string</em><em>, </em><em>'CSR'</em><em> or </em><em>'pELL'</em>) – Output format of the interpolator.
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>om</strong> (<em>numpy.float</em>) – Coordinate</p></li>
+<li><p><strong>Nd</strong> (<em>tuple of int</em>) – Image shape</p></li>
+<li><p><strong>Kd</strong> (<em>tuple of int</em>) – Oversampled grid shape</p></li>
+<li><p><strong>Jd</strong> (<em>tuple of int</em>) – Interpolator size</p></li>
+<li><p><strong>ft_axes</strong> (<em>tuple of int</em>) – Axes where FFT takes place</p></li>
+<li><p><strong>format</strong> (<em>string</em><em>, </em><em>'CSR'</em><em> or </em><em>'pELL'</em>) – Output format of the interpolator.
 ‘CSR’: the precomputed Compressed Sparse Row (CSR) matrix.
-‘pELL’: partial ELLPACK which precomputes the concatenated 1D interpolators.</li>
+‘pELL’: partial ELLPACK which precomputes the concatenated 1D interpolators.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return st:</th><td class="field-body"><p class="first last">dictionary for NUFFT</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Return st</dt>
+<dd class="field-even"><p>dictionary for NUFFT</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -2902,61 +2733,53 @@ central grid (from Kd dimension)</p>
 Only the front parts of the input/output arrays are copied.
 The oversize  parts of the input array are truncated (if Nd &gt; Kd), 
 and the smaller size are zero-padded (if Nd &lt; Kd)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Nd</strong> (<em>tuple with integer elements</em>) – tuple, the dimensions of array1</li>
-<li><strong>Kd</strong> (<em>tuple with integer elements</em>) – tuple, the dimensions of array2</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Nd</strong> (<em>tuple with integer elements</em>) – tuple, the dimensions of array1</p></li>
+<li><p><strong>Kd</strong> (<em>tuple with integer elements</em>) – tuple, the dimensions of array2</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">inlist: the index of the input array</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">outlist: the index of the output array</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">nelem: the length of the inlist and outlist (equal length)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">inlist: list with integer elements</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">outlist: list with integer elements</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">nelem: int</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>inlist: the index of the input array</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>outlist: the index of the output array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>nelem: the length of the inlist and outlist (equal length)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>inlist: list with integer elements</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>outlist: list with integer elements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nelem: int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="pynufft.src._helper.helper.rdx_kron">
 <code class="descclassname">pynufft.src._helper.helper.</code><code class="descname">rdx_kron</code><span class="sig-paren">(</span><em>ud</em>, <em>kd</em>, <em>Jd</em>, <em>radix=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src._helper.helper.rdx_kron" title="Permalink to this definition">¶</a></dt>
 <dd><p>Radix-n Kronecker product of multi-dimensional array</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ud</strong> (<em>tuple of</em><em> (</em><em>M</em><em>, </em><em>Jd</em><em>[</em><em>d</em><em>]</em><em>) </em><em>numpy.complex64 arrays</em>) – 1D interpolators</li>
-<li><strong>kd</strong> (<em>tuple of</em><em> (</em><em>M</em><em>, </em><em>Jd</em><em>[</em><em>d</em><em>]</em><em>) </em><em>numpy.uint arrays</em>) – 1D indices to interpolators</li>
-<li><strong>Jd</strong> (<em>tuple of int</em>) – 1D interpolator sizes</li>
-<li><strong>radix</strong> (<em>int</em>) – radix of Kronecker product</li>
-<li><strong>kk</strong> (<em>tuple of</em><em> (</em><em>M</em><em>, </em><em>Jd</em><em>[</em><em>d</em><em>]</em><em>) </em><em>numpy.uint arrays</em>) – 1D indices to interpolators</li>
-<li><strong>JJ</strong> (<em>tuple of int</em>) – 1D interpolator sizes</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ud</strong> (<em>tuple of</em><em> (</em><em>M</em><em>, </em><em>Jd</em><em>[</em><em>d</em><em>]</em><em>) </em><em>numpy.complex64 arrays</em>) – 1D interpolators</p></li>
+<li><p><strong>kd</strong> (<em>tuple of</em><em> (</em><em>M</em><em>, </em><em>Jd</em><em>[</em><em>d</em><em>]</em><em>) </em><em>numpy.uint arrays</em>) – 1D indices to interpolators</p></li>
+<li><p><strong>Jd</strong> (<em>tuple of int</em>) – 1D interpolator sizes</p></li>
+<li><p><strong>radix</strong> (<em>int</em>) – radix of Kronecker product</p></li>
+<li><p><strong>kk</strong> (<em>tuple of</em><em> (</em><em>M</em><em>, </em><em>Jd</em><em>[</em><em>d</em><em>]</em><em>) </em><em>numpy.uint arrays</em>) – 1D indices to interpolators</p></li>
+<li><p><strong>JJ</strong> (<em>tuple of int</em>) – 1D interpolator sizes</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">uu: 1D interpolators</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>uu: 1D interpolators</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -2966,25 +2789,26 @@ and the smaller size are zero-padded (if Nd &lt; Kd)</p>
 For fast GPU computing, preindexing allows for fast Hadamard product and copy.
 However preindexing costs some memory.
 strides_divide_itemsize aims to replace preindexing by run-time calculation of the index, given the invNd_elements.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Nd</strong> (<em>tuple of int</em>) – Input shape</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Nd_elements: strides/itemsize of the Nd.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">invNd_elements: (float32)(1/Nd_elements). Division on GPU is slow but multiply is fast. Thus we can precompute the inverse and then multiply the inverse on GPU.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Nd_elements: tuple of int</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">invNd_elements: tuple of float32</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Nd</strong> (<em>tuple of int</em>) – Input shape</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nd_elements: strides/itemsize of the Nd.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>invNd_elements: (float32)(1/Nd_elements). Division on GPU is slow but multiply is fast. Thus we can precompute the inverse and then multiply the inverse on GPU.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Nd_elements: tuple of int</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>invNd_elements: tuple of float32</p>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-class docutils literal notranslate"><span class="pre">pynufft.NUFFT_hsa</span></code></p>
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">pynufft.NUFFT_hsa</span></code></p>
 </div>
 </dd></dl>
 
@@ -2995,7 +2819,8 @@ strides_divide_itemsize aims to replace preindexing by run-time calculation of t
 <dt id="pynufft.src.re_subroutine.atomic_add">
 <code class="descclassname">pynufft.src.re_subroutine.</code><code class="descname">atomic_add</code><span class="sig-paren">(</span><em>API</em><span class="sig-paren">)</span><a class="headerlink" href="#pynufft.src.re_subroutine.atomic_add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the atomic_add for the given API. 
-Overcome the missing atomic_add_float for OpenCL-1.2.</p>
+Overcome the missing atomic_add_float for OpenCL-1.2. 
+Note: will be checked if OpenCL 2.0 provided by all GPU vendors.</p>
 </dd></dl>
 
 <dl class="function">
@@ -3172,8 +2997,8 @@ Optionally, users can clone the github repository and build the package from the
 <p>However, NUFFT_hsa relies on the JIT (just-in-time) compilation mechanism of Reikna/PyCUDA/PyOpenCL.
 The supporting compiler may be:</p>
 <ul class="simple">
-<li>gcc-7.3.0</li>
-<li>Microsoft (R) Visual Studio 2015 community edition.</li>
+<li><p>gcc-7.3.0</p></li>
+<li><p>Microsoft (R) Visual Studio 2015 community edition.</p></li>
 </ul>
 <p>(Please refer to the following section: special topic: Installation under Windows 10).</p>
 <p>To accelerate the code on the graphic processing unit (GPU),
@@ -3243,14 +3068,14 @@ dev-util/intel-ocl-sdk-4.4.0.117-r1, and x11-drivers/nvidia-drivers-430.40.</p>
 <p>The following general guidance may work in your case but cannot be guaranteed.</p>
 <p><strong>Pre-requisites</strong></p>
 <ul class="simple">
-<li>GPU, a clean Windows 10, Windows Visual Studio 2015 Community Version and CUDA 9.2.148</li>
+<li><p>GPU, a clean Windows 10, Windows Visual Studio 2015 Community Version and CUDA 9.2.148</p></li>
 </ul>
 <p>This is the most complex step. Please refer to the official documentation of Nvidia:</p>
 <p><cite>https://docs.nvidia.com/cuda/archive/9.2/cuda-installation-guide-microsoft-windows/index.html</cite></p>
 <ul class="simple">
-<li>First, install the Nvidia-driver 417.35-notebook-win10-64bit-international-whql-rp.</li>
-<li>Second, install the Microsoft Visual Studio 2015 Community.</li>
-<li>Third, install CUDA-9.2. Do not install an older driver.</li>
+<li><p>First, install the Nvidia-driver 417.35-notebook-win10-64bit-international-whql-rp.</p></li>
+<li><p>Second, install the Microsoft Visual Studio 2015 Community.</p></li>
+<li><p>Third, install CUDA-9.2. Do not install an older driver.</p></li>
 </ul>
 <p>Now open command prompt <cite>cmd</cite>, type</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvcc</span> <span class="o">-</span><span class="n">V</span>
@@ -3265,7 +3090,7 @@ dev-util/intel-ocl-sdk-4.4.0.117-r1, and x11-drivers/nvidia-drivers-430.40.</p>
 </div>
 <p>which indicates that nvcc can be found in the system.</p>
 <ul class="simple">
-<li>Add the environmental variable path.</li>
+<li><p>Add the environmental variable path.</p></li>
 </ul>
 <p>If the system cannot find <cite>cl.exe</cite> when you type <cite>cl</cite>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>C:\Users\User&gt;cl
@@ -3287,11 +3112,11 @@ Add “C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin” and “C:\P
 <p>without the earlier error message. If the error persists, the path must be modified again.</p>
 <p><strong>Installation of Anaconda3</strong></p>
 <ul class="simple">
-<li>Now install Anaconda3. I downloaded Anaconda3-2018.12-Windows-x86_64. Once this is done you can follow the general installation procedure as described above.</li>
+<li><p>Now install Anaconda3. I downloaded Anaconda3-2018.12-Windows-x86_64. Once this is done you can follow the general installation procedure as described above.</p></li>
 </ul>
 <p><strong>Installation of Pytools, PyCUDA, and PyNUFFT</strong></p>
 <ul>
-<li><p class="first">Open Anaconda3 command prompt, type:</p>
+<li><p>Open Anaconda3 command prompt, type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">PYTHONIOENCODING</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">pytools</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">pycuda</span>
@@ -3300,9 +3125,9 @@ Add “C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin” and “C:\P
 </pre></div>
 </div>
 </li>
-<li><p class="first">Test PyNUFFT:</p>
+<li><p>Test PyNUFFT:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="k">import</span> <span class="n">tests</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">tests</span>
 <span class="n">tests</span><span class="o">.</span><span class="n">test_init</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -3510,77 +3335,111 @@ Add “C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin” and “C:\P
 </div>
 <span id="document-versionhistory"></span><div class="section" id="version-history">
 <h2>Version history<a class="headerlink" href="#version-history" title="Permalink to this headline">¶</a></h2>
+<p><strong>v2020.1.0</strong></p>
+<ul class="simple">
+<li><p>add batch mode to nudft_cpu</p></li>
+</ul>
+<p><strong>v2020.0.0</strong></p>
+<ul class="simple">
+<li><p>fix batch=1. This can cause error in Riekna fft.</p></li>
+</ul>
 <p><strong>v2019.2.3</strong></p>
-<p>-Planned to be released soon.</p>
+<p>-(experimental) Add the unified NUFFT() class. Now CPU, GPU, and legacy GPU mode are encapsuled in a single class.</p>
+<p>-Tested using Intel Neo OpenCL driver (see <a class="reference external" href="https://github.com/intel/compute-runtime">https://github.com/intel/compute-runtime</a>) and IntelPython3.</p>
+<p>-The old NUFFT_cpu() and NUFFT_legacy() will be kept in the system for compatibility.</p>
 <p><strong>v2019.2.1-2019.2.2</strong></p>
 <p>-Remove lsmr as scipy 1.13 has caused unknown error.</p>
 <p><strong>v2019.2.0</strong></p>
 <ul class="simple">
-<li>Bump</li>
+<li><p>Bump</p></li>
 </ul>
 <p><strong>v2019.1.2</strong></p>
 <ul class="simple">
-<li>BUGFIX: fix the loss of accuracy in cSpmvh(). Replace the group/local by global memory (the group/local sizes have caused the unknown run-time behaviour on cuda)</li>
+<li><p>BUGFIX: fix the loss of accuracy in cSpmvh(). Replace the group/local by global memory (the group/local sizes have caused the unknown run-time behaviour on cuda)</p></li>
 </ul>
 <p><strong>v2019.1.1</strong></p>
 <ul class="simple">
-<li>Refactor the re_subroutine.py</li>
-<li>Adopt tensor form</li>
+<li><p>Refactor the re_subroutine.py</p></li>
+<li><p>Adopt tensor form</p></li>
 </ul>
 <p><strong>v0.4.0.0</strong></p>
 <ul class="simple">
-<li>0.4.0.0 is a beta version.</li>
-<li>Major updates for the NUFFT_hsa class, including memory reduction and split-radix. Multiple NUFFT_hsa() using cuda backend becomes possible, by pushing the context to the top of the stack when a method is called.</li>
-<li>Tested in Windows 10 with PyCUDA 2018.1.1, nvidia-driver 417.35, CUDA 9.2, Visual Studio 2015 Community, and Anaconda Python 3.7 64-bit. PyOpenCL in Windows is yet to be tested.</li>
-<li>Add batch mode.</li>
+<li><p>0.4.0.0 is a beta version.</p></li>
+<li><p>Major updates for the NUFFT_hsa class, including memory reduction and split-radix. Multiple NUFFT_hsa() using cuda backend becomes possible, by pushing the context to the top of the stack when a method is called.</p></li>
+<li><p>Tested in Windows 10 with PyCUDA 2018.1.1, nvidia-driver 417.35, CUDA 9.2, Visual Studio 2015 Community, and Anaconda Python 3.7 64-bit. PyOpenCL in Windows is yet to be tested.</p></li>
+<li><p>Add batch mode.</p></li>
 </ul>
 <p><strong>v0.3.3.12</strong></p>
 <ul class="simple">
-<li>0.3.3.12 is a bug-fixed version.</li>
-<li>Removal of the keyword async for compatibility reasons because Reikna has changed the keyword to <a href="#id1"><span class="problematic" id="id2">async_</span></a>.</li>
+<li><p>0.3.3.12 is a bug-fixed version.</p></li>
+<li><p>Removal of the keyword async for compatibility reasons because Reikna has changed the keyword to <a href="#id1"><span class="problematic" id="id2">async_</span></a>.</p></li>
 </ul>
 <p><strong>v0.3.3.8</strong></p>
 <ul class="simple">
-<li>Bugfix: mm = numpy.tile(mm, [numpy.prod(Jd).astype(int), 1])  to fix the wrong type when numpy.prod(Jd) is not cast as int</li>
-<li>Bugfix: fix rcond=None error in Anaconda 3.6.5 and Numpy 1.13.1 (the recommended None in Numpy 1.14 is backward incompatible with 1.13)</li>
-<li>Bugfix:  indx1 = indx.copy() is replaced by indx1 = list(indx) for Python2 compatibility</li>
+<li><p>Bugfix: mm = numpy.tile(mm, [numpy.prod(Jd).astype(int), 1])  to fix the wrong type when numpy.prod(Jd) is not cast as int</p></li>
+<li><p>Bugfix: fix rcond=None error in Anaconda 3.6.5 and Numpy 1.13.1 (the recommended None in Numpy 1.14 is backward incompatible with 1.13)</p></li>
+<li><p>Bugfix:  indx1 = indx.copy() is replaced by indx1 = list(indx) for Python2 compatibility</p></li>
 </ul>
 <p><strong>v0.3.3.7</strong></p>
 <ul class="simple">
-<li>Bugfix in 0.3.3.7 Toeplitz is removed from the NUFFT_cpu and NUFFT_gpu to avoid the MemoryError.</li>
+<li><p>Bugfix in 0.3.3.7 Toeplitz is removed from the NUFFT_cpu and NUFFT_gpu to avoid the MemoryError.</p></li>
 </ul>
 <p><strong>v0.3.3.6</strong></p>
 <ul class="simple">
-<li>Bugfix: correct the error of import. Now import NUFFT_cpu, NUFFT_hsa at the top level.</li>
+<li><p>Bugfix: correct the error of import. Now import NUFFT_cpu, NUFFT_hsa at the top level.</p></li>
 </ul>
 <p><strong>v0.3.3</strong></p>
 <ul class="simple">
-<li>Note: GPU support is superseded by Heterogeneous System Architecture (HSA).</li>
-<li>A variety of nonlinear solvers are provided, including the conjugate gradient method (cg), L1 total-variation ordinary least square (L1TVOLS), and L1 total-variation least absolute deviation (L1TVLAD).</li>
-<li>The CPU version support other nonlinear solvers, lsqr, gmr, cg, bicgstab, bicg, cgs, gmres, lgmres , apart from cg, L1TVOLS and L1TVLAD.</li>
-<li>Support multi-dimensional transform and reconstruction (experimentally).</li>
+<li><p>Note: GPU support is superseded by Heterogeneous System Architecture (HSA).</p></li>
+<li><p>A variety of nonlinear solvers are provided, including the conjugate gradient method (cg), L1 total-variation ordinary least square (L1TVOLS), and L1 total-variation least absolute deviation (L1TVLAD).</p></li>
+<li><p>The CPU version support other nonlinear solvers, lsqr, gmr, cg, bicgstab, bicg, cgs, gmres, lgmres , apart from cg, L1TVOLS and L1TVLAD.</p></li>
+<li><p>Support multi-dimensional transform and reconstruction (experimentally).</p></li>
 </ul>
 <p><strong>v0.3.2.9</strong></p>
 <ul class="simple">
-<li>Experimental support of NVIDIA’s graphic processing unit (GPU).</li>
-<li>The experimental class gpuNUFFT requires pycuda, scikit-cuda, and python-cuda-cffi. scikit-cuda can be installed from standard command.</li>
+<li><p>Experimental support of NVIDIA’s graphic processing unit (GPU).</p></li>
+<li><p>The experimental class gpuNUFFT requires pycuda, scikit-cuda, and python-cuda-cffi. scikit-cuda can be installed from standard command.</p></li>
 </ul>
 <p><strong>v0.3.2.8</strong></p>
 <ul class="simple">
-<li>Tested under Linux and Windows Anaconda3</li>
+<li><p>Tested under Linux and Windows Anaconda3</p></li>
 </ul>
 <p><strong>v0.3</strong></p>
 <ul class="simple">
-<li>Updated setup.py</li>
-<li>Removal of pyfftw due to segfault under some Linux distributions</li>
+<li><p>Updated setup.py</p></li>
+<li><p>Removal of pyfftw due to segfault under some Linux distributions</p></li>
 </ul>
 </div>
 <span id="document-acknow/init"></span><div class="section" id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
-<p>Contributors:</p>
-<p>Thanks to Loubna El Gueddari Benoit Sarthou, and Dr. Philippe Ciuciu at CEA for constructive feedback and readability improvement.</p>
-<p>Thanks to Dr. Sin Chi Chen for providing brain MRI.</p>
-<p>We thank Andy Schwarzl and Professor Florian Knoll for providing test results and answering my question about gpuNUFFT.</p>
+<p>I would be more than grateful for what
+contributors have done (either contributing codes or fixing bugs in pynufft).
+However, The information of contributors and partners are kept anonymized without
+their prior express informed consent.
+If anyone would like to be identified as a contributors/partners, please contact <a class="reference external" href="mailto:pynufft&#37;&#52;&#48;gmail&#46;com">pynufft<span>&#64;</span>gmail<span>&#46;</span>com</a>.</p>
+<p><strong>Financial supports</strong></p>
+<p>Cambridge Commonwealth, European and International Trust (Cambridge, UK)</p>
+<p>Ministry of Education (Taiwan)</p>
+<p>NVIDIA Corp for donating Titan X Pascal.</p>
+<p>The * project (The <a href="#id1"><span class="problematic" id="id2">*</span></a>, * and <a href="#id3"><span class="problematic" id="id4">*</span></a>)</p>
+<p>The * project</p>
+<p><strong>Contributors and partners</strong></p>
+<p>R******</p>
+<p>T******</p>
+<p>H******</p>
+<p>J******</p>
+<p>W*****</p>
+<p>I******</p>
+<p>A*****</p>
+<p>A*****</p>
+<p>B*****</p>
+<p>D******</p>
+<p>M*****</p>
+<p>C******</p>
+<p>C*****</p>
+<p>J*****</p>
+<p>J******</p>
+<p>The <strong>*</strong> project (The <a href="#id5"><span class="problematic" id="id6">*</span></a>, * and <a href="#id7"><span class="problematic" id="id8">*</span></a>)</p>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -3601,7 +3460,7 @@ Add “C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin” and “C:\P
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
-        <li class="nav-item nav-item-0"><a href="index.html#document-index">PyNUFFT 2019.2.3rc2  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html#document-index">PyNUFFT 2020.1.0  documentation</a> &#187;</li> 
       </ul>
     </div>
 <script type="text/javascript">
@@ -3611,7 +3470,7 @@ Add “C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin” and “C:\P
 </script>
 <script type="text/javascript" src="_static/js/bootstrap.js"></script>
   <div class="footer">
-    &copy; Copyright 2012-2019, PyNUFFT services. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+    &copy; Copyright 2012-2020, PyNUFFT services. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
   </body>
 </html>
