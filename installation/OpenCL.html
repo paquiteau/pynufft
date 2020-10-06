@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation of OpenCL &mdash; PyNUFFT 2020.2.1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.1  documentation" href="../index.html"/>
+        <link rel="up" title="Installation" href="init.html"/>
+        <link rel="next" title="Tutorial" href="../tutor/init.html"/>
+        <link rel="prev" title="Installation under Windows 10" href="Windows.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+            
+            <img src="../_static/logo.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/init.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="init.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="init.html#system-requirements">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init.html#software">Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init.html#general-installation">General Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="init.html#special-topics">Special topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Linux.html">Installation under Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Windows.html">Installation under Windows 10</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installation of OpenCL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutor/init.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manu/init.html">Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/init.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknow/init.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyNUFFT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="init.html">Installation</a> &raquo;</li>
+        
+      <li>Installation of OpenCL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/installation/OpenCL.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation-of-opencl">
+<h1>Installation of OpenCL<a class="headerlink" href="#installation-of-opencl" title="Permalink to this headline">¶</a></h1>
+<p>OpenCL is one of the backends that PyNUFFT supports. Up to the present, PyNUFFT has used OpenCL-1.2. One missing feature of OpenCL-1.2 is <cite>atomicAdd</cite> for the array with floating point numbers.   PyNUFFT makes use of <cite>atomic_cmpxchg</cite> (compare and exchange) to implement the atomic_add_float subroutine, which can be seen in the <cite>pynufft.src.re_subroutine.atomic_add</cite>. This code has appeared in many resources, e.g. <cite>http://simpleopencl.blogspot.com/2013/05/atomic-operations-and-floats-in-opencl.html</cite> and <cite>https://github.com/clMathLibraries/clSPARSE/blob/master/src/library/kernels/csrmv_adaptive.cl</cite>.</p>
+<p>Note that the OpenCL standard is still evolving and all of the OpenCL supports may change quickly. Old sdk may not work with the newest Intel chipsets. Please try different versions of the hardware and software.</p>
+<p>The current compiler version is gcc version 7.3.0. Other compilers may be used on the target system but I haven’t tested any of them.</p>
+<p><strong>Intel OpenCL</strong></p>
+<p>Intel HD graphics after the Skylake generation usually support OpenCL as long as the suitable intel-sdk is installed.</p>
+<p>One OpenCL example is a Gigabyte aero 14 Gentoo Linux on a machine with Intel Corporation HD Graphics 530 (rev 06). The dev-util/intel-ocl-sdk-4.4.0.117-r1 installed the <cite>intel_sdk_for_ocl_applications_2014_ubuntu_4.4.0.117_x64.tgz</cite> opencl package. The <cite>clinfo</cite> command shows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Platform</span> <span class="n">Name</span>                                   <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">OpenCL</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">devices</span>                                 <span class="mi">1</span>
+<span class="n">Device</span> <span class="n">Name</span>                                     <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Core</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span> <span class="n">i7</span><span class="o">-</span><span class="mi">6700</span><span class="n">HQ</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
+<span class="n">Device</span> <span class="n">Vendor</span>                                   <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Corporation</span>
+<span class="n">Device</span> <span class="n">Vendor</span> <span class="n">ID</span>                                <span class="mh">0x8086</span>
+<span class="n">Device</span> <span class="n">Version</span>                                  <span class="n">OpenCL</span> <span class="mf">1.2</span> <span class="p">(</span><span class="n">Build</span> <span class="mi">117</span><span class="p">)</span>
+<span class="n">Driver</span> <span class="n">Version</span>                                  <span class="mf">1.2</span><span class="o">.</span><span class="mf">0.117</span>
+<span class="n">Device</span> <span class="n">OpenCL</span> <span class="n">C</span> <span class="n">Version</span>                         <span class="n">OpenCL</span> <span class="n">C</span> <span class="mf">1.2</span>
+<span class="n">Device</span> <span class="n">Type</span>                                     <span class="n">CPU</span>
+<span class="n">Device</span> <span class="n">Profile</span>                                  <span class="n">FULL_PROFILE</span>
+<span class="n">Device</span> <span class="n">Available</span>                                <span class="n">Yes</span>
+<span class="n">Compiler</span> <span class="n">Available</span>                              <span class="n">Yes</span>
+<span class="n">Linker</span> <span class="n">Available</span>                                <span class="n">Yes</span>
+<span class="n">Max</span> <span class="n">compute</span> <span class="n">units</span>                               <span class="mi">8</span>
+<span class="n">Max</span> <span class="n">clock</span> <span class="n">frequency</span>                             <span class="mi">2600</span><span class="n">MHz</span>
+<span class="n">Device</span> <span class="n">Partition</span>                                <span class="p">(</span><span class="n">core</span><span class="p">)</span>
+  <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">devices</span>                     <span class="mi">8</span>
+  <span class="n">Supported</span> <span class="n">partition</span> <span class="n">types</span>                     <span class="n">by</span> <span class="n">counts</span><span class="p">,</span> <span class="n">equally</span><span class="p">,</span> <span class="n">by</span> <span class="n">names</span> <span class="p">(</span><span class="n">Intel</span><span class="p">)</span>
+  <span class="n">Supported</span> <span class="n">affinity</span> <span class="n">domains</span>                    <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+<span class="n">Max</span> <span class="n">work</span> <span class="n">item</span> <span class="n">dimensions</span>                        <span class="mi">3</span>
+<span class="n">Max</span> <span class="n">work</span> <span class="n">item</span> <span class="n">sizes</span>                             <span class="mi">8192</span><span class="n">x8192x8192</span>
+<span class="n">Max</span> <span class="n">work</span> <span class="n">group</span> <span class="n">size</span>                             <span class="mi">8192</span>
+<span class="n">Preferred</span> <span class="n">work</span> <span class="n">group</span> <span class="n">size</span> <span class="n">multiple</span>              <span class="mi">128</span>
+<span class="n">Preferred</span> <span class="o">/</span> <span class="n">native</span> <span class="n">vector</span> <span class="n">sizes</span>
+  <span class="n">char</span>                                                 <span class="mi">1</span> <span class="o">/</span> <span class="mi">32</span>
+  <span class="n">short</span>                                                <span class="mi">1</span> <span class="o">/</span> <span class="mi">16</span>
+  <span class="nb">int</span>                                                  <span class="mi">1</span> <span class="o">/</span> <span class="mi">8</span>
+  <span class="n">long</span>                                                 <span class="mi">1</span> <span class="o">/</span> <span class="mi">4</span>
+  <span class="n">half</span>                                                 <span class="mi">0</span> <span class="o">/</span> <span class="mi">0</span>        <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+  <span class="nb">float</span>                                                <span class="mi">1</span> <span class="o">/</span> <span class="mi">8</span>
+  <span class="n">double</span>                                               <span class="mi">1</span> <span class="o">/</span> <span class="mi">4</span>        <span class="p">(</span><span class="n">cl_khr_fp64</span><span class="p">)</span>
+<span class="n">Half</span><span class="o">-</span><span class="n">precision</span> <span class="n">Floating</span><span class="o">-</span><span class="n">point</span> <span class="n">support</span>           <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+<span class="n">Single</span><span class="o">-</span><span class="n">precision</span> <span class="n">Floating</span><span class="o">-</span><span class="n">point</span> <span class="n">support</span>         <span class="p">(</span><span class="n">core</span><span class="p">)</span>
+  <span class="n">Denormals</span>                                     <span class="n">Yes</span>
+  <span class="n">Infinity</span> <span class="ow">and</span> <span class="n">NANs</span>                             <span class="n">Yes</span>
+  <span class="n">Round</span> <span class="n">to</span> <span class="n">nearest</span>                              <span class="n">Yes</span>
+  <span class="n">Round</span> <span class="n">to</span> <span class="n">zero</span>                                 <span class="n">No</span>
+  <span class="n">Round</span> <span class="n">to</span> <span class="n">infinity</span>                             <span class="n">No</span>
+  <span class="n">IEEE754</span><span class="o">-</span><span class="mi">2008</span> <span class="n">fused</span> <span class="n">multiply</span><span class="o">-</span><span class="n">add</span>               <span class="n">No</span>
+  <span class="n">Support</span> <span class="ow">is</span> <span class="n">emulated</span> <span class="ow">in</span> <span class="n">software</span>               <span class="n">No</span>
+  <span class="n">Correctly</span><span class="o">-</span><span class="n">rounded</span> <span class="n">divide</span> <span class="ow">and</span> <span class="n">sqrt</span> <span class="n">operations</span>  <span class="n">No</span>
+<span class="n">Double</span><span class="o">-</span><span class="n">precision</span> <span class="n">Floating</span><span class="o">-</span><span class="n">point</span> <span class="n">support</span>         <span class="p">(</span><span class="n">cl_khr_fp64</span><span class="p">)</span>
+  <span class="n">Denormals</span>                                     <span class="n">Yes</span>
+  <span class="n">Infinity</span> <span class="ow">and</span> <span class="n">NANs</span>                             <span class="n">Yes</span>
+  <span class="n">Round</span> <span class="n">to</span> <span class="n">nearest</span>                              <span class="n">Yes</span>
+  <span class="n">Round</span> <span class="n">to</span> <span class="n">zero</span>                                 <span class="n">Yes</span>
+  <span class="n">Round</span> <span class="n">to</span> <span class="n">infinity</span>                             <span class="n">Yes</span>
+  <span class="n">IEEE754</span><span class="o">-</span><span class="mi">2008</span> <span class="n">fused</span> <span class="n">multiply</span><span class="o">-</span><span class="n">add</span>               <span class="n">Yes</span>
+  <span class="n">Support</span> <span class="ow">is</span> <span class="n">emulated</span> <span class="ow">in</span> <span class="n">software</span>               <span class="n">No</span>
+<span class="n">Address</span> <span class="n">bits</span>                                    <span class="mi">64</span><span class="p">,</span> <span class="n">Little</span><span class="o">-</span><span class="n">Endian</span>
+<span class="n">Global</span> <span class="n">memory</span> <span class="n">size</span>                              <span class="mi">33613447168</span> <span class="p">(</span><span class="mf">31.3</span><span class="n">GiB</span><span class="p">)</span>
+<span class="n">Error</span> <span class="n">Correction</span> <span class="n">support</span>                        <span class="n">No</span>
+<span class="n">Max</span> <span class="n">memory</span> <span class="n">allocation</span>                           <span class="mi">8403361792</span> <span class="p">(</span><span class="mf">7.826</span><span class="n">GiB</span><span class="p">)</span>
+<span class="n">Unified</span> <span class="n">memory</span> <span class="k">for</span> <span class="n">Host</span> <span class="ow">and</span> <span class="n">Device</span>              <span class="n">Yes</span>
+<span class="n">Minimum</span> <span class="n">alignment</span> <span class="k">for</span> <span class="nb">any</span> <span class="n">data</span> <span class="nb">type</span>             <span class="mi">128</span> <span class="nb">bytes</span>
+<span class="n">Alignment</span> <span class="n">of</span> <span class="n">base</span> <span class="n">address</span>                       <span class="mi">1024</span> <span class="n">bits</span> <span class="p">(</span><span class="mi">128</span> <span class="nb">bytes</span><span class="p">)</span>
+<span class="n">Global</span> <span class="n">Memory</span> <span class="n">cache</span> <span class="nb">type</span>                        <span class="n">Read</span><span class="o">/</span><span class="n">Write</span>
+<span class="n">Global</span> <span class="n">Memory</span> <span class="n">cache</span> <span class="n">size</span>                        <span class="mi">262144</span> <span class="p">(</span><span class="mi">256</span><span class="n">KiB</span><span class="p">)</span>
+<span class="n">Global</span> <span class="n">Memory</span> <span class="n">cache</span> <span class="n">line</span> <span class="n">size</span>                   <span class="mi">64</span> <span class="nb">bytes</span>
+<span class="n">Image</span> <span class="n">support</span>                                   <span class="n">Yes</span>
+  <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samplers</span> <span class="n">per</span> <span class="n">kernel</span>             <span class="mi">480</span>
+  <span class="n">Max</span> <span class="n">size</span> <span class="k">for</span> <span class="mi">1</span><span class="n">D</span> <span class="n">images</span> <span class="kn">from</span> <span class="nn">buffer</span>            <span class="mi">525210112</span> <span class="n">pixels</span>
+  <span class="n">Max</span> <span class="mi">1</span><span class="n">D</span> <span class="ow">or</span> <span class="mi">2</span><span class="n">D</span> <span class="n">image</span> <span class="n">array</span> <span class="n">size</span>                 <span class="mi">2048</span> <span class="n">images</span>
+  <span class="n">Max</span> <span class="mi">2</span><span class="n">D</span> <span class="n">image</span> <span class="n">size</span>                             <span class="mi">16384</span><span class="n">x16384</span> <span class="n">pixels</span>
+  <span class="n">Max</span> <span class="mi">3</span><span class="n">D</span> <span class="n">image</span> <span class="n">size</span>                             <span class="mi">2048</span><span class="n">x2048x2048</span> <span class="n">pixels</span>
+  <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">read</span> <span class="n">image</span> <span class="n">args</span>                 <span class="mi">480</span>
+  <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">write</span> <span class="n">image</span> <span class="n">args</span>                <span class="mi">480</span>
+<span class="n">Local</span> <span class="n">memory</span> <span class="nb">type</span>                               <span class="n">Global</span>
+<span class="n">Local</span> <span class="n">memory</span> <span class="n">size</span>                               <span class="mi">32768</span> <span class="p">(</span><span class="mi">32</span><span class="n">KiB</span><span class="p">)</span>
+<span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">constant</span> <span class="n">args</span>                     <span class="mi">480</span>
+<span class="n">Max</span> <span class="n">constant</span> <span class="n">buffer</span> <span class="n">size</span>                        <span class="mi">131072</span> <span class="p">(</span><span class="mi">128</span><span class="n">KiB</span><span class="p">)</span>
+<span class="n">Max</span> <span class="n">size</span> <span class="n">of</span> <span class="n">kernel</span> <span class="n">argument</span>                     <span class="mi">3840</span> <span class="p">(</span><span class="mf">3.75</span><span class="n">KiB</span><span class="p">)</span>
+<span class="n">Queue</span> <span class="n">properties</span>
+  <span class="n">Out</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">order</span> <span class="n">execution</span>                        <span class="n">Yes</span>
+  <span class="n">Profiling</span>                                     <span class="n">Yes</span>
+  <span class="n">Local</span> <span class="n">thread</span> <span class="n">execution</span> <span class="p">(</span><span class="n">Intel</span><span class="p">)</span>                <span class="n">Yes</span>
+<span class="n">Prefer</span> <span class="n">user</span> <span class="n">sync</span> <span class="k">for</span> <span class="n">interop</span>                    <span class="n">No</span>
+<span class="n">Profiling</span> <span class="n">timer</span> <span class="n">resolution</span>                      <span class="mi">1</span><span class="n">ns</span>
+<span class="n">Execution</span> <span class="n">capabilities</span>
+  <span class="n">Run</span> <span class="n">OpenCL</span> <span class="n">kernels</span>                            <span class="n">Yes</span>
+  <span class="n">Run</span> <span class="n">native</span> <span class="n">kernels</span>                            <span class="n">Yes</span>
+  <span class="n">SPIR</span> <span class="n">versions</span>                                 <span class="mf">1.2</span>
+<span class="n">printf</span><span class="p">()</span> <span class="n">buffer</span> <span class="n">size</span>                            <span class="mi">1048576</span> <span class="p">(</span><span class="mi">1024</span><span class="n">KiB</span><span class="p">)</span>
+<span class="n">Built</span><span class="o">-</span><span class="ow">in</span> <span class="n">kernels</span>                                <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+<span class="n">Device</span> <span class="n">Extensions</span>                               <span class="n">cl_khr_icd</span> <span class="n">cl_khr_global_int32_base_atomics</span> <span class="n">cl_khr_global_int32_extended_atomics</span> <span class="n">cl_khr_local_int32_base_atomics</span> <span class="n">cl_khr_local_int32_extended_atomics</span> <span class="n">cl_khr_byte_addressable_store</span> <span class="n">cl_khr_spir</span> <span class="n">cl_intel_exec_by_local_thread</span> <span class="n">cl_khr_depth_images</span> <span class="n">cl_khr_3d_image_writes</span> <span class="n">cl_khr_fp64</span>
+</pre></div>
+</div>
+<p>Pure CPU system without Intel HD graphics may require the newest Intel SDK for OpenCL <cite>https://software.intel.com/en-us/intel-opencl</cite> and <cite>https://software.intel.com/en-us/articles/opencl-drivers</cite>. One pure CPU system with Intel i7 7900X can make use of Intel Studio 2019.</p>
+<p><strong>Nvidia OpenCL</strong></p>
+<p>NVIDIA also supports OpenCL 1.2. A successful installation made use of nvidia-driver 417.18 and CUDA-SDK-9.2.88 and gcc 7.3.0. clinfo shows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">Platform</span> <span class="n">Name</span>                                   <span class="n">NVIDIA</span> <span class="n">CUDA</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">devices</span>                                 <span class="mi">1</span>
+  <span class="n">Device</span> <span class="n">Name</span>                                     <span class="n">GeForce</span> <span class="n">GTX</span> <span class="mi">1060</span>
+  <span class="n">Device</span> <span class="n">Vendor</span>                                   <span class="n">NVIDIA</span> <span class="n">Corporation</span>
+  <span class="n">Device</span> <span class="n">Vendor</span> <span class="n">ID</span>                                <span class="mh">0x10de</span>
+  <span class="n">Device</span> <span class="n">Version</span>                                  <span class="n">OpenCL</span> <span class="mf">1.2</span> <span class="n">CUDA</span>
+  <span class="n">Driver</span> <span class="n">Version</span>                                  <span class="mf">415.18</span>
+  <span class="n">Device</span> <span class="n">OpenCL</span> <span class="n">C</span> <span class="n">Version</span>                         <span class="n">OpenCL</span> <span class="n">C</span> <span class="mf">1.2</span>
+  <span class="n">Device</span> <span class="n">Type</span>                                     <span class="n">GPU</span>
+  <span class="n">Device</span> <span class="n">Topology</span> <span class="p">(</span><span class="n">NV</span><span class="p">)</span>                            <span class="n">PCI</span><span class="o">-</span><span class="n">E</span><span class="p">,</span> <span class="mi">01</span><span class="p">:</span><span class="mf">00.0</span>
+  <span class="n">Device</span> <span class="n">Profile</span>                                  <span class="n">FULL_PROFILE</span>
+  <span class="n">Device</span> <span class="n">Available</span>                                <span class="n">Yes</span>
+  <span class="n">Compiler</span> <span class="n">Available</span>                              <span class="n">Yes</span>
+  <span class="n">Linker</span> <span class="n">Available</span>                                <span class="n">Yes</span>
+  <span class="n">Max</span> <span class="n">compute</span> <span class="n">units</span>                               <span class="mi">10</span>
+  <span class="n">Max</span> <span class="n">clock</span> <span class="n">frequency</span>                             <span class="mi">1670</span><span class="n">MHz</span>
+  <span class="n">Compute</span> <span class="n">Capability</span> <span class="p">(</span><span class="n">NV</span><span class="p">)</span>                         <span class="mf">6.1</span>
+  <span class="n">Device</span> <span class="n">Partition</span>                                <span class="p">(</span><span class="n">core</span><span class="p">)</span>
+    <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">devices</span>                     <span class="mi">1</span>
+    <span class="n">Supported</span> <span class="n">partition</span> <span class="n">types</span>                     <span class="kc">None</span>
+    <span class="n">Supported</span> <span class="n">affinity</span> <span class="n">domains</span>                    <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+  <span class="n">Max</span> <span class="n">work</span> <span class="n">item</span> <span class="n">dimensions</span>                        <span class="mi">3</span>
+  <span class="n">Max</span> <span class="n">work</span> <span class="n">item</span> <span class="n">sizes</span>                             <span class="mi">1024</span><span class="n">x1024x64</span>
+  <span class="n">Max</span> <span class="n">work</span> <span class="n">group</span> <span class="n">size</span>                             <span class="mi">1024</span>
+  <span class="n">Preferred</span> <span class="n">work</span> <span class="n">group</span> <span class="n">size</span> <span class="n">multiple</span>              <span class="mi">32</span>
+  <span class="n">Warp</span> <span class="n">size</span> <span class="p">(</span><span class="n">NV</span><span class="p">)</span>                                  <span class="mi">32</span>
+  <span class="n">Preferred</span> <span class="o">/</span> <span class="n">native</span> <span class="n">vector</span> <span class="n">sizes</span>
+    <span class="n">char</span>                                                 <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span>
+    <span class="n">short</span>                                                <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span>
+    <span class="nb">int</span>                                                  <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span>
+    <span class="n">long</span>                                                 <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span>
+    <span class="n">half</span>                                                 <span class="mi">0</span> <span class="o">/</span> <span class="mi">0</span>        <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+    <span class="nb">float</span>                                                <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span>
+    <span class="n">double</span>                                               <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span>        <span class="p">(</span><span class="n">cl_khr_fp64</span><span class="p">)</span>
+  <span class="n">Half</span><span class="o">-</span><span class="n">precision</span> <span class="n">Floating</span><span class="o">-</span><span class="n">point</span> <span class="n">support</span>           <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+  <span class="n">Single</span><span class="o">-</span><span class="n">precision</span> <span class="n">Floating</span><span class="o">-</span><span class="n">point</span> <span class="n">support</span>         <span class="p">(</span><span class="n">core</span><span class="p">)</span>
+    <span class="n">Denormals</span>                                     <span class="n">Yes</span>
+    <span class="n">Infinity</span> <span class="ow">and</span> <span class="n">NANs</span>                             <span class="n">Yes</span>
+    <span class="n">Round</span> <span class="n">to</span> <span class="n">nearest</span>                              <span class="n">Yes</span>
+    <span class="n">Round</span> <span class="n">to</span> <span class="n">zero</span>                                 <span class="n">Yes</span>
+    <span class="n">Round</span> <span class="n">to</span> <span class="n">infinity</span>                             <span class="n">Yes</span>
+    <span class="n">IEEE754</span><span class="o">-</span><span class="mi">2008</span> <span class="n">fused</span> <span class="n">multiply</span><span class="o">-</span><span class="n">add</span>               <span class="n">Yes</span>
+    <span class="n">Support</span> <span class="ow">is</span> <span class="n">emulated</span> <span class="ow">in</span> <span class="n">software</span>               <span class="n">No</span>
+    <span class="n">Correctly</span><span class="o">-</span><span class="n">rounded</span> <span class="n">divide</span> <span class="ow">and</span> <span class="n">sqrt</span> <span class="n">operations</span>  <span class="n">Yes</span>
+  <span class="n">Double</span><span class="o">-</span><span class="n">precision</span> <span class="n">Floating</span><span class="o">-</span><span class="n">point</span> <span class="n">support</span>         <span class="p">(</span><span class="n">cl_khr_fp64</span><span class="p">)</span>
+    <span class="n">Denormals</span>                                     <span class="n">Yes</span>
+    <span class="n">Infinity</span> <span class="ow">and</span> <span class="n">NANs</span>                             <span class="n">Yes</span>
+    <span class="n">Round</span> <span class="n">to</span> <span class="n">nearest</span>                              <span class="n">Yes</span>
+    <span class="n">Round</span> <span class="n">to</span> <span class="n">zero</span>                                 <span class="n">Yes</span>
+    <span class="n">Round</span> <span class="n">to</span> <span class="n">infinity</span>                             <span class="n">Yes</span>
+    <span class="n">IEEE754</span><span class="o">-</span><span class="mi">2008</span> <span class="n">fused</span> <span class="n">multiply</span><span class="o">-</span><span class="n">add</span>               <span class="n">Yes</span>
+    <span class="n">Support</span> <span class="ow">is</span> <span class="n">emulated</span> <span class="ow">in</span> <span class="n">software</span>               <span class="n">No</span>
+  <span class="n">Address</span> <span class="n">bits</span>                                    <span class="mi">64</span><span class="p">,</span> <span class="n">Little</span><span class="o">-</span><span class="n">Endian</span>
+  <span class="n">Global</span> <span class="n">memory</span> <span class="n">size</span>                              <span class="mi">6373572608</span> <span class="p">(</span><span class="mf">5.936</span><span class="n">GiB</span><span class="p">)</span>
+  <span class="n">Error</span> <span class="n">Correction</span> <span class="n">support</span>                        <span class="n">No</span>
+  <span class="n">Max</span> <span class="n">memory</span> <span class="n">allocation</span>                           <span class="mi">1593393152</span> <span class="p">(</span><span class="mf">1.484</span><span class="n">GiB</span><span class="p">)</span>
+  <span class="n">Unified</span> <span class="n">memory</span> <span class="k">for</span> <span class="n">Host</span> <span class="ow">and</span> <span class="n">Device</span>              <span class="n">No</span>
+  <span class="n">Integrated</span> <span class="n">memory</span> <span class="p">(</span><span class="n">NV</span><span class="p">)</span>                          <span class="n">No</span>
+  <span class="n">Minimum</span> <span class="n">alignment</span> <span class="k">for</span> <span class="nb">any</span> <span class="n">data</span> <span class="nb">type</span>             <span class="mi">128</span> <span class="nb">bytes</span>
+  <span class="n">Alignment</span> <span class="n">of</span> <span class="n">base</span> <span class="n">address</span>                       <span class="mi">4096</span> <span class="n">bits</span> <span class="p">(</span><span class="mi">512</span> <span class="nb">bytes</span><span class="p">)</span>
+  <span class="n">Global</span> <span class="n">Memory</span> <span class="n">cache</span> <span class="nb">type</span>                        <span class="n">Read</span><span class="o">/</span><span class="n">Write</span>
+  <span class="n">Global</span> <span class="n">Memory</span> <span class="n">cache</span> <span class="n">size</span>                        <span class="mi">163840</span> <span class="p">(</span><span class="mi">160</span><span class="n">KiB</span><span class="p">)</span>
+  <span class="n">Global</span> <span class="n">Memory</span> <span class="n">cache</span> <span class="n">line</span> <span class="n">size</span>                   <span class="mi">128</span> <span class="nb">bytes</span>
+  <span class="n">Image</span> <span class="n">support</span>                                   <span class="n">Yes</span>
+    <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samplers</span> <span class="n">per</span> <span class="n">kernel</span>             <span class="mi">32</span>
+    <span class="n">Max</span> <span class="n">size</span> <span class="k">for</span> <span class="mi">1</span><span class="n">D</span> <span class="n">images</span> <span class="kn">from</span> <span class="nn">buffer</span>            <span class="mi">134217728</span> <span class="n">pixels</span>
+    <span class="n">Max</span> <span class="mi">1</span><span class="n">D</span> <span class="ow">or</span> <span class="mi">2</span><span class="n">D</span> <span class="n">image</span> <span class="n">array</span> <span class="n">size</span>                 <span class="mi">2048</span> <span class="n">images</span>
+    <span class="n">Max</span> <span class="mi">2</span><span class="n">D</span> <span class="n">image</span> <span class="n">size</span>                             <span class="mi">16384</span><span class="n">x32768</span> <span class="n">pixels</span>
+    <span class="n">Max</span> <span class="mi">3</span><span class="n">D</span> <span class="n">image</span> <span class="n">size</span>                             <span class="mi">16384</span><span class="n">x16384x16384</span> <span class="n">pixels</span>
+    <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">read</span> <span class="n">image</span> <span class="n">args</span>                 <span class="mi">256</span>
+    <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">write</span> <span class="n">image</span> <span class="n">args</span>                <span class="mi">16</span>
+  <span class="n">Local</span> <span class="n">memory</span> <span class="nb">type</span>                               <span class="n">Local</span>
+  <span class="n">Local</span> <span class="n">memory</span> <span class="n">size</span>                               <span class="mi">49152</span> <span class="p">(</span><span class="mi">48</span><span class="n">KiB</span><span class="p">)</span>
+  <span class="n">Registers</span> <span class="n">per</span> <span class="n">block</span> <span class="p">(</span><span class="n">NV</span><span class="p">)</span>                        <span class="mi">65536</span>
+  <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">constant</span> <span class="n">args</span>                     <span class="mi">9</span>
+  <span class="n">Max</span> <span class="n">constant</span> <span class="n">buffer</span> <span class="n">size</span>                        <span class="mi">65536</span> <span class="p">(</span><span class="mi">64</span><span class="n">KiB</span><span class="p">)</span>
+  <span class="n">Max</span> <span class="n">size</span> <span class="n">of</span> <span class="n">kernel</span> <span class="n">argument</span>                     <span class="mi">4352</span> <span class="p">(</span><span class="mf">4.25</span><span class="n">KiB</span><span class="p">)</span>
+  <span class="n">Queue</span> <span class="n">properties</span>
+    <span class="n">Out</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">order</span> <span class="n">execution</span>                        <span class="n">Yes</span>
+    <span class="n">Profiling</span>                                     <span class="n">Yes</span>
+  <span class="n">Prefer</span> <span class="n">user</span> <span class="n">sync</span> <span class="k">for</span> <span class="n">interop</span>                    <span class="n">No</span>
+  <span class="n">Profiling</span> <span class="n">timer</span> <span class="n">resolution</span>                      <span class="mi">1000</span><span class="n">ns</span>
+  <span class="n">Execution</span> <span class="n">capabilities</span>
+    <span class="n">Run</span> <span class="n">OpenCL</span> <span class="n">kernels</span>                            <span class="n">Yes</span>
+    <span class="n">Run</span> <span class="n">native</span> <span class="n">kernels</span>                            <span class="n">No</span>
+    <span class="n">Kernel</span> <span class="n">execution</span> <span class="n">timeout</span> <span class="p">(</span><span class="n">NV</span><span class="p">)</span>                 <span class="n">No</span>
+  <span class="n">Concurrent</span> <span class="n">copy</span> <span class="ow">and</span> <span class="n">kernel</span> <span class="n">execution</span> <span class="p">(</span><span class="n">NV</span><span class="p">)</span>       <span class="n">Yes</span>
+    <span class="n">Number</span> <span class="n">of</span> <span class="k">async</span> <span class="n">copy</span> <span class="n">engines</span>                  <span class="mi">2</span>
+  <span class="n">printf</span><span class="p">()</span> <span class="n">buffer</span> <span class="n">size</span>                            <span class="mi">1048576</span> <span class="p">(</span><span class="mi">1024</span><span class="n">KiB</span><span class="p">)</span>
+  <span class="n">Built</span><span class="o">-</span><span class="ow">in</span> <span class="n">kernels</span>                                <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+  <span class="n">Device</span> <span class="n">Extensions</span>                               <span class="n">cl_khr_global_int32_base_atomics</span> <span class="n">cl_khr_global_int32_extended_atomics</span> <span class="n">cl_khr_local_int32_base_atomics</span> <span class="n">cl_khr_local_int32_extended_atomics</span> <span class="n">cl_khr_fp64</span> <span class="n">cl_khr_byte_addressable_store</span> <span class="n">cl_khr_icd</span> <span class="n">cl_khr_gl_sharing</span> <span class="n">cl_nv_compiler_options</span> <span class="n">cl_nv_device_attribute_query</span> <span class="n">cl_nv_pragma_unroll</span> <span class="n">cl_nv_copy_opts</span> <span class="n">cl_nv_create_buffer</span>
+</pre></div>
+</div>
+<p><strong>AMD GPU</strong></p>
+<p>AMD has a very good support for OpenCL. See AMDGPU-PRO driver. AMD usually performs very well for fp64 (double precision PyNUFFT is available on request).</p>
+<p><strong>Open-source Intel Compute OpenCL (Intel-NEO and Intel SDK)</strong></p>
+<p>Try to install Intel’s proprietary OpenCL sdk.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tutor/init.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Windows.html" class="btn btn-neutral" title="Installation under Windows 10" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2020, PyNUFFT services.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2020.2.1 ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

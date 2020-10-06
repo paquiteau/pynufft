@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Multi-dimensional NUFFT &mdash; PyNUFFT 2020.2.1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.1  documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+            
+            <img src="../_static/logo.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/init.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/init.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutor/init.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="init.html">Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/init.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknow/init.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyNUFFT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Multi-dimensional NUFFT</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manu/Nd_NUFFT.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multi-dimensional-nufft">
+<h1>Multi-dimensional NUFFT<a class="headerlink" href="#multi-dimensional-nufft" title="Permalink to this headline">¶</a></h1>
+<p>Multi-dimensional transforms are supported in PyNUFFT.</p>
+<div class="section" id="parameters-of-pynufft">
+<h2>Parameters of PyNUFFT<a class="headerlink" href="#parameters-of-pynufft" title="Permalink to this headline">¶</a></h2>
+<p>Here we summarize the required variables in <a class="reference internal" href="../overview/CPU_GPU.html#parameter-table"><span class="std std-numref">Table 2</span></a></p>
+<span id="parameter-table"></span><table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-text">Title</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 60%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Heading row 1, column 1</p></th>
+<th class="head"><p>Heading row 1, column 2</p></th>
+<th class="head"><p>Heading row 1, column 3</p></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Row 1, column 1</p></td>
+<td></td>
+<td><p>Row 1, column 3</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Row 2, column 1</p></td>
+<td><p>Row 2, column 2</p></td>
+<td><p>Row 2, column 3</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Non-Cartesian coordinates (om)</strong></p>
+<p>om is an numpy array with a shape of (M, dim).
+M is  the number of non-Cartesian samples, dim is the dimensionality.
+The dtype of om is float.  om is normalized between <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span>.</p>
+<p><strong>Image grid size (Nd)</strong></p>
+<p>The image grid determines the size of the image.</p>
+<p><strong>Oversampled Fourier grid (Kd)</strong></p>
+<p>The oversampled Fourier grid determines the size of the frequency.
+Normally the Kd is 2 × Nd[d] for d-th axis.</p>
+<p><strong>Interpolator size (Jd)</strong></p>
+<p>The interpolator computes the Jd[d] adjacent weighted sum of the oversampled Fourier grid.
+A normal choice of Jd is 6 for all axes.</p>
+<p>Optionally, user can provide additional variables:</p>
+<p><strong>ft_axes (default = None (all axes))</strong></p>
+<p>ft_axes the NUFFT_cpu to operate the FFT on the given axes.</p>
+<p><strong>batch (deprecated)</strong></p>
+<p>Batch mode allows NUFFT to operate on the additional axis.</p>
+<p><code class="xref std std-numref docutils literal notranslate"><span class="pre">anatomy_nufft</span></code> illustrates the variables for 1D, 2D, 3D NUFFT.</p>
+<div class="figure align-default" id="id2">
+<span id="anatomy-nufft"></span><a class="reference internal image-reference" href="../_images/anatomy_nufft.png"><img alt="../_images/anatomy_nufft.png" src="../_images/anatomy_nufft.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-text">The anatomy of 1D, 2D, and 3D NUFFT.
+(A) 1D NUFFT: om is a numpy.array of the shape (M,1).
+M is the number of non-Cartesian points.
+Nd = (8, ) is the image domain grid size and Kd = (16, ) is the oversampled grid size.
+Jd = (6, ) is the interpolator size.
+(B) 2D NUFFT: om is a numpy.array of the shape (M,2).
+M is the number of non-Cartesian points.
+Nd = (8, 8 ) is the image domain grid size and Kd = (16, 16 ) is the oversampled grid size.
+Jd = (6, 6 ) is the interpolator size.
+(C) 3D NUFFT: om is a numpy.array of the shape (M,3).
+M is the number of non-Cartesian points.
+Nd = (8, 8, 8 ) is the image domain grid size and Kd = (16, 16, 16 ) is the oversampled grid size.
+Jd = (6, 6, 6 ) is the interpolator size.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Import pynufft module</strong></p>
+<p>In python environment, import pynufft module and other packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy.misc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
+</pre></div>
+</div>
+<p><strong>Planning</strong>
+Create a pynufft object NufftObj:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span><span class="p">,</span> <span class="n">NUFFT_hsa</span>
+<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Provided <span class="math notranslate nohighlight">\(om\)</span>, the size of time series (<span class="math notranslate nohighlight">\(Nd\)</span>), oversampled grid (<span class="math notranslate nohighlight">\(Kd\)</span>), and interpolatro size (<span class="math notranslate nohighlight">\(Jd\)</span>) are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span> <span class="c1"># time grid, tuple</span>
+<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span> <span class="c1"># frequency grid, tuple</span>
+<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># interpolator</span>
+<span class="c1">#     om=       numpy.load(DATA_PATH+&#39;om3D.npz&#39;)[&#39;arr_0&#39;]</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">15120</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can plan NufftObj with these parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Forward transform</strong></p>
+<p>Now NufftObj has been prepared and is ready for computations. Continue with an example.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;pynufft&#39;</span><span class="p">,</span> <span class="s1">&#39;./src/data/&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">DATA_PATH</span> <span class="o">+</span><span class="s1">&#39;phantom_3D_128_128_128.npz&#39;</span><span class="p">)[</span><span class="s1">&#39;arr_0&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">special_license</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This display the image <code class="xref std std-numref docutils literal notranslate"><span class="pre">3d_example_image</span></code>.</p>
+<div class="figure align-default" id="id3">
+<span id="d-example-image"></span><a class="reference internal image-reference" href="../_images/3D_phantom.png"><img alt="../_images/3D_phantom.png" src="../_images/3D_phantom.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text">The 3D phantom</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>NufftObj transform the time_data to non-Cartesian locations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Image restoration with solve()</strong>:</p>
+<p>The image can be restored from non-Cartesian samples y:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">restore_image</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;cg&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">restore_image1</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">restore_image2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">kspace</span><span class="p">,</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original signal&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image1</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;L1TVLAD&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image2</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;L1TVOLS&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">restore_image</span><span class="p">[:,:,</span><span class="mi">32</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CG&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CG&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default" id="id4">
+<span id="d-restore"></span><a class="reference internal image-reference" href="../_images/3D_restore.png"><img alt="../_images/3D_restore.png" src="../_images/3D_restore.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Image restoration using’cg’, ‘L1TVOLS’, ‘L1TVLAD’.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>#.. literalinclude::  ../../../example/script_3D.py</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2020, PyNUFFT services.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2020.2.1 ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

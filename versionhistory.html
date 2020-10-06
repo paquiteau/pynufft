@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Version history &mdash; PyNUFFT 2020.2.1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.1  documentation" href="index.html"/>
+        <link rel="next" title="Acknowledgements" href="acknow/init.html"/>
+        <link rel="prev" title="API documentation" href="API/init.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+            
+            <img src="_static/logo.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview/init.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation/init.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutor/init.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manu/init.html">Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API/init.html">API documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknow/init.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyNUFFT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Version history</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/versionhistory.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="version-history">
+<h1>Version history<a class="headerlink" href="#version-history" title="Permalink to this headline">¶</a></h1>
+<p><strong>v2020.1.2</strong></p>
+<ul class="simple">
+<li><p>new_index: change the khatri_rao_k(), OMEGA_k() in helper.py; col += kindx[index];// + 1</p></li>
+<li><p>Add code of conduct of Contributor Covenant v2.0</p></li>
+<li><p>Update some documentations</p></li>
+</ul>
+<p><strong>v2020.1.0</strong></p>
+<ul class="simple">
+<li><p>add batch mode to nudft_cpu</p></li>
+</ul>
+<p><strong>v2020.0.0</strong></p>
+<ul class="simple">
+<li><p>fix batch=1. This can cause error in Riekna fft.</p></li>
+</ul>
+<p><strong>v2019.2.3</strong></p>
+<p>-(experimental) Add the unified NUFFT() class. Now CPU, GPU, and legacy GPU mode are encapsuled in a single class.</p>
+<p>-Tested using Intel Neo OpenCL driver (see <a class="reference external" href="https://github.com/intel/compute-runtime">https://github.com/intel/compute-runtime</a>) and IntelPython3.</p>
+<p>-The old NUFFT_cpu() and NUFFT_legacy() will be kept in the system for compatibility.</p>
+<p><strong>v2019.2.1-2019.2.2</strong></p>
+<p>-Remove lsmr as scipy 1.13 has caused unknown error.</p>
+<p><strong>v2019.2.0</strong></p>
+<ul class="simple">
+<li><p>Bump</p></li>
+</ul>
+<p><strong>v2019.1.2</strong></p>
+<ul class="simple">
+<li><p>BUGFIX: fix the loss of accuracy in cSpmvh(). Replace the group/local by global memory (the group/local sizes have caused the unknown run-time behaviour on cuda)</p></li>
+</ul>
+<p><strong>v2019.1.1</strong></p>
+<ul class="simple">
+<li><p>Refactor the re_subroutine.py</p></li>
+<li><p>Adopt tensor form</p></li>
+</ul>
+<p><strong>v0.4.0.0</strong></p>
+<ul class="simple">
+<li><p>0.4.0.0 is a beta version.</p></li>
+<li><p>Major updates for the NUFFT_hsa class, including memory reduction and split-radix. Multiple NUFFT_hsa() using cuda backend becomes possible, by pushing the context to the top of the stack when a method is called.</p></li>
+<li><p>Tested in Windows 10 with PyCUDA 2018.1.1, nvidia-driver 417.35, CUDA 9.2, Visual Studio 2015 Community, and Anaconda Python 3.7 64-bit. PyOpenCL in Windows is yet to be tested.</p></li>
+<li><p>Add batch mode.</p></li>
+</ul>
+<p><strong>v0.3.3.12</strong></p>
+<ul class="simple">
+<li><p>0.3.3.12 is a bug-fixed version.</p></li>
+<li><p>Removal of the keyword async for compatibility reasons because Reikna has changed the keyword to <a href="#id1"><span class="problematic" id="id2">async_</span></a>.</p></li>
+</ul>
+<p><strong>v0.3.3.8</strong></p>
+<ul class="simple">
+<li><p>Bugfix: mm = numpy.tile(mm, [numpy.prod(Jd).astype(int), 1])  to fix the wrong type when numpy.prod(Jd) is not cast as int</p></li>
+<li><p>Bugfix: fix rcond=None error in Anaconda 3.6.5 and Numpy 1.13.1 (the recommended None in Numpy 1.14 is backward incompatible with 1.13)</p></li>
+<li><p>Bugfix:  indx1 = indx.copy() is replaced by indx1 = list(indx) for Python2 compatibility</p></li>
+</ul>
+<p><strong>v0.3.3.7</strong></p>
+<ul class="simple">
+<li><p>Bugfix in 0.3.3.7 Toeplitz is removed from the NUFFT_cpu and NUFFT_gpu to avoid the MemoryError.</p></li>
+</ul>
+<p><strong>v0.3.3.6</strong></p>
+<ul class="simple">
+<li><p>Bugfix: correct the error of import. Now import NUFFT_cpu, NUFFT_hsa at the top level.</p></li>
+</ul>
+<p><strong>v0.3.3</strong></p>
+<ul class="simple">
+<li><p>Note: GPU support is superseded by Heterogeneous System Architecture (HSA).</p></li>
+<li><p>A variety of nonlinear solvers are provided, including the conjugate gradient method (cg), L1 total-variation ordinary least square (L1TVOLS), and L1 total-variation least absolute deviation (L1TVLAD).</p></li>
+<li><p>The CPU version support other nonlinear solvers, lsqr, gmr, cg, bicgstab, bicg, cgs, gmres, lgmres , apart from cg, L1TVOLS and L1TVLAD.</p></li>
+<li><p>Support multi-dimensional transform and reconstruction (experimentally).</p></li>
+</ul>
+<p><strong>v0.3.2.9</strong></p>
+<ul class="simple">
+<li><p>Experimental support of NVIDIA’s graphic processing unit (GPU).</p></li>
+<li><p>The experimental class gpuNUFFT requires pycuda, scikit-cuda, and python-cuda-cffi. scikit-cuda can be installed from standard command.</p></li>
+</ul>
+<p><strong>v0.3.2.8</strong></p>
+<ul class="simple">
+<li><p>Tested under Linux and Windows Anaconda3</p></li>
+</ul>
+<p><strong>v0.3</strong></p>
+<ul class="simple">
+<li><p>Updated setup.py</p></li>
+<li><p>Removal of pyfftw due to segfault under some Linux distributions</p></li>
+</ul>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="acknow/init.html" class="btn btn-neutral float-right" title="Acknowledgements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="API/init.html" class="btn btn-neutral" title="API documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2020, PyNUFFT services.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2020.2.1 ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

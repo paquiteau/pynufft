@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CPU and GPU (HSA) &mdash; PyNUFFT 2020.2.1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.1  documentation" href="../index.html"/>
+        <link rel="up" title="Overview" href="init.html"/>
+        <link rel="next" title="Installation" href="../installation/init.html"/>
+        <link rel="prev" title="Multi-dimensional NUFFT" href="Nd_NUFFT.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+            
+            <img src="../_static/logo.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="init.html">Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pynufft.html">The Python Non-uniform fast Fourier transform (PyNUFFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Nd_NUFFT.html">Multi-dimensional NUFFT</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CPU and GPU (HSA)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameters-of-pynufft">Parameters of PyNUFFT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/init.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutor/init.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manu/init.html">Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/init.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknow/init.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyNUFFT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="init.html">Overview</a> &raquo;</li>
+        
+      <li>CPU and GPU (HSA)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/overview/CPU_GPU.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cpu-and-gpu-hsa">
+<h1>CPU and GPU (HSA)<a class="headerlink" href="#cpu-and-gpu-hsa" title="Permalink to this headline">¶</a></h1>
+<p>The PyNUFFT ran originally on Numpy/Scipy. Unfortunately the default Numpy/Scipy is most efficient on a single CPU core.</p>
+<p>Later it was ported to PyCUDA and PyOpenCL, which allows us to leverage the speed of multi-core CPU and GPU.</p>
+<p>Mixing NUFFT_cpu and NUFFT_hsa, or multiple NUFFT_cpu or multiple NUFFT_hsa is possible but has no warranty.</p>
+<p>The class methods are listed in <a class="reference internal" href="#dimension-table"><span class="std std-numref">Table 1</span></a></p>
+<span id="dimension-table"></span><table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Methods implemented in NUFFT</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>method name</p></th>
+<th class="head"><p>NUFFT()</p></th>
+<th class="head"><p>NUFFT(helper.device_list[0])</p></th>
+<th class="head"><p>References</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>__init__()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Constructor</p></td>
+</tr>
+<tr class="row-odd"><td><p>plan()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Planning the instance</p></td>
+</tr>
+<tr class="row-even"><td><p>forward()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Forward NUFFT <span class="math notranslate nohighlight">\(A\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>adjoint()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Adjoint NUFFT <span class="math notranslate nohighlight">\(A^H\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>offload()</p></td>
+<td><p>×</p></td>
+<td><p>✓</p></td>
+<td><p>Offload the NUFFT_hsa() to device.</p></td>
+</tr>
+<tr class="row-odd"><td><p>x2xx()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Apply the scaling factor</p></td>
+</tr>
+<tr class="row-even"><td><p>xx2k()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Oversampled FFT</p></td>
+</tr>
+<tr class="row-odd"><td><p>k2y()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Interpolation</p></td>
+</tr>
+<tr class="row-even"><td><p>k2vec()</p></td>
+<td><p>✓</p></td>
+<td><p>×</p></td>
+<td><p>Reshape the k-space to the vector</p></td>
+</tr>
+<tr class="row-odd"><td><p>vec2y()</p></td>
+<td><p>✓</p></td>
+<td><p>×</p></td>
+<td><p>Multiply the vector to generate the data</p></td>
+</tr>
+<tr class="row-even"><td><p>vec2k()</p></td>
+<td><p>✓</p></td>
+<td><p>×</p></td>
+<td><p>Reshape the vector to k-space</p></td>
+</tr>
+<tr class="row-odd"><td><p>y2vec()</p></td>
+<td><p>✓</p></td>
+<td><p>×</p></td>
+<td><p>Multiply the data to get the vector</p></td>
+</tr>
+<tr class="row-even"><td><p>y2k()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Adjoint of k2y()</p></td>
+</tr>
+<tr class="row-odd"><td><p>k2xx()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Inverse FFT (excessive parts are cropped)</p></td>
+</tr>
+<tr class="row-even"><td><p>xx2x()</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Apply the scaling factor</p></td>
+</tr>
+<tr class="row-odd"><td><p>_precompute</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Apply the scaling factor</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="parameters-of-pynufft">
+<h2>Parameters of PyNUFFT<a class="headerlink" href="#parameters-of-pynufft" title="Permalink to this headline">¶</a></h2>
+<p>Below we summarize the required variables in <a class="reference internal" href="#parameter-table"><span class="std std-numref">Table 2</span></a></p>
+<span id="parameter-table"></span><table class="colwidths-given docutils align-default" id="id2">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Parameters of the plan() method</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>NUFFT</p></th>
+<th class="head"><p>NUFFT(helper.device_list()[0])</p></th>
+<th class="head"><p>References</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>om (Numpy Array)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Non-Cartesian coordinates (M, dim)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nd (tuple)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Size of the image grid</p></td>
+</tr>
+<tr class="row-even"><td><p>Kd (tuple)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Size of the oversampled Fourier grid</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jd (tuple)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>Size of the interpolator</p></td>
+</tr>
+<tr class="row-even"><td><p>ft_axes (tuple)</p></td>
+<td><p>optional</p></td>
+<td><p>optional</p></td>
+<td><p>FFT on the given axes (default = None (all axes))</p></td>
+</tr>
+<tr class="row-odd"><td><p>radix (int)</p></td>
+<td><p>×</p></td>
+<td><p>optional</p></td>
+<td><p>radix (default = 1)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../installation/init.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Nd_NUFFT.html" class="btn btn-neutral" title="Multi-dimensional NUFFT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2020, PyNUFFT services.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2020.2.1 ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation under Windows 10 &mdash; PyNUFFT 2020.2.1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.1  documentation" href="../index.html"/>
+        <link rel="up" title="Installation" href="init.html"/>
+        <link rel="next" title="Installation of OpenCL" href="OpenCL.html"/>
+        <link rel="prev" title="Installation under Linux" href="Linux.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+            
+            <img src="../_static/logo.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/init.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="init.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="init.html#system-requirements">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init.html#software">Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init.html#general-installation">General Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="init.html#special-topics">Special topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Linux.html">Installation under Linux</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installation under Windows 10</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OpenCL.html">Installation of OpenCL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutor/init.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manu/init.html">Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/init.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknow/init.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyNUFFT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="init.html">Installation</a> &raquo;</li>
+        
+      <li>Installation under Windows 10</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/installation/Windows.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation-under-windows-10">
+<h1>Installation under Windows 10<a class="headerlink" href="#installation-under-windows-10" title="Permalink to this headline">¶</a></h1>
+<p>PyNUFFT has been tested under the Windows 10 home edition.</p>
+<p>The successful installation experience may be useful, but the actual process can be different due to the variety of software and hardware environments.</p>
+<p>I used Nvidia-driver 417.35-notebook-win10-64bit-international-whql-rp, Anaconda3-2018.12-Windows-x86_64, PyCUDA 2018.1.1 from official pip, Microsoft Visual Studio 2015 Community, CUDA 9.2.148_win10 and cuda_9.2.148.1_windows (patch).</p>
+<p>The following general guidance may work in your case but cannot be guaranteed.</p>
+<p><strong>Pre-requisites</strong></p>
+<ul class="simple">
+<li><p>GPU, a clean Windows 10, Windows Visual Studio 2015 Community Version and CUDA 9.2.148</p></li>
+</ul>
+<p>This is the most complex step. Please refer to the official documentation of Nvidia:</p>
+<p><cite>https://docs.nvidia.com/cuda/archive/9.2/cuda-installation-guide-microsoft-windows/index.html</cite></p>
+<ul class="simple">
+<li><p>First, install the Nvidia-driver 417.35-notebook-win10-64bit-international-whql-rp.</p></li>
+<li><p>Second, install the Microsoft Visual Studio 2015 Community.</p></li>
+<li><p>Third, install CUDA-9.2. Do not install an older driver.</p></li>
+</ul>
+<p>Now open command prompt <cite>cmd</cite>, type</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvcc</span> <span class="o">-</span><span class="n">V</span>
+</pre></div>
+</div>
+<p>You may see</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvcc</span><span class="p">:</span> <span class="n">NVIDIA</span> <span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Cuda</span> <span class="n">compiler</span> <span class="n">driver</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2005</span><span class="o">-</span><span class="mi">2018</span> <span class="n">NVIDIA</span> <span class="n">Corporation</span>
+<span class="n">Built</span> <span class="n">on</span> <span class="n">Tue_Jun_12_23</span><span class="p">:</span><span class="mi">09_12</span><span class="n">_Central_Daylight_time_2018</span>
+<span class="n">Cuda</span> <span class="n">compilation</span> <span class="n">tool</span><span class="p">,</span> <span class="n">release</span> <span class="mf">9.2</span><span class="p">,</span> <span class="n">V9</span><span class="o">.</span><span class="mf">2.148</span>
+</pre></div>
+</div>
+<p>which indicates that nvcc can be found in the system.</p>
+<ul class="simple">
+<li><p>Add the environmental variable path.</p></li>
+</ul>
+<p>If the system cannot find <cite>cl.exe</cite> when you type <cite>cl</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>C:\Users\User&gt;cl
+`cl` is not recognized as an internal or external command,
+operable program or batch file.
+</pre></div>
+</div>
+<p>this error is due to the fact that Visual Studio has not been added to the system path, so the system cannot find cl.</p>
+<p>Try to follow the webpage instruction at <cite>https://docs.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v%3Doffice.14)</cite>.
+Add “C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin” and “C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE”.</p>
+<p>Once Visual Studio has been added to the system, open Windows cmd and it should find cl.exe</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">User</span><span class="o">&gt;</span><span class="n">cl</span>
+<span class="n">Microsoft</span> <span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">C</span><span class="o">/</span><span class="n">C</span><span class="o">++</span> <span class="n">Optimizing</span> <span class="n">Compiler</span> <span class="n">Version</span> <span class="mf">19.0024215</span><span class="o">.</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x86</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="n">Microsoft</span> <span class="n">Corpooration</span><span class="o">.</span> <span class="n">All</span> <span class="n">rights</span> <span class="n">reserved</span><span class="o">.</span>
+
+<span class="n">usage</span><span class="p">:</span> <span class="n">cl</span> <span class="p">[</span> <span class="n">option</span><span class="o">...</span> <span class="p">]</span> <span class="n">filename</span><span class="o">...</span> <span class="p">[</span> <span class="o">/</span><span class="n">link</span> <span class="n">linkoption</span><span class="o">...</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>without the earlier error message. If the error persists, the path must be modified again.</p>
+<p><strong>Installation of Anaconda3</strong></p>
+<ul class="simple">
+<li><p>Now install Anaconda3. I downloaded Anaconda3-2018.12-Windows-x86_64. Once this is done you can follow the general installation procedure as described above.</p></li>
+</ul>
+<p><strong>Installation of Pytools, PyCUDA, and PyNUFFT</strong></p>
+<ul>
+<li><p>Open Anaconda3 command prompt, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">PYTHONIOENCODING</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pytools</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pycuda</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">reikna</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pynufft</span>
+</pre></div>
+</div>
+</li>
+<li><p>Test PyNUFFT:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">tests</span>
+<span class="n">tests</span><span class="o">.</span><span class="n">test_init</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="OpenCL.html" class="btn btn-neutral float-right" title="Installation of OpenCL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Linux.html" class="btn btn-neutral" title="Installation under Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2020, PyNUFFT services.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2020.2.1 ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; PyNUFFT 2020.2.1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.1  documentation" href="../index.html"/>
+        <link rel="next" title="Installation under Linux" href="Linux.html"/>
+        <link rel="prev" title="CPU and GPU (HSA)" href="../overview/CPU_GPU.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+            
+            <img src="../_static/logo.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/init.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#system-requirements">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software">Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-installation">General Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#special-topics">Special topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Linux.html">Installation under Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Windows.html">Installation under Windows 10</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OpenCL.html">Installation of OpenCL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutor/init.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manu/init.html">Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/init.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknow/init.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyNUFFT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/installation/init.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="system-requirements">
+<h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
+<p><strong>CPU</strong></p>
+<p>Each PyNUFFT instance is designed to be executed on a single node.
+PyNUFFT has no built-in distributed computing on multiple nodes,
+but the users can design their own one.</p>
+<p>For example, users may install PyNUFFT on multiple nodes and control them through the network.</p>
+<p>Multple NUFFT_cpu instances on a single node provided that the total memory is sufficient to keep all instances.</p>
+<p>We recommend one or more modern x86_64 processors on a single node. Successful stories include Intel® Core™ i7-6700HQ Processor,
+Intel® Xeon® W-2125, Intel® Core™ i9-7900X.</p>
+<p><strong>Memory</strong></p>
+<p>A general instruction is that the memory should be sufficient for computing a single NUFFT object, which is dependent on the type of problem.</p>
+<p>A single 2D problem of 256 × 256 matrix can be computed on a system with 8GB memory.</p>
+<p>For 3D NUFFT, it is not uncommon for a single NUFFT_cpu object to consume more than 200GB memory.</p>
+<p><strong>GPU</strong></p>
+<p>Each PyNUFFT instance is initiated on a single GPU. An instance cannot be distributed across multiple GPUs.
+(PyNUFFT does not use cuFFT.)</p>
+<p>However, multiple NUFFT_hsa instances may be initiated both on a single GPU and on multiple GPUs,
+but the performance may be impacted (limited by the memory, PCI-E bus or GPU cores).</p>
+<p>To use GPU, a recent NVIDIA’s GPU (after Maxwell, Pascal) with the recent drivers should be working properly.</p>
+<p>The newest nvidia-driver versions of 415.18 or later is recommended.
+Earlier versions may work but please be informed that Nvidia may discontinue support for outdated drivers.</p>
+<p>A general rule is that the memory on the GPU has to be sufficient for computing the NUFFT problem.
+Successful stories include NVIDIA Geforce GTX 965m/GTX 1070 maxQ/1060 6GB,
+NVIDIA Titan V100 (Amazon Web Services),
+NVIDIA Titan X Pascal,
+and NVIDIA Quadro P6000.</p>
+<p><strong>Operating System</strong></p>
+<p>Ubunut 16.04 - 18.04 are recommended.</p>
+<p>Windows 10 has been tested but it requires Microsoft Studio 2015 community. Please refer to the following special topic about the installation under Windows 10.</p>
+</div>
+<div class="section" id="software">
+<h2>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h2>
+<p><strong>Python</strong></p>
+<p>Users must be familiar with Python and its pip packaging system.
+Python 3.6-3.7 are currently supported (Python 2 will not be supported since 1, Jan, 2020).</p>
+<p>To run the NUFFT_cpu, the basic CPython, Numpy and Scipy packages must be available on the system.
+IronPython is compatible with CPython so ipython might be useful.</p>
+<p>PyNUFFT can be installed through the pip command.
+Optionally, users can clone the github repository and build the package from the local folder.</p>
+<p><strong>Compiler</strong></p>
+<p>NUFFT class does not require a compiler.</p>
+<p>However, NUFFT relies on the JIT (just-in-time) compilation mechanism of Reikna/PyCUDA/PyOpenCL.
+The supporting compiler may be:</p>
+<ul class="simple">
+<li><p>gcc-7.3.0, gcc-8.4.0</p></li>
+<li><p>Microsoft (R) Visual Studio 2015 community edition.</p></li>
+</ul>
+<p>(Please refer to the following section: special topic: Installation under Windows 10).</p>
+<p>To accelerate the code on the graphic processing unit (GPU),
+Reikna, PyCUDA, PyOpencl must be available. Please refer the following special topic: Installation of OpenCL.</p>
+<p>CUDA programming skills are not strictly needed.
+However, it may be helpful if users understand GPU programming.</p>
+</div>
+<div class="section" id="general-installation">
+<h2>General Installation<a class="headerlink" href="#general-installation" title="Permalink to this headline">¶</a></h2>
+<p>Continuum’s <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a> environment should provide all the above packages.</p>
+<p><strong>Installation using pip</strong></p>
+<p>Install pynufft by using the <a class="reference external" href="https://en.wikipedia.org/wiki/Pip_(package_manager)">pip</a> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install pynufft
+</pre></div>
+</div>
+<p><strong>Installation from Git Repository</strong></p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Git">git</a> is a version control program, which allows you to clone the latest code base from the <a class="reference external" href="https://github.com/jyhmiinlin/pynufft">pynufft</a> repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/jyhmiinlin/pynufft
+$ cd pynufft
+$ python setup.py install --user
+</pre></div>
+</div>
+<p><strong>Uninstall pynufft</strong></p>
+<p>Simply use “pip uninstall” to remove pynufft:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip uninstall pynufft
+</pre></div>
+</div>
+<p><strong>Test whether the installation is successful (deprecated)</strong></p>
+<ul class="simple">
+<li><p>Ask <a class="reference external" href="mailto:pynufft&#37;&#52;&#48;gmail&#46;com">pynufft<span>&#64;</span>gmail<span>&#46;</span>com</a> for technical support.</p></li>
+</ul>
+</div>
+<div class="section" id="special-topics">
+<h2>Special topics<a class="headerlink" href="#special-topics" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Linux.html">Installation under Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Windows.html">Installation under Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenCL.html">Installation of OpenCL</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Linux.html" class="btn btn-neutral float-right" title="Installation under Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../overview/CPU_GPU.html" class="btn btn-neutral" title="CPU and GPU (HSA)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2020, PyNUFFT services.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2020.2.1 ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

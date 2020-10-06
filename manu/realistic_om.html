@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>k-Space trajectories (om) &mdash; PyNUFFT 2020.2.1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.1  documentation" href="../index.html"/>
+        <link rel="up" title="Manual" href="init.html"/>
+        <link rel="next" title="API documentation" href="../API/init.html"/>
+        <link rel="prev" title="Multiple NUFFT instances" href="multiple_NUFFT.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyNUFFT
+          
+
+          
+            
+            <img src="../_static/logo.jpeg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/init.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/init.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutor/init.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="init.html">Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="multiple_NUFFT.html">Multiple NUFFT instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiple_NUFFT.html#multiprocessing-experimental">Multiprocessing (experimental)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">k-Space trajectories (om)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cartesian-k-space">Cartesian k-space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#radial-k-space">Radial k-space</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../API/init.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknow/init.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyNUFFT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="init.html">Manual</a> &raquo;</li>
+        
+      <li>k-Space trajectories (om)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manu/realistic_om.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="k-space-trajectories-om">
+<h1>k-Space trajectories (om)<a class="headerlink" href="#k-space-trajectories-om" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cartesian-k-space">
+<h2>Cartesian k-space<a class="headerlink" href="#cartesian-k-space" title="Permalink to this headline">¶</a></h2>
+<p>This section aims to provide a good example to show that NUFFT can be used to compute many different trajectories, including the Cartesian k-space.</p>
+<p>However, Cartesian k-space should mostly be computed by FFT and this section is provided only for testing.</p>
+<p>In the example, we generate a PyNUFFT object and make a plan using Cartesian k-space, followed by the NUFFT transform.</p>
+<p>The data is created by NUFFT but on the Cartesian grid.</p>
+<p>Last the Cartesian data are transformed back to image by IFFT (with two ifftshifts before and after ifftn):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generating trajectories for Cartesian k-space</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">fake_Cartesian</span><span class="p">(</span><span class="n">Nd</span><span class="p">):</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Nd</span><span class="p">)</span> <span class="c1"># dimension</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">Nd</span><span class="p">)</span>
+    <span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="n">Nd</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">dimid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="n">om</span><span class="p">[:,</span> <span class="n">dimid</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">dimid</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">*</span><span class="mi">2</span><span class="o">/</span> <span class="n">Nd</span><span class="p">[</span><span class="n">dimid</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">om</span>
+
+<span class="kn">import</span> <span class="nn">scipy.misc</span>
+
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
+
+
+<span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()[::</span><span class="mi">2</span><span class="p">,::</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">fake_Cartesian</span><span class="p">(</span><span class="n">Nd</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of samples (M) = &#39;</span><span class="p">,</span> <span class="n">om</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimension = &#39;</span><span class="p">,</span> <span class="n">om</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nd = &#39;</span><span class="p">,</span> <span class="n">Nd</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kd = &#39;</span><span class="p">,</span> <span class="n">Kd</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jd = &#39;</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+
+<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
+<span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="n">y2</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Nd</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifftshift</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifftn</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifftshift</span><span class="p">(</span><span class="n">y2</span><span class="p">)))</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original image&#39;</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Restored image&#39;</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">image</span> <span class="o">-</span> <span class="n">x2</span><span class="p">),</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Difference map&#39;</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As you can see, the resulting images (<a class="reference internal" href="#fake-cartesian"><span class="std std-numref">Fig. 9</span></a>) confirm that NUFFT + IFFT can restore the original image.</p>
+<div class="figure align-default" id="id1">
+<span id="fake-cartesian"></span><a class="reference internal image-reference" href="../_images/fake_Cartesian.png"><img alt="../_images/fake_Cartesian.png" src="../_images/fake_Cartesian.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">A Cartesian example generates the contrived Cartesian data using NUFFT, followed by IFFT.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="radial-k-space">
+<h2>Radial k-space<a class="headerlink" href="#radial-k-space" title="Permalink to this headline">¶</a></h2>
+<p>We can generate the radial spokes on the 2D plane.
+Each radial spoke spans the range of  <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> at the angle <span class="math notranslate nohighlight">\(\theta\)</span> and each point is fully determined by the  polar coordinate (R, <span class="math notranslate nohighlight">\(\theta\)</span>).
+See <a class="reference internal" href="#radial-spoke"><span class="std std-numref">Fig. 10</span></a> for more information.</p>
+<div class="figure align-default" id="id2">
+<span id="radial-spoke"></span><a class="reference internal image-reference" href="../_images/radial_spoke.png"><img alt="../_images/radial_spoke.png" src="../_images/radial_spoke.png" style="width: 30%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Illustration of five radial spokes.
+Each point of the spoke can be described by the polar coordinate (R, <span class="math notranslate nohighlight">\(\theta\)</span>),
+which can be transformed to Cartesian coordinates (R cos(<span class="math notranslate nohighlight">\(\theta\)</span>), R sin(<span class="math notranslate nohighlight">\(\theta\)</span>)).</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>The following code generates 360 radial spokes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># generating 2D radial coordinates</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">spoke_range</span> <span class="o">=</span> <span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span> <span class="o">-</span> <span class="mf">256.0</span> <span class="p">)</span><span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span> <span class="mi">256</span>  <span class="c1"># normalized between -pi and pi</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">512</span><span class="o">*</span><span class="mi">360</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">M</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">angle</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">):</span>
+   <span class="n">radian</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span> <span class="mf">360.0</span>
+   <span class="n">spoke_x</span> <span class="o">=</span>  <span class="n">spoke_range</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radian</span><span class="p">)</span>
+   <span class="n">spoke_y</span> <span class="o">=</span>  <span class="n">spoke_range</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radian</span><span class="p">)</span>
+   <span class="n">om</span><span class="p">[</span><span class="mi">512</span><span class="o">*</span><span class="n">angle</span> <span class="p">:</span> <span class="mi">512</span><span class="o">*</span><span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">spoke_x</span>
+   <span class="n">om</span><span class="p">[</span><span class="mi">512</span><span class="o">*</span><span class="n">angle</span> <span class="p">:</span> <span class="mi">512</span><span class="o">*</span><span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">spoke_y</span>
+
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">om</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../API/init.html" class="btn btn-neutral float-right" title="API documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="multiple_NUFFT.html" class="btn btn-neutral" title="Multiple NUFFT instances" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2020, PyNUFFT services.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2020.2.1 ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
