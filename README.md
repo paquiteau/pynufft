@@ -63,6 +63,21 @@ acceleration= 10.455399523742015
 17.97926664352417 2.710083246231079
 acceleration in solver= 6.634211944790991
 ```
+## Abuse of the project
+
+We have noticed many people have started to abuse this project as soon as 
+they know this work. 
+
+They were using their junky benchmarks, and use propaganda to delibrately lower 
+the performance of PyNUFFT. 
+
+As we have shown in the tutorial, their misunderstanding about Fourier transform
+is the reason why they failed. 
+
+https://github.com/philouc/isbi19-tutorial/blob/f442a89c4fc8c76fa225bedbf6804c6fa300e56c/python/03b.ISBI19_notebook.ipynb
+
+As they have violated the open-source license, 
+their right to continuously use this package has been revoked. 
 
 ### Contact information
 email: pynufft@gamil.com
