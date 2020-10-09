@@ -7,7 +7,6 @@ A minimal "getting start" tutorial is available at http://jyhmiinlin.github.io/p
 
 $ pip install pynufft --user
 
-## How to use?
 
 ### Using Numpy/Scipy
 
