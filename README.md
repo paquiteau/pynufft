@@ -73,9 +73,9 @@ the performance of PyNUFFT.
 
 As we have shown in the tutorial, their misunderstanding about Fourier transform
 is the reason why they failed. 
-
+'''
 https://github.com/philouc/isbi19-tutorial/blob/f442a89c4fc8c76fa225bedbf6804c6fa300e56c/python/03b.ISBI19_notebook.ipynb
-
+'''
 As they have violated the open-source license, 
 their right to continuously use this package has been revoked. 
 
