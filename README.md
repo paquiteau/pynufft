@@ -64,5 +64,7 @@ acceleration= 10.455399523742015
 acceleration in solver= 6.634211944790991
 ```
 
+![](speed_accuracy_comparisons.png)
+
 ### Contact information
 email: pynufft@gamil.com
