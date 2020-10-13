@@ -46,9 +46,10 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> y = A2.forward(x)
 ```
 
-### Using NUDFT_cupy and NUDFT (double precision)
+### Using NUDFT_cupy and NUDFT (double precision, experimental)
 
-Some users ask for double precision. So NUDFT and NUDFT_cupy are offered.
+Some users ask for double precision. 
+NUDFT and NUDFT_cupy are offered.
 Speedup is dependent on cupy and GPU.  
 
 
