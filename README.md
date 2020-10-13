@@ -48,6 +48,10 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ### Using NUDFT_cupy and NUDFT (double precision)
 
+Some users ask for double precision. So NUDFT and NUDFT_cupy are offered.
+Speed is not great though.
+
+
 ```
 >>> from pynufft import NUDFT_cupy, NUDFT
 >>> import numpy
