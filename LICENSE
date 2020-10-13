@@ -1,3 +1,13 @@
 Copyright (c) 2012 - Jyh-Miin Lin
 All rights reserved.
-GPLv3 and AGPL (for web service)
+Min-max kernel is originated from The Michigan Image Reconstruction Toolbox (MIRT) by Prof. Jeffrey Fessler and his students.
+BSD license.
+If you use the Numpy/Scipy version, you are using the  please cite:
+Jeffrey A Fessler, "Michigan Image Reconstruction Toolbox," available at [url], downloaded [date].
+Fessler, Jeffrey A., and Bradley P. Sutton. "Nonuniform fast Fourier transforms using min-max interpolation." IEEE transactions on signal processing 51.2 (2003): 560-574.
+
+The GPU/CPU acceleration and mixed radix part were written by the PyNUFFT team (not endorsed by Prof. Fessler and his students but we thank for their work). 
+Please cite the following paper in addition to MIRT:
+Lin, Jyh-Miin. “Python Non-Uniform Fast Fourier Transform (PyNUFFT): An Accelerated Non-Cartesian MRI Package on a Heterogeneous Platform (CPU/GPU).” Journal of Imaging 4.3 (2018): 51.
+J.-M. Lin and H.-W. Chung, Pynufft: python non-uniform fast Fourier transform for MRI Building Bridges in Medical Sciences 2017, St John’s College, CB2 1TP Cambridge, UK
+LGPLv3 or AGPL-3.0
