@@ -46,6 +46,25 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> y = A2.forward(x)
 ```
 
+### Using NUDFT_cupy and NUDFT (double precision)
+
+```
+>>> from pynufft import NUDFT_cupy, NUDFT
+>>> import numpy
+>>> A2= NUDFT_cupy()
+>>> om = numpy.random.randn(10,2)
+>>> Nd = (64,64)
+>>> A2.plan(om, Nd)
+>>> x=numpy.random.randn(*Nd)
+>>> y = A2.forward(x)
+>>> A = NUDFT()
+>>> A.plan(om, Nd)
+>>> y_cpu = A.forward(x)
+>>> print(numpy.linalg.norm(y.get() - y_cpu))
+6.752054788357788e-14
+```
+
+
 ## Testing GPU acceleration
 
 ```
