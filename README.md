@@ -49,7 +49,9 @@ Type "help", "copyright", "credits" or "license" for more information.
 ### Using NUDFT_cupy and NUDFT (double precision)
 
 Some users ask for double precision. So NUDFT and NUDFT_cupy are offered.
-Speed is not great though.
+Speedup is not measured for now. 
+Answer to the criticism in 
+Gossard, Alban, Frédéric de Gournay, and Pierre Weiss. "Off-the-grid data-driven optimization of sampling schemes in MRI." arXiv preprint arXiv:2010.01817 (2020).
 
 
 ```
