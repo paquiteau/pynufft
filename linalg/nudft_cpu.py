@@ -59,7 +59,7 @@ class NUDFT:
         >>> from pynufft import NUDFT
         >>> NufftObj = NUDFT()
         """
-        self.dtype = numpy.complex64  # : initial value: numpy.complex64
+        self.dtype = numpy.complex128  # : initial value: numpy.complex64
         self.debug = 0  #: initial value: 0
         self.Nd = ()  # : initial value: ()
 #         self.Kd = ()  # : initial value: ()
