@@ -243,9 +243,9 @@ def solve(nufft,   y,  solver=None, *args, **kwargs):
             methods={'lsqr':scipy.sparse.linalg.lsqr,
                                 'lsmr':scipy.sparse.linalg.lsmr,}
             k2 = methods[solver](A,  y.flatten(), *args, **kwargs)#,show=True)
-
- 
-            xx = nufft.k2xx(nufft.vec2k(k2[0]))
+            vec = k2[0]
+            vec.shape = nufft.Kd
+            xx = nufft.k2xx(vec)
             x= xx/nufft.sn
             return x#, k2[1:]        
         elif 'L1TVOLS' == solver:
