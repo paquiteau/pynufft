@@ -12,7 +12,7 @@ We release the package in the hope that it is useful. However, some users starte
 We kindly ask users stop spreading false information: 
 when they only have data saved as single precision floating point numbers, they assigned wrong parameters and claim that PyNUFFT is worse than packages. (which is not true) 
  
-For example, some users have set the Cartesian grid incorrectly, and claim that PyNUFFT is far less accurate than NFFT. What making them failed is that the coordinate was wrong. We have made the correction in another conference. The SSIM of the correct Cartesian setting is SSIM ~ 1.000. However, we don't have time to make corrections for all failed cases. 
+For example, some users have set the Cartesian grid incorrectly, and claim that PyNUFFT is far worse than they expected. What making them failed is that the coordinate was wrong. We have made the correction in another conference. The SSIM of the correct Cartesian setting is SSIM ~ 1.000. However, we don't have time to make corrections for all failed cases. 
  
 We have collected many failed case studies (preprints, emails from big organizations, tutorials in signal processing conferences). 
 
