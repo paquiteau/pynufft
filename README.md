@@ -2,7 +2,25 @@
 # PyNUFFT: Python non-uniform fast Fourier transform
 
 A minimal "getting start" tutorial is available at http://jyhmiinlin.github.io/pynufft/ .
+
+## How not to misuse PyNUFFT?
+
+The best way is either to use it correctly or not to use this package at all. 
+
+We release the package in the hope that it is useful. However, some users started to abuse this service and make false claims.
+
+We ask users stop spreading false information when they only have data saved as single precision floating point numbers. 
  
+They assigned wrong parameters and claim that PyNUFFT is worse than packages. (which is not true) 
+ 
+For example, some users have set the Cartesian grid incorrectly, and claim that PyNUFFT is far less accurate than NFFT. What making them failed is that the coordinate 
+was wrong. We have made the correction in another conference. The SSIM of the correct Cartesian setting is SSIM ~ 1.000. 
+ 
+We have collected many failed case studies (preprints, emails from big organizations, tutorials in signal processing conferences). 
+
+We are offering a training course to allow users to access these failed cases and learn how to use the package correctly.
+
+
 ## Installation
 
 $ pip install pynufft --user
