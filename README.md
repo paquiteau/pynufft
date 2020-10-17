@@ -114,6 +114,15 @@ https://arxiv.org/pdf/2010.01817
 This statement is dubious. If they want double-precision, they should use NUDFT and NUDFT_cupy. I have kindly asked them to clarify their source of significantly numerical errors.  
 
 
+### On the RRSG challenge of reproducible research in ISMRM 2019
+
+Some reports deliberately demonstrated bad results, which are not reflecting the quality of third party packages.
+
+Actually, PyNUFFT is doing great. Our result is as follows. (The code is available on request)
+
+![](with_espirit.png)
+
+
 ### Contact information
 J.-M. Lin
 email: pynufft@gamil.com
