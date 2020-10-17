@@ -92,7 +92,7 @@ acceleration in solver= 6.634211944790991
 
 ### On the misleading information in the IEEE-ISBI 2019 tutorial
 
-Here is the fork that I took at that time. 
+Here is the snapshot that I forked at that time. 
 
 https://github.com/jyhmiinlin/isbi19-tutorial
 
