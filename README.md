@@ -104,7 +104,7 @@ There is a condition that users of the PyNUFFT package should develop their solv
         
 One of our colleagues has corrected their error in ESMRMB 2019  but there are more errors. So we don't want to spend more time on this material. We have kindly asked them to correct their wrong benchmarks in their tutorial, but I have received no correction. 
 
-Unfortunately, I have to make a correction on this website. 
+
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
 
