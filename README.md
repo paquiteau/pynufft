@@ -93,23 +93,27 @@ acceleration in solver= 6.634211944790991
 
 ### On the misleading information in the IEEE-ISBI 2019 tutorial
 
-Here is the snapshot that I forked at that time. 
+I am sorry but here is the snapshot forked from the tutorial at that time of presentation. 
 
 https://github.com/jyhmiinlin/isbi19-tutorial
 
-First of all, I won't say this is scientific misconduct but their methods have many errors. 
+First of all, this may not be a scientific misconduct but I am very dissapointed that their methods didn't quite follow the tutorial of PyNUFFT.
 
-The person was degrading his own reputation, not PyNUFFT as the user had agreed on the "Disclaimer of Warranty" when they are using PyNUFFT. 
+In fact, their "tutorial" is full of errors. Please note that users had agreed on the "Disclaimer of Warranty" when they are using PyNUFFT. 
 To be clear, the purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. 
 There has been a concensus that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. 
+Users should take the full responsibility of using any solver in their tests. They should take care of the programming details, DFT, and their applications.
 
 Actually, his own "superior" work is built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as claimed). However, this tutorial was 
-shedding a negative light on PyNUFFT. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
+deliberately shedding a negative light on PyNUFFT. 
 
-One of our colleagues has corrected his error in ESMRMB 2019 but there are more errors. So we don't want to waste our time and teach them low-level signal processings.
+They are abusing our free service and giving negative comments. 
+This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
 
-We kindly ask the author to truely listen to our advice (not to learn PyNUFFT and present wrong benchmark), and to correct the misleading benchmarks.
+One of our colleagues has corrected the error but there are more errors. We don't and we can't waste our time and teach them basic MRI physics/reconstruction.
 
+We kindly ask the author to truely learn science (not to abuse PyNUFFT in a wrong way and present wrong benchmark at the same time). 
+They should withdraw the misleading benchmarks.
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
 
@@ -117,14 +121,16 @@ https://arxiv.org/pdf/2010.01817
 
 " ...... and Python toolboxes begin to emerge [cite PyNUFFT]. Our experience using them however led to unstable results due to significant numerical errors."
 
-Again, their statement is baseless. The tutorial has asked users to be familiar with the basic DFT. If they want double-precision, they should use NUDFT and NUDFT_cupy. I have kindly asked them to clarify their source of "significantly numerical errors".  
+Again, their statement is baseless. The tutorial has asked users to be familiar with the basic DFT. 
+
+If they want double-precision, they should use NUDFT and NUDFT_cupy. I have kindly asked them to clarify their source of "significantly numerical errors".  
 
 
 ### On the RRSG challenge of reproducible research in ISMRM 2019
 
-Some reports deliberately demonstrated bad results, which are not reflecting the quality of third party packages.
+Some reports deliberately demonstrated bad results from PyNUFFT. Again, they are takig full responsibility for their activities. 
 
-Actually, PyNUFFT is doing great. Our result is as follows. (The code is available on request)
+Actually, PyNUFFT is doing great for the challenge. Our result is as follows. (The code is available on request)
 
 ![](with_espirit.png)
 
