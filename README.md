@@ -111,7 +111,7 @@ https://arxiv.org/pdf/2010.01817
 
 " ...... and Python toolboxes begin to emerge [cite PyNUFFT]. Our experience using them however led to unstable results due to significant numerical errors."
 
-This statement is dubious. If they want double-precision, they should use NUDFT and NUDFT_cupy. I have kindly asked them to clarify their source of significantly numerical errors.  
+Again, their statement is baseless. If they want double-precision, they should use NUDFT and NUDFT_cupy. I have kindly asked them to clarify their source of "significantly numerical errors".  
 
 
 ### Contact information
