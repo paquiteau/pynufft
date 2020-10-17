@@ -93,27 +93,14 @@ acceleration in solver= 6.634211944790991
 
 ### On the misleading information in the IEEE-ISBI 2019 tutorial
 
-I am sorry but here is the snapshot forked from the tutorial at that time of presentation. 
-
+I am sorry but here is the snapshot forked from the tutorial at that time of presentation.
 https://github.com/jyhmiinlin/isbi19-tutorial
-
-First of all, this may not be a scientific misconduct but I am very dissapointed that their methods didn't quite follow the tutorial of PyNUFFT.
-
-In fact, their "tutorial" is full of errors. Please note that users had agreed on the "Disclaimer of Warranty" when they are using PyNUFFT. 
-To be clear, the purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. 
-There has been a concensus that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. 
-Users should take the full responsibility of using any solver in their tests. They should take care of the programming details, DFT, and their applications.
-
-Actually, his own "superior" work is built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as claimed). However, this tutorial was 
-deliberately shedding a negative light on PyNUFFT. 
-
-They are abusing our free service and giving negative comments. 
-This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
-
+First of all, this may not be scientific misconduct but I am very disappointed that their methods didn't quite follow the tutorial of PyNUFFT.
+In fact, their "tutorial" is full of errors. Please note that users had agreed on the "Disclaimer of Warranty" when they are using PyNUFFT. To be clear, the purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. There has been a consensus that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. Users should take full responsibility for using any solver in their tests. They should take care of the programming details, DFT, and their applications.
+Actually, his own "superior" work is built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as claimed). However, this tutorial was deliberately shedding a negative light on PyNUFFT.
+They are abusing our free service and giving negative comments. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
 One of our colleagues has corrected the error but there are more errors. We don't and we can't waste our time and teach them basic MRI physics/reconstruction.
-
-We kindly ask the author to truely learn science (not to abuse PyNUFFT in a wrong way and present wrong benchmark at the same time). 
-They should withdraw the misleading benchmarks.
+We kindly ask the author to truly learn science (not to abuse PyNUFFT in the wrong way and present the wrong benchmark at the same time). They should withdraw the misleading benchmarks.
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
 
