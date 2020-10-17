@@ -90,7 +90,7 @@ acceleration in solver= 6.634211944790991
 
 ![](Figure_1.png)
 
-### On the wrong information in the IEEE-ISBI 2019 tutorial
+### On the misleading information in the IEEE-ISBI 2019 tutorial
 
 Here is the fork that I took at that time. 
 
