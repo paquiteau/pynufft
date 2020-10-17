@@ -96,11 +96,9 @@ Here is the fork that I took at that time.
 
 https://github.com/jyhmiinlin/isbi19-tutorial
 
-First of all, I don't know why they are doing this? There are just too many errors in their tutorial.  
+First of all, I don't know why they are doing this? There are just too many errors in their tutorial. They are degrading their reputation, not PyNUFFT as they had agreed on the "Disclaimer of Warranty" when they are using PyNUFFT.
 
-The purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. 
-
-There has been a condition that users of the PyNUFFT package SHOULD develop their solver, instead of delivering wrong information and abuse this package. Most importantly, their work is also built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as they claimed). However, they were deliberately shedding a negative light on PyNUFFT. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
+To be clear, the purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. So, there has been a concensus that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. Actually, their work is also built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as they claimed). However, they were deliberately shedding a negative light on PyNUFFT. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
 
 One of our colleagues has corrected their error in ESMRMB 2019  but there are more errors. So we don't want to spend more time on this material. We have kindly asked them to correct their wrong benchmarks in their tutorial, but I have received no correction. 
 
