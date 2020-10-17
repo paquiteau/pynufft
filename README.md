@@ -96,19 +96,13 @@ Here is the fork that I took at that time.
 
 https://github.com/jyhmiinlin/isbi19-tutorial
 
-First of all, I don't know why they are doing this?
+First of all, I don't know why they are doing this? There are just too many errors in their tutorial.  
 
-There are just too many errors in their tutorial. 
 The purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. 
-There is a condition that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package.
 
-Most importantly, their application is built on top of PyNUFFT (not the "GPU version of NFFT"), which I think their approach is deliberately shedding a negative light on PyNUFFT. 
-
-There are too many obvious errors in the Jupyter Notebook given in IEEE-ISBI 2019 tutorial.                                                 
-One of our colleagues has corrected their error in ESMRMB 2019 but there are more. So we don't want to spend more time on this material. 
-
-We have kindly asked them to correct their error in their tutorial, but I have received no correction. 
-
+There is a condition that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. Most importantly, their work is also built on top of PyNUFFT (not the "GPU version of NFFT"), which I think their approach is deliberately shedding a negative light on PyNUFFT. Obviously, they have been following the conditions they had agreed. 
+        
+One of our colleagues has corrected their error in ESMRMB 2019 but there are more errors. So we don't want to spend more time on this material. We have kindly asked them to correct their error in their tutorial, but I have received no correction. Therefore, I have to make the correction on this website. 
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
 
