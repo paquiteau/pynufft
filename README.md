@@ -90,6 +90,36 @@ acceleration in solver= 6.634211944790991
 
 ![](Figure_1.png)
 
+### On the wrong information in the IEEE-ISBI 2019 tutorial
+
+Here is the fork that I took at that time. 
+
+https://github.com/jyhmiinlin/isbi19-tutorial
+
+I don't know why they are doing this?
+
+
+There are just too many errors in that tutorial. 
+PyNUFFT aims to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, as well as Numpy/Scipy. 
+There is a condition that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package.
+This action is an abuse of this package.
+
+In addition, their application is built on top of PyNUFFT, which I think their approach is deliberately shedding a negative light on PyNUFFT. 
+
+There are too many obvious errors in the Jupyter Notebook given in IEEE-ISBI 2019 tutorial.                                                 
+One of our colleagues has corrected their error in ESMRMB 2019 but there are more errors so we don't want to spend more time on this material. 
+We have asked them to correct their error in their tutorial, but I have received no correction. 
+We can only educate users who would like to listen.
+ 
+
+### On the Off-the-grid data-driven optimization of sampling schemes...
+
+https://arxiv.org/pdf/2010.01817
+
+" ...... and Python toolboxes begin to emerge [cite PyNUFFT]. Our experience using them however led to unstable results due to significant numerical errors."
+which is wrong. If they want double-precision, they can use NUDFT and NUDFT_cupy. I have kindly sent an email them to correct their statement.  
+
+
 ### Contact information
 J.-M. Lin
 email: pynufft@gamil.com
