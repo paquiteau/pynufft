@@ -2,6 +2,7 @@ Copyright (c) 2012 - PyNUFFT
 All rights reserved.
 MIT (before 2019.1.2), LGPLv3 and AGPL-3.0(for web service)
 
+Off-label use of the PyNUFFT is prohibited. Users of the PyNUFFT package agree not to disseminate results from nonscientific methods and benchmarks. Users should develop their own answer to their problem. Users have agreed "Disclaimer of Warranty" in the license.
 
 MIT license Copyright (C) 2012- J.-M. Lin, PyNUFFT contributors
 
