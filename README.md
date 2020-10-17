@@ -107,17 +107,17 @@ This action is an abuse of this package.
 In addition, their application is built on top of PyNUFFT, which I think their approach is deliberately shedding a negative light on PyNUFFT. 
 
 There are too many obvious errors in the Jupyter Notebook given in IEEE-ISBI 2019 tutorial.                                                 
-One of our colleagues has corrected their error in ESMRMB 2019 but there are more errors so we don't want to spend more time on this material. 
-We have asked them to correct their error in their tutorial, but I have received no correction. 
-We can only educate users who would like to listen.
- 
+One of our colleagues has corrected their error in ESMRMB 2019 but there are more. So we don't want to spend more time on this material. 
+
+We have kindly asked them to correct their error in their tutorial, but I have received no correction. 
+
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
 
 https://arxiv.org/pdf/2010.01817
 
 " ...... and Python toolboxes begin to emerge [cite PyNUFFT]. Our experience using them however led to unstable results due to significant numerical errors."
-which is wrong. If they want double-precision, they can use NUDFT and NUDFT_cupy. I have kindly sent an email them to correct their statement.  
+which is wrong. If they want double-precision, they can use NUDFT and NUDFT_cupy. I have kindly sent an email them to clarify their source of errors.  
 
 
 ### Contact information
