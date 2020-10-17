@@ -100,10 +100,9 @@ First of all, I don't know why they are doing this? There are just too many erro
 
 The purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. 
 
-There is a condition that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. Most importantly, their work is also built on top of PyNUFFT (not the "GPU version of NFFT"), which I think their approach is deliberately shedding a negative light on PyNUFFT. Obviously, they did not follow the conditions they had agreed in the first place. 
-        
-One of our colleagues has corrected their error in ESMRMB 2019  but there are more errors. So we don't want to spend more time on this material. We have kindly asked them to correct their wrong benchmarks in their tutorial, but I have received no correction. 
+There has been a condition that users of the PyNUFFT package SHOULD develop their solver, instead of delivering wrong information and abuse this package. Most importantly, their work is also built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as they claimed). However, they were deliberately shedding a negative light on PyNUFFT. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
 
+One of our colleagues has corrected their error in ESMRMB 2019  but there are more errors. So we don't want to spend more time on this material. We have kindly asked them to correct their wrong benchmarks in their tutorial, but I have received no correction. 
 
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
