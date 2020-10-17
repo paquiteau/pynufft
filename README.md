@@ -97,13 +97,18 @@ Here is the snapshot that I forked at that time.
 
 https://github.com/jyhmiinlin/isbi19-tutorial
 
-First of all, I don't know why the person was doing this? I won't say this is scientific misconduct but there are just too many errors in this tutorial. The person was degrading his own reputation, not PyNUFFT as the user had agreed on the "Disclaimer of Warranty" when they are using PyNUFFT. To be clear, the purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. There has been a concensus that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. 
+First of all, I won't say this is scientific misconduct but their methods have many errors. 
 
-Actually, his own "superior" work is built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as claimed). However, this tutorial was shedding a negative light on PyNUFFT. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
+The person was degrading his own reputation, not PyNUFFT as the user had agreed on the "Disclaimer of Warranty" when they are using PyNUFFT. 
+To be clear, the purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. 
+There has been a concensus that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. 
+
+Actually, his own "superior" work is built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as claimed). However, this tutorial was 
+shedding a negative light on PyNUFFT. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
 
 One of our colleagues has corrected his error in ESMRMB 2019 but there are more errors. So we don't want to waste our time and teach them low-level signal processings.
 
-However, We have kindly asked the author to be a honest person and to correct the misleading benchmarks (I have received no correction since then). 
+We kindly ask the author to truely listen to our advice (not to learn PyNUFFT and present wrong benchmark), and to correct the misleading benchmarks.
 
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
