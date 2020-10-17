@@ -106,8 +106,8 @@ Users should take full responsibility for using any solver in their tests. They 
 Actually, his own "superior" work is built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as claimed). 
 However, this tutorial was deliberately shedding a negative light on PyNUFFT.
 They are abusing our free service and giving negative comments. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
-One of our colleagues has corrected the error but there are more errors. We don't and we can't waste our time and teach them basic MRI physics/reconstruction.
-We kindly ask the author to truly learn science (not to abuse PyNUFFT in the wrong way and present the wrong benchmark at the same time). 
+One of our colleagues has corrected the error but there are more errors. We don't and we can't waste our time and teach them basic MRI reconstructions.
+We kindly ask the author to truly learn science (not to abuse PyNUFFT in the wrong way and present the misleading benchmark at the same time). 
 They should withdraw the misleading tutorials.
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
