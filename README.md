@@ -88,6 +88,7 @@ acceleration= 10.455399523742015
 17.97926664352417 2.710083246231079
 acceleration in solver= 6.634211944790991
 ```
+### Comparisons
 
 ![](Figure_1.png)
 
