@@ -1,4 +1,5 @@
 ![](g5738.jpeg)
+<img src="g5738.jpeg", width=800>
 
 # PyNUFFT: Python non-uniform fast Fourier transform
 
@@ -89,6 +90,8 @@ acceleration= 10.455399523742015
 acceleration in solver= 6.634211944790991
 ```
 
+<img src="Figure_1.png", width=800>
+
 ![](Figure_1.png)
 
 ### On the misleading information in the IEEE-ISBI 2019 tutorial
@@ -126,7 +129,7 @@ Some reports deliberately demonstrated bad results from PyNUFFT. Again, they are
 Actually, PyNUFFT is doing great for the challenge. Our result is as follows. (The code is available on request)
 
 ![](with_espirit.png)
-
+<img src="with_espirit.png", width=800>
 
 ### Contact information
 J.-M. Lin
