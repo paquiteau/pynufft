@@ -118,18 +118,6 @@ This LinearOperator allows the problem to be solved by scipy.sparse.linalg.lsmr 
 
 ![](with_espirit.png)
 
-### On the misleading information in the IEEE-ISBI 2019 tutorial 
- 
-The tutorial is from an enthusiastic user. However, his tutorial is full of errors and it is not endorsed by me. 
-
-Obviously, the author of the IEEE-ISBI 2019 tutorial just asked his interns and students to copy PyNUFFT testing files, and he doesn't know how to do MRI reconstruction with PyNUFFT.
-
-Basically, he is creating his solvers with the "Fourier Operator", which is a wrapper around other NUFFT/NFFT implementations. 
-
-Please, read the PyNUFFT tutorial carefully. 
- 
-http://jyhmiinlin.github.io/pynufft/manu/realistic_om.html
-
 
 ### Contact information
 J.-M. Lin
