@@ -124,9 +124,9 @@ The tutorial is from an enthusiastic user. However, his tutorial is full of erro
 
 Obviously, the author of the IEEE-ISBI 2019 tutorial just asked his interns and students to copy PyNUFFT testing files, and he doesn't know how to do MRI reconstruction with PyNUFFT.
 
-Basically, he is creating his solvers with the "Fourier Operator", which is a wrapper around other NUFFT/NFFT implementations.  
+Basically, he is creating his solvers with the "Fourier Operator", which is a wrapper around other NUFFT/NFFT implementations. 
 
-Please, read the tutorial carefully. 
+Please, read the PyNUFFT tutorial carefully. 
  
 http://jyhmiinlin.github.io/pynufft/manu/realistic_om.html
 
