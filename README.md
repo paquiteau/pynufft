@@ -108,7 +108,7 @@ However, this tutorial was deliberately shedding a negative light on PyNUFFT.
 They are abusing our free service and giving negative comments. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
 One of our colleagues has corrected the error but there are more errors. We don't and we can't waste our time and teach them basic MRI reconstructions.
 We kindly ask the author to truly learn science (not to abuse PyNUFFT in the wrong way and present the misleading benchmark at the same time). 
-They should withdraw the misleading tutorials.
+I suggest them not to use PyNUFFT.
 
 ### On the Off-the-grid data-driven optimization of sampling schemes...
 
