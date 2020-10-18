@@ -93,23 +93,6 @@ acceleration in solver= 6.634211944790991
 
 ![](Figure_1.png)
 
-### On the misleading information in the IEEE-ISBI 2019 tutorial
-
-I am sorry but here is the snapshot forked from the tutorial at that time of presentation.
-https://github.com/jyhmiinlin/isbi19-tutorial
-First of all, this may not be scientific misconduct but I am very disappointed that their methods didn't quite follow the tutorial of PyNUFFT.
-In fact, their jupyter notebook is full of errors. 
-Please note that users had agreed on the "Disclaimer of Warranty" when they are using PyNUFFT. 
-To be clear, the purpose of the PyNUFFT package is to provide a fast and accurate NUFFT implementation on OpenCL/CUDA devices, apart from Numpy/Scipy. 
-There has been a consensus that users of the PyNUFFT package should develop their solver, instead of delivering wrong information and abuse this package. 
-Users should take full responsibility for using any solver in their tests. They should take care of the programming details, DFT, and their applications.
-Actually, his own "superior" work is built on top of the GPU part of PyNUFFT (not the "GPU version of NFFT" as claimed). 
-However, this tutorial was deliberately shedding a negative light on PyNUFFT.
-They are abusing our free service and giving negative comments. This is a kind of "Corporate Abuse of Open Source" https://dev.to/lethargilistic/open-source-has-not-failed-dont-cover-up-corporate-abuse-of-open-source-3ffe .
-One of our colleagues has corrected the error but there are more errors. We don't and we can't waste our time and teach them basic MRI reconstructions.
-We kindly ask the author to truly learn science (not to abuse PyNUFFT in the wrong way and present the misleading benchmark at the same time). 
-I suggest them not to use PyNUFFT.
-
 ### On the Off-the-grid data-driven optimization of sampling schemes...
 
 https://arxiv.org/pdf/2010.01817
@@ -120,11 +103,33 @@ If they want double-precision, they may want to try pynufft.NUDFT and pynufft.NU
 
 ### On the RRSG challenge of reproducible research in ISMRM 2019
 
-Some reports deliberately demonstrated bad results from PyNUFFT. Again, they are takig full responsibility for their activities. 
+The RRSG Challenge aims to reproduce the CG-SENSE paper (Pruessmann KP, Weiger M, Börnert P, Boesiger P. Advances in Sensitivity Encoding With Arbitrary k-Space Trajectories.
+Magnetic Resonance in Medicine 2001;(46):638–651.).
 
 Actually, PyNUFFT is doing great for the challenge. Our result is as follows. (The code is available on request)
 
+The basic idea is to extract the coil sensitivity profiles from the center of k-space (as the ACS in ESPIRiT).
+
+The problem is ill-conditioned. The square root of the sampling-density compensation function D^(1/2) is needed. 
+
+A nice feature about Scipy/Numpy is that we can build a scipy.sparse.LinearOperator.
+
+This LinearOperator allows the problem to be solved by scipy.sparse.linalg.lsmr or scipy.sparse.linalg.lsqr. (Normal equation is not used in this case)
+
 ![](with_espirit.png)
+
+### On the misleading information in the IEEE-ISBI 2019 tutorial 
+ 
+The tutorial is from an enthusiastic user. However, his tutorial is full of errors and it is not endorsed by me. 
+
+Obviously, the author of the IEEE-ISBI 2019 tutorial just asked his interns and students to copy PyNUFFT testing files, and he doesn't know how to do MRI reconstruction with PyNUFFT.
+
+Basically, he is creating his solvers with the "Fourier Operator", which is a wrapper around other NUFFT/NFFT implementations.  
+
+Please, read the tutorial carefully. 
+ 
+http://jyhmiinlin.github.io/pynufft/manu/realistic_om.html
+
 
 ### Contact information
 J.-M. Lin
