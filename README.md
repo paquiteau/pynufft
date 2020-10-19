@@ -106,7 +106,7 @@ If they want double-precision, they may want to try pynufft.NUDFT and pynufft.NU
 The RRSG Challenge aims to reproduce the CG-SENSE paper (Pruessmann KP, Weiger M, Börnert P, Boesiger P. Advances in Sensitivity Encoding With Arbitrary k-Space Trajectories.
 Magnetic Resonance in Medicine 2001;(46):638–651.).
 
-Actually, PyNUFFT is doing great for the challenge. Our result is as follows. (The code is available on request)
+Actually, PyNUFFT does not fail in this challenge. Our result is as follows. (The code is available on request)
 
 The basic idea is to extract the coil sensitivity profiles from the center of k-space (as the ACS in ESPIRiT).
 
