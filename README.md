@@ -110,7 +110,7 @@ Actually, PyNUFFT is doing great for the challenge. Our result is as follows. (T
 
 The basic idea is to extract the coil sensitivity profiles from the center of k-space (as the ACS in ESPIRiT).
 
-The problem is ill-conditioned. The square root of the sampling-density compensation function D^(1/2) is needed. 
+The problem is ill-conditioned. The square root of the sampling-density compensation function D<sup>1/2</sup> is needed. 
 
 A nice feature about Scipy/Numpy is that we can build a scipy.sparse.LinearOperator.
 
