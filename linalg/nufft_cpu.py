@@ -10,7 +10,7 @@ import numpy.fft
 import scipy.linalg
 import scipy.special
 
-from ..src._helper import helper, helper1
+from ..src._helper import helper#helper1
 
 
 class NUFFT_cpu:
@@ -101,13 +101,13 @@ class NUFFT_cpu:
         # backup
         self.sn = numpy.asarray(self.st['sn'].astype(self.dtype), order='C')
 
-        if batch is None:  # single-coil
-            self.parallel_flag = 0
-            self.batch = 1
+#         if batch is None:  # single-coil
+        self.parallel_flag = 0
+        self.batch = 1
 
-        else:  # multi-coil
-            self.parallel_flag = 1
-            self.batch = batch
+#         else:  # multi-coil
+#             self.parallel_flag = 1
+#             self.batch = batch
 
         if self.parallel_flag is 1:
             self.multi_Nd = self.Nd + (self.batch, )
