@@ -57,6 +57,8 @@ NUDFT is offered.
 >>> from pynufft import  NUDFT
 >>> import numpy
 >>> x=numpy.random.randn(*Nd)
+>>> om = numpy.random.randn(10,2)
+>>> Nd = (64,64)
 >>> A = NUDFT()
 >>> A.plan(om, Nd)
 >>> y_cpu = A.forward(x)
