@@ -48,27 +48,19 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> y = A2.forward(x)
 ```
 
-### Using NUDFT_cupy and NUDFT (double precision, experimental)
+### Using NUDFT (double precision)
 
 Some users ask for double precision. 
-NUDFT and NUDFT_cupy are offered.
-Speedup is dependent on cupy and GPU.  
-
+NUDFT is offered.
 
 ```
->>> from pynufft import NUDFT_cupy, NUDFT
+>>> from pynufft import  NUDFT
 >>> import numpy
->>> A2= NUDFT_cupy()
->>> om = numpy.random.randn(10,2)
->>> Nd = (64,64)
->>> A2.plan(om, Nd)
 >>> x=numpy.random.randn(*Nd)
->>> y = A2.forward(x)
 >>> A = NUDFT()
 >>> A.plan(om, Nd)
 >>> y_cpu = A.forward(x)
->>> print(numpy.linalg.norm(y.get() - y_cpu))
-6.752054788357788e-14
+
 ```
 
 
@@ -93,13 +85,6 @@ acceleration in solver= 6.634211944790991
 
 ![](Figure_1.png)
 
-### On the Off-the-grid data-driven optimization of sampling schemes...
-
-https://arxiv.org/pdf/2010.01817
-
-" ...... and Python toolboxes begin to emerge [cite PyNUFFT]. Our experience using them however led to unstable results due to significant numerical errors."
-
-If they want double-precision, they may want to try pynufft.NUDFT and pynufft.NUDFT_cupy. 
 
 ### On the RRSG challenge of reproducible research in ISMRM 2019
 
