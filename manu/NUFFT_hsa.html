@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NUFFT_hsa (deprecated) &mdash; PyNUFFT 2020.2.3 documentation</title>
+  <title>NUFFT(device) &mdash; PyNUFFT 2020.2.6 documentation</title>
   
 
   
@@ -37,7 +37,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PyNUFFT 2020.2.3 documentation" href="../index.html"/> 
+    <link rel="top" title="PyNUFFT 2020.2.6 documentation" href="../index.html"/>
+        <link rel="up" title="Manual" href="init.html"/>
+        <link rel="next" title="Multiple NUFFT instances" href="multiple_NUFFT.html"/>
+        <link rel="prev" title="NUFFT" href="NUFFT_cpu.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -69,7 +72,7 @@
             
             
               <div class="version">
-                2020.2.3
+                2020.2.6
               </div>
             
           
@@ -93,11 +96,18 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/init.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation/init.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutor/init.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="init.html">Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="init.html">Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="NUFFT_cpu.html">NUFFT</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NUFFT(device)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiple_NUFFT.html">Multiple NUFFT instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiple_NUFFT.html#multiprocessing-experimental">Multiprocessing (experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="realistic_om.html">k-Space trajectories (om)</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../API/init.html">API documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../versionhistory.html">Version history</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acknow/init.html">Acknowledgements</a></li>
@@ -145,7 +155,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>NUFFT_hsa (deprecated)</li>
+          <li><a href="init.html">Manual</a> &raquo;</li>
+        
+      <li>NUFFT(device)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -164,98 +176,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nufft-hsa-deprecated">
-<h1>NUFFT_hsa (deprecated)<a class="headerlink" href="#nufft-hsa-deprecated" title="Permalink to this headline">¶</a></h1>
-<p><strong>The NUFFT_hsa class</strong></p>
+  <div class="section" id="nufft-device">
+<h1>NUFFT(device)<a class="headerlink" href="#nufft-device" title="Permalink to this headline">¶</a></h1>
+<p><strong>The NUFFT(device) class</strong></p>
+<p>NUFFT(device) computes NUFFT on the CUDA/OpenCL device.</p>
 <p>Defining the equispaced to non-Cartesian transform as  operator <span class="math notranslate nohighlight">\(A\)</span>, the
-NUFFT_hsa class provides the following methods:</p>
+NUFFT(device) class provides the following methods:</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt>forward() method computes the single-coil to single-coil, or multi-coil to</dt><dd><p>multi-coil (batch mode) forward operation <span class="math notranslate nohighlight">\(A\)</span>.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>adjoint() method computes the single-coil to single-coil, or multi-coil to</dt><dd><p>multi-coil  (batch mode) adjoint operation  <span class="math notranslate nohighlight">\(A^H\)</span>.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>selfadjoint() method computes the single-coil to single-coil, or multi-coil</dt><dd><p>to multi-coil (batch mode) selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span>.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>forward_one2many() method computes the single-coil to multi-coil forward</dt><dd><p>operation <span class="math notranslate nohighlight">\(A\)</span> in batch mode. The single-coil image is copied to
-multi-coil images before transform. If set_sense() is called first,
-multi-coil images will be implicitly multiplied by the coil
-sensitivities before transform. If set_sense() is never called,
-multi-coil images will not be changed by the coil sensitivities before
-transform.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>adjoint_many2one() method computes the multi-coil to single-coil adjoint</dt><dd><p>operation  <span class="math notranslate nohighlight">\(A^H\)</span> in batch mode.
-The final reduction will divide the summed image by the number of
-coils. If set_sense() is called first, multi-coil images will be
-implicitly multiplied by the conjugate of coil sensitivities before
-reduction. If set_sense() is never called, multi-coil images will not
-be changed by the coil sensitivities before reduction.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>selfadjoint_one2many2one () method computes the single-coil to single-coil</dt><dd><p>selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span> in batch mode.
-It connects forward_one2many() and adjoint_many2one() methods.
-If set_sense() is called first, coil sensitivities and the conjugate
-are used during forward_one2many() and adjoint_many2one().</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>solve() method links many solvers in pynufft.linalg.solver_cpu,</dt><dd><p>which is based on the solvers of scipy.sparse.linalg.cg,
-scipy.sparse.linalg.’lsqr’, ‘dc’, ‘bicg’, ‘bicgstab’, ‘cg’,
-‘gmres’, ‘lgmres’</p>
-</dd>
-</dl>
-</li>
+<li><p>forward() method computes the single forward operation <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>adjoint() method computes the single adjoint operation  <span class="math notranslate nohighlight">\(A^H\)</span>.</p></li>
+<li><p>selfadjoint() method computes the single selfadjoint operation <span class="math notranslate nohighlight">\(A^H A\)</span>.</p></li>
+<li><p>solve() method now only offers ‘cg’, ‘dc’, ‘L1TVOLS’</p></li>
 </ul>
 <p><strong>Attributes</strong></p>
 <ul class="simple">
-<li><p>NUFFT_hsa.ndims: the dimension</p></li>
-<li><p>NUFFT_hsa.ft_axes: the axes where the FFT takes place</p></li>
-<li><dl class="simple">
-<dt>NUFFT_hsa.parallel_flag: 1 for parallel transform.</dt><dd><p>0 for single channel.
-If 1, the additional axis is batch.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>NUFFT_hsa.batch: internal attribute saving the number of channels.</dt><dd><p>If parallel_flag is 0, the batch is 1.
-Otherwise, the batch must be given explicitly during planning.</p>
-</dd>
-</dl>
-</li>
-<li><p>NUFFT_hsa.Nd: Tuple, the dimensions of the image</p></li>
-<li><p>NUFFT_hsa.Kd: Tuple, the dimensions of oversampled k-space</p></li>
+<li><p>NUFFT.ndims: the dimension</p></li>
+<li><p>NUFFT.ft_axes: the axes where the FFT takes place</p></li>
+<li><p>NUFFT.Nd: Tuple, the dimensions of the image</p></li>
+<li><p>NUFFT.Kd: Tuple, the dimensions of oversampled k-space</p></li>
 </ul>
 <p><strong>Acceleration on PyCUDA/PyOpenCL</strong></p>
 <p>The NUFFT_hsa was designed to accelerate the NUFFT function
 on the multi-core CPU and GPU, using PyOpenCL and PyCUDA backends.
 This was made possible by using Reikna meta-package.</p>
-<p>If multiple NUFFT_hsa objects are created with the PyCUDA backend,
+<p>If multiple NUFFT(device) objects are created with the PyCUDA backend,
 each call can be executed only after the  context has ‘popped up’. This is
 achieved by the decorator function push_cuda_context():
-calling NUFFT_hsa methods will trigger the decorator and get the context popped up.
+calling NUFFT(device) methods will trigger the decorator and get the context popped up.
 However, PyOpenCL has no such restriction
-and the call will automatically bypass the decorator for the NUFFT_hsa
+and the call will automatically bypass the decorator for the NUFFT(device)
 with the PyOpenCL backend.</p>
 <p>Different objects can be constructed on different PyCUDA and PyOpenCL backends.</p>
-<p><strong>The life-cycle of the PyNUFFT_hsa object</strong></p>
-<p>NUFFT_hsa employs the plan-execution two-stage model.
+<p><strong>The life-cycle of the PyNUFFT(device) object</strong></p>
+<p>NUFFT(device) employs the plan-execution two-stage model.
 This can maximize the runtime speed, at the cost of the extra precomputation times and extra memory.</p>
-<p>Instantiating an NUFFT_hsa instance also initiates the context and defines some instance attributes.
+<p>Instantiating an NUFFT(device) instance also initiates the context and defines some instance attributes.
 The context is linked to the accelerator and the kernels are compiled on the chosen device.
 Instance attributes will be replaced later when the method plan() is called.</p>
 <p>Then the plan() method calls the helper.plan() function,
@@ -277,6 +232,15 @@ interpolators.</p>
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="multiple_NUFFT.html" class="btn btn-neutral float-right" title="Multiple NUFFT instances" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="NUFFT_cpu.html" class="btn btn-neutral" title="NUFFT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -305,7 +269,7 @@ interpolators.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2020.2.3',
+            VERSION:'2020.2.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

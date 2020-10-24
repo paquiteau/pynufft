@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The Python Non-uniform fast Fourier transform (PyNUFFT) &mdash; PyNUFFT 2020.2.3 documentation</title>
+  <title>The Python Non-uniform fast Fourier transform (PyNUFFT) &mdash; PyNUFFT 2020.2.6 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PyNUFFT 2020.2.3 documentation" href="../index.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.6 documentation" href="../index.html"/>
         <link rel="up" title="Overview" href="init.html"/>
         <link rel="next" title="Multi-dimensional NUFFT" href="Nd_NUFFT.html"/>
         <link rel="prev" title="Overview" href="init.html"/> 
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                2020.2.3
+                2020.2.6
               </div>
             
           
@@ -191,8 +191,10 @@
 <p><em>Fessler JA, Sutton BP. Nonuniform fast Fourier transforms using min-max interpolation. IEEE Trans Signal Process 2003;51(2):560-574.</em></p>
 <p><strong>Current status of PyNUFFT</strong></p>
 <ul class="simple">
-<li><p>The current PyNUFFT relies on Numpy/Scipy (NUFFT_cpu) and Reikan/PyCUDA/PyOpenCL (NUFFT_hsa).</p></li>
-<li><p>A single NUFFT class. Switch between CPU and GPU by selecting device = pynufft.helper.device_list[0]</p></li>
+<li><p>The current PyNUFFT offers NUFFT() or Reikan/PyCUDA/PyOpenCL (NUFFT(device), device is in helper.device_list()).</p></li>
+</ul>
+<p>Switch between CPU and GPU by selecting device = pynufft.helper.device_list[0] (0 is the first device in the system)</p>
+<ul class="simple">
 <li><p>LGPLv3 and AGPL (for web service)</p></li>
 </ul>
 <blockquote>
@@ -246,7 +248,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2020.2.3',
+            VERSION:'2020.2.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -5,7 +5,7 @@ The PyNUFFT ran originally on Numpy/Scipy. Unfortunately the default Numpy/Scipy
 
 Later it was ported to PyCUDA and PyOpenCL, which allows us to leverage the speed of multi-core CPU and GPU.   
 
-Mixing NUFFT_cpu and NUFFT_hsa, or multiple NUFFT_cpu or multiple NUFFT_hsa is possible but has no warranty. 
+Mixing NUFFTs with CPU/GPU is possible but has no warranty. 
 
 The class methods are listed in :numref:`dimension_table`
 

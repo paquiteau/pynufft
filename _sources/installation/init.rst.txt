@@ -13,7 +13,7 @@ but the users can design their own one.
 
 For example, users may install PyNUFFT on multiple nodes and control them through the network.  
 
-Multple NUFFT_cpu instances on a single node provided that the total memory is sufficient to keep all instances. 
+Multple NUFFT instances on a single node provided that the total memory is sufficient to keep all instances. 
 
 We recommend one or more modern x86_64 processors on a single node. Successful stories include Intel® Core™ i7-6700HQ Processor, 
 Intel® Xeon® W-2125, Intel® Core™ i9-7900X. 
@@ -26,7 +26,7 @@ A general instruction is that the memory should be sufficient for computing a si
   
 A single 2D problem of 256 × 256 matrix can be computed on a system with 8GB memory. 
  
-For 3D NUFFT, it is not uncommon for a single NUFFT_cpu object to consume more than 200GB memory.
+For 3D NUFFT, it is not uncommon for a single NUFFT object to consume more than 200GB memory.
 
 **GPU**
 
@@ -64,7 +64,7 @@ Software
 Users must be familiar with Python and its pip packaging system.  
 Python 3.6-3.7 are currently supported (Python 2 will not be supported since 1, Jan, 2020). 
 
-To run the NUFFT_cpu, the basic CPython, Numpy and Scipy packages must be available on the system.
+To run the NUFFT, the basic CPython, Numpy and Scipy packages must be available on the system.
 IronPython is compatible with CPython so ipython might be useful. 
 
 PyNUFFT can be installed through the pip command. 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CPU and GPU (HSA) &mdash; PyNUFFT 2020.2.3 documentation</title>
+  <title>CPU and GPU (HSA) &mdash; PyNUFFT 2020.2.6 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PyNUFFT 2020.2.3 documentation" href="../index.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.6 documentation" href="../index.html"/>
         <link rel="up" title="Overview" href="init.html"/>
         <link rel="next" title="Installation" href="../installation/init.html"/>
         <link rel="prev" title="Multi-dimensional NUFFT" href="Nd_NUFFT.html"/> 
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                2020.2.3
+                2020.2.6
               </div>
             
           
@@ -181,7 +181,7 @@
 <h1>CPU and GPU (HSA)<a class="headerlink" href="#cpu-and-gpu-hsa" title="Permalink to this headline">¶</a></h1>
 <p>The PyNUFFT ran originally on Numpy/Scipy. Unfortunately the default Numpy/Scipy is most efficient on a single CPU core.</p>
 <p>Later it was ported to PyCUDA and PyOpenCL, which allows us to leverage the speed of multi-core CPU and GPU.</p>
-<p>Mixing NUFFT_cpu and NUFFT_hsa, or multiple NUFFT_cpu or multiple NUFFT_hsa is possible but has no warranty.</p>
+<p>Mixing NUFFTs with CPU/GPU is possible but has no warranty.</p>
 <p>The class methods are listed in <a class="reference internal" href="#dimension-table"><span class="std std-numref">Table 1</span></a></p>
 <span id="dimension-table"></span><table class="colwidths-given docutils align-default" id="id1">
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">Methods implemented in NUFFT</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
@@ -379,7 +379,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2020.2.3',
+            VERSION:'2020.2.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

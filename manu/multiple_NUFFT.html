@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Multiple NUFFT instances &mdash; PyNUFFT 2020.2.3 documentation</title>
+  <title>Multiple NUFFT instances &mdash; PyNUFFT 2020.2.6 documentation</title>
   
 
   
@@ -37,10 +37,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PyNUFFT 2020.2.3 documentation" href="../index.html"/>
+    <link rel="top" title="PyNUFFT 2020.2.6 documentation" href="../index.html"/>
         <link rel="up" title="Manual" href="init.html"/>
         <link rel="next" title="k-Space trajectories (om)" href="realistic_om.html"/>
-        <link rel="prev" title="Manual" href="init.html"/> 
+        <link rel="prev" title="NUFFT(device)" href="NUFFT_hsa.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                2020.2.3
+                2020.2.6
               </div>
             
           
@@ -101,6 +101,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation/init.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutor/init.html">Tutorial</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="init.html">Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="NUFFT_cpu.html">NUFFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NUFFT_hsa.html">NUFFT(device)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Multiple NUFFT instances</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#multiprocessing-experimental">Multiprocessing (experimental)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="realistic_om.html">k-Space trajectories (om)</a></li>
@@ -212,12 +214,13 @@ context to pop up to the top of the stack of the contexts.</p>
 </pre></div>
 </div>
 <p><strong>Multiple NUFFT_hsa instances</strong></p>
-<p>Like NUFFT_cpu, each instance can be planned immediately after being created:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the first NUFFT</span>
+<p>Like NUFFT, each instance can be planned immediately after being created:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT</span><span class="p">,</span> <span class="n">helper</span>
+<span class="c1"># Create the first NUFFT(device)</span>
 <span class="n">NufftObj1</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">device_list</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">NufftObj1</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om1</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
 
-<span class="c1"># Create the second NUFFT_hsa</span>
+<span class="c1"># Create the second NUFFT(device)</span>
 <span class="n">NufftObj2</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">device_list</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">NufftObj2</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om2</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
 
@@ -241,6 +244,117 @@ each NUFFT instance should be created and then executed in a separate process;
 <p>One example of working with multiprocessing (mixed CUDA and OpenCL backends) is as follows.
 In this example, an “atomic_NUFFT” class is created as a high-level wrapper for the creation and execution of NUFFT.
 This example has only been tested in Linux because parallel computing is highly platform dependent.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">An example of multiprocessing with NUFFT using PyCUDA backend, </span>
+<span class="sd">wrapped inside the atomic_NUFFT wrapper class.  </span>
+<span class="sd">The two processes are running on two CPU cores.</span>
+<span class="sd">Each process creates one NUFFT and offloads the computations to GPU.</span>
+<span class="sd">nvidia-smi confirms that two python programs are using the GPU.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT</span><span class="p">,</span> <span class="n">helper</span>
+<span class="kn">import</span> <span class="nn">scipy.misc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="kn">import</span> <span class="nn">os</span> 
+    
+
+
+<span class="k">class</span> <span class="nc">atomic_NUFFT</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="n">device_indx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This caches the parameters only.</span>
+<span class="sd">        Any other GPU related stuffs are carried out in run()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">om</span> <span class="o">=</span> <span class="n">om</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nd</span> <span class="o">=</span> <span class="n">Nd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Kd</span> <span class="o">=</span> <span class="n">Kd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Jd</span> <span class="o">=</span> <span class="n">Jd</span>
+<span class="c1">#         self.API = API</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device_indx</span> <span class="o">=</span> <span class="n">device_indx</span>
+        
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">cpu_cores</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        In this method, the NUFFT are created and executed on a fixed CPU core.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pid</span><span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pid=&#39;</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;taskset -p -c </span><span class="si">%d</span><span class="s2">-</span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cpu_cores</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cpu_cores</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pid</span><span class="p">))</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Control the CPU affinity. Otherwise the process on one core can be switched to another core.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># create NUFFT</span>
+<span class="c1">#         NUFFT = NUFFT(self.API, )</span>
+        
+        <span class="c1"># plan the NUFFT</span>
+        
+        <span class="n">device_list</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">device_list</span><span class="p">()</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">NUFFT</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="p">(</span><span class="n">device_list</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">device_indx</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NUFFT</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">om</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nd</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Kd</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Jd</span><span class="p">)</span>
+        <span class="c1"># send the image to device</span>
+        <span class="n">gx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NUFFT</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="c1"># carry out 10000 forward transform</span>
+        <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">):</span>
+            <span class="n">gy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NUFFT</span><span class="o">.</span><span class="n">_forward_device</span><span class="p">(</span><span class="n">gx</span><span class="p">)</span>
+
+        <span class="c1"># return the object</span>
+        <span class="k">return</span> <span class="n">gy</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="n">Nd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">Kd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">Jd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">35636</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> 
+<span class="n">x</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()[::</span><span class="mi">2</span><span class="p">,::</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">om1</span> <span class="o">=</span> <span class="n">om</span><span class="p">[</span><span class="n">om</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">om2</span> <span class="o">=</span> <span class="n">om</span><span class="p">[</span><span class="n">om</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># create pool</span>
+<span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># create the list to receive the return values</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Now enter the first process</span>
+<span class="c1"># This is the standard multiprocessing Pool</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">atomic_NUFFT</span><span class="p">(</span><span class="n">om1</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1"># async won&#39;t obstruct the next line of code</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">run</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+<span class="c1"># the result is appended</span>
+<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># Now enter the second process</span>
+<span class="c1"># This is the standard multiprocessing Pool</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">atomic_NUFFT</span><span class="p">(</span><span class="n">om2</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Non-obstructive</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">run</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">)))</span>
+<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># closing the pool </span>
+<span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+<span class="c1"># results are appended</span>
+<span class="c1"># Now print the outputs</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="c1"># check CPU results</span>
+
+<span class="n">NUFFT_cpu1</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="p">()</span>
+<span class="n">NUFFT_cpu1</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om1</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">NUFFT_cpu1</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;norm = &#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">result1</span><span class="p">)</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span>
+
+<span class="n">NUFFT_cpu2</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="p">()</span>
+<span class="n">NUFFT_cpu2</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om2</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">NUFFT_cpu2</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;norm = &#39;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">result2</span><span class="p">)</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y2</span><span class="p">))</span>
+
+</pre></div>
+</div>
 </div>
 
 
@@ -256,7 +370,7 @@ This example has only been tested in Linux because parallel computing is highly 
         <a href="realistic_om.html" class="btn btn-neutral float-right" title="k-Space trajectories (om)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="init.html" class="btn btn-neutral" title="Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="NUFFT_hsa.html" class="btn btn-neutral" title="NUFFT(device)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -287,7 +401,7 @@ This example has only been tested in Linux because parallel computing is highly 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2020.2.3',
+            VERSION:'2020.2.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

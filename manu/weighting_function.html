@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ND NUFFT with &mdash; PyNUFFT 2020.2.3 documentation</title>
+  <title>ND NUFFT with &mdash; PyNUFFT 2020.2.6 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PyNUFFT 2020.2.3 documentation" href="../index.html"/> 
+    <link rel="top" title="PyNUFFT 2020.2.6 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                2020.2.3
+                2020.2.6
               </div>
             
           
@@ -169,12 +169,12 @@
 <p>This section navigates you through the 1D PyNUFFT.</p>
 <div class="section" id="initiating-a-pynufft-object">
 <h2>Initiating a PyNUFFT object<a class="headerlink" href="#initiating-a-pynufft-object" title="Permalink to this headline">¶</a></h2>
-<p>We can initiate a PyNUFFT by importing the NUFFT_cpu object:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import NUFFT_cpu class</span>
-<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT_cpu</span>
+<p>We can initiate a PyNUFFT by importing the NUFFT() object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import NUFFT class</span>
+<span class="kn">from</span> <span class="nn">pynufft</span> <span class="kn">import</span> <span class="n">NUFFT</span>
 
 <span class="c1"># Initiate the NufftObj object</span>
-<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT_cpu</span><span class="p">()</span>
+<span class="n">NufftObj</span> <span class="o">=</span> <span class="n">NUFFT</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The NufftObj object has been created but it is still empty at this point.</p>
@@ -193,10 +193,10 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 <div class="section" id="plan-for-the-nufft-object">
 <h2>Plan for the NUFFT object<a class="headerlink" href="#plan-for-the-nufft-object" title="Permalink to this headline">¶</a></h2>
 <p>Now we call:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="n">ft_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">batch</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NufftObj</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">Nd</span><span class="p">,</span> <span class="n">Kd</span><span class="p">,</span> <span class="n">Jd</span><span class="p">,</span> <span class="n">ft_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>See :py:class: <cite>pynufft.NUFFT_cpu</cite> and  :py:class: <cite>pynufft.NUFFT_hsa</cite></p>
+<p>See :py:class: <cite>pynufft.NUFFT</cite></p>
 </div>
 <div class="section" id="forward-nufft">
 <h2>Forward NUFFT<a class="headerlink" href="#forward-nufft" title="Permalink to this headline">¶</a></h2>
@@ -206,7 +206,7 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 </div>
 <p>If batch = None, the image.shape is equal to Nd. The returned y has a shape which is equal to (M, )</p>
 <p>If batch exists, the image.shape is equal to Nd + (batch, ). The returned y has a shape which is equal to (M, batch)</p>
-<p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">pynufft.NUFFT_cpu.forward()</span></code> :py:func: <cite>pynufft.NUFFT_hsa.forward</cite></p>
+<p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">pynufft.NUFFT.forward()</span></code></p>
 </div>
 <div class="section" id="adjoint-nufft">
 <h2>Adjoint NUFFT<a class="headerlink" href="#adjoint-nufft" title="Permalink to this headline">¶</a></h2>
@@ -214,8 +214,7 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">NufftObj</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If batch = None, y has a shape which is equal to (M, ). The returned image.shape is equal to Nd.</p>
-<p>If batch exists, y has a shape which is equal to (M, batch). The returned image.shape is equal to Nd + (batch, ).</p>
+<p>y has a shape which is equal to (M, ).</p>
 </div>
 </div>
 
@@ -254,7 +253,7 @@ Now we can plan for the NufftObj object given the non-Cartesian coordinates (om)
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2020.2.3',
+            VERSION:'2020.2.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
