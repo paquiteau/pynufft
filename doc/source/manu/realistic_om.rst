@@ -31,7 +31,7 @@ Last the Cartesian data are transformed back to image by IFFT (with two ifftshif
     
    import scipy.misc
    
-   from pynufft import NUFFT_cpu
+   from pynufft import NUFFT
    
    
    Nd = (256,256)
@@ -48,7 +48,7 @@ Last the Cartesian data are transformed back to image by IFFT (with two ifftshif
    print('Kd = ', Kd)
    print('Jd = ', Jd)
    
-   NufftObj = NUFFT_cpu()
+   NufftObj = NUFFT()
    NufftObj.plan(om, Nd, Kd, Jd)
    y = NufftObj.forward(image)
    

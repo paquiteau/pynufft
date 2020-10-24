@@ -7,7 +7,7 @@ NufftObj = pynufft.NUFFT()
 import pkg_resources
 
 # find the relative path of data folder
-DATA_PATH = pkg_resources.resource_filename('pynufft', 'data/')
+DATA_PATH = pkg_resources.resource_filename('pynufft', 'src/data/')
 
 # now load the om locations
 om = numpy.load(DATA_PATH+'om2D.npz')['arr_0']
@@ -51,7 +51,7 @@ pyplot.imshow(numpy.abs(k_show), cmap=cm.gray, norm=matplotlib.colors.Normalize(
 pyplot.show()
 
 # Inverse transform using density compensation inverse_DC()
-x3 = NufftObj.inverse_DC(y)
+x3 = NufftObj.solve(y,'dc',maxiter=1)
 x3_display = x3*1.0/numpy.max(x3[...].real)
 pyplot.imshow(x3_display.real,cmap=cm.gray)
 pyplot.show()

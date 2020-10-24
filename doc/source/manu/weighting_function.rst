@@ -7,13 +7,13 @@ This section navigates you through the 1D PyNUFFT.
 Initiating a PyNUFFT object
 ---------------------------
 
-We can initiate a PyNUFFT by importing the NUFFT_cpu object::
+We can initiate a PyNUFFT by importing the NUFFT() object::
 
-   # import NUFFT_cpu class
-   from pynufft import NUFFT_cpu
+   # import NUFFT class
+   from pynufft import NUFFT
    
    # Initiate the NufftObj object
-   NufftObj = NUFFT_cpu()
+   NufftObj = NUFFT()
 
 
 The NufftObj object has been created but it is still empty at this point.
@@ -42,10 +42,10 @@ Plan for the NUFFT object
 
 Now we call: ::
 
-   NufftObj.plan(om, Nd, Kd, Jd, ft_axes=(0,1), batch=None)
+   NufftObj.plan(om, Nd, Kd, Jd, ft_axes=(0,1))
    
 
-See :py:class: `pynufft.NUFFT_cpu` and  :py:class: `pynufft.NUFFT_hsa`
+See :py:class: `pynufft.NUFFT` 
 
 
 
@@ -61,7 +61,7 @@ If batch = None, the image.shape is equal to Nd. The returned y has a shape whic
 
 If batch exists, the image.shape is equal to Nd + (batch, ). The returned y has a shape which is equal to (M, batch) 
    
-See :py:func:`pynufft.NUFFT_cpu.forward` :py:func: `pynufft.NUFFT_hsa.forward`
+See :py:func:`pynufft.NUFFT.forward` 
 
 -------------
 Adjoint NUFFT
@@ -71,13 +71,5 @@ The adjoint NUFFT transforms the non-Cartesian samples into the image ::
 
    x2 = NufftObj.adjoint(y)
    
-If batch = None, y has a shape which is equal to (M, ). The returned image.shape is equal to Nd. 
-
-If batch exists, y has a shape which is equal to (M, batch). The returned image.shape is equal to Nd + (batch, ). 
- 
+y has a shape which is equal to (M, ).  
    
-
-
-
-
-

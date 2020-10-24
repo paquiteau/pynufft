@@ -1,7 +1,7 @@
 import numpy
-import pynufft.NUFFT_cpu as NUFFT_cpu
+import pynufft
 
-NufftObj = NUFFT_cpu()
+NufftObj = pynufft.NUFFT()
 
 om = numpy.random.randn(1512,1) 
 om = numpy.random.randn(1512,1) 
@@ -47,8 +47,8 @@ pyplot.legend()
 pyplot.show()  
 
 
-# Test inverse method using density compensation (inverse DC)
-x3 = NufftObj.inverse_DC(y) 
+# Test inverse method using density compensation 
+x3 = NufftObj.solve(y,'dc',maxiter=1) 
 pyplot.plot(x3.real,'.-', label='real') 
 pyplot.plot(x3.imag,'r.-', label='imag') 
 pyplot.plot(time_data,'k',label='original signal')

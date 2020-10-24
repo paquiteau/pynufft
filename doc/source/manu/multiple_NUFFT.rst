@@ -45,15 +45,15 @@ or each instance can be planned once it has been created::
 
 **Multiple NUFFT_hsa instances**
 
-Like NUFFT_cpu, each instance can be planned immediately after being created:
+Like NUFFT, each instance can be planned immediately after being created::
 
-::
 
-   # Create the first NUFFT
+   from pynufft import NUFFT, helper
+   # Create the first NUFFT(device)
    NufftObj1 = NUFFT(helper.device_list()[0])
    NufftObj1.plan(om1, Nd, Kd, Jd)
    
-   # Create the second NUFFT_hsa
+   # Create the second NUFFT(device)
    NufftObj2 = NUFFT(helper.device_list()[0])
    NufftObj2.plan(om2, Nd, Kd, Jd)
    

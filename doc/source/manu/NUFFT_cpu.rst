@@ -1,51 +1,27 @@
-NUFFT_cpu (deprecated)
-======================
+NUFFT
+=====
 
-**The NUFFT_cpu class**
+**The NUFFT class**
 
-The NUFFT_cpu class encapsulates the NUFFT function using the Numpy/Scipy environment. 
-This allows portability so the NUFFT_cpu() can be easily ported to Windows and Linux.
+The NUFFT class encapsulates the NUFFT function using the Numpy/Scipy environment. 
+This allows portability so the NUFFT() can be easily ported to Windows and Linux.
 Users can install their favourite Python distribution. 
 So far, I have tested Anaconda, intel-python, intel-numpy and open-source python.
 
-However, the performance of NUFFT_cpu is therefore impacted by the Numpy implementation.  
+However, the performance of NUFFT is therefore impacted by the Numpy implementation.  
 
 
 Defining the equispaced to non-Cartesian transform as  operator :math:`A`, the
-NUFFT_cpu class provides the following methods:
+NUFFT class provides the following methods:
 
-- forward() method computes the single-coil to single-coil, or multi-coil to
-    multi-coil (batch mode) forward operation :math:`A`.
+- forward() method computes the single forward operation :math:`A`.
 
-- adjoint() method computes the single-coil to single-coil, or multi-coil to
-        multi-coil  (batch mode) adjoint operation  :math:`A^H`.
+- adjoint() method computes the single adjoint operation  :math:`A^H`.
 
-- selfadjoint() method computes the single-coil to single-coil, or multi-coil
-        to multi-coil (batch mode) selfadjoint operation :math:`A^H A`.
+- selfadjoint() method computes the single selfadjoint operation :math:`A^H A`.
 
-- forward_one2many() method computes the single-coil to multi-coil forward
-        operation :math:`A` in batch mode. The single-coil image is copied to
-        multi-coil images before transform. If set_sense() is called first,
-        multi-coil images will be implicitly multiplied by the coil
-        sensitivities before transform. If set_sense() is never called,
-        multi-coil images will not be changed by the coil sensitivities before
-        transform.
 
-- adjoint_many2one() method computes the multi-coil to single-coil adjoint
-        operation  :math:`A^H` in batch mode.
-        The final reduction will divide the summed image by the number of
-        coils. If set_sense() is called first, multi-coil images will be
-        implicitly multiplied by the conjugate of coil sensitivities before
-        reduction. If set_sense() is never called, multi-coil images will not
-        be changed by the coil sensitivities before reduction.
-
-- selfadjoint_one2many2one () method computes the single-coil to single-coil
-        selfadjoint operation :math:`A^H A` in batch mode.
-        It connects forward_one2many() and adjoint_many2one() methods.
-        If set_sense() is called first, coil sensitivities and the conjugate
-        are used during forward_one2many() and adjoint_many2one().
-
-- solve() method links many solvers in pynufft.linalg.solver_cpu,
+- solve() method links many solvers in pynufft.linalg.solver,
           which is based on the solvers of scipy.sparse.linalg.cg,
           scipy.sparse.linalg. 'lsqr', 'dc', 'bicg', 'bicgstab', 'cg',
           'gmres', 'lgmres'
@@ -53,31 +29,23 @@ NUFFT_cpu class provides the following methods:
 
 **Attributes**
 
-- NUFFT_cpu.ndims: the dimension
+- NUFFT.ndims: the dimension
 
-- NUFFT_cpu.ft_axes: the axes where the FFT takes place
+- NUFFT.ft_axes: the axes where the FFT takes place
 
-- NUFFT_cpu.parallel_flag: 1 for parallel transform.
-                           0 for single channel.
-                           If 1, the additional axis is batch.
+- NUFFT.Nd: Tuple, the dimensions of the image
 
-- NUFFT_cpu.batch: internal attribute saving the number of channels.
-                   If parallel_flag is 0, the batch is 1.
-                   Otherwise, the batch must be given explictly during planning.
-
-- NUFFT_cpu.Nd: Tuple, the dimensions of the image
-
-- NUFFT_cpu.Kd: Tuple, the dimensions of the oversampled k-space
+- NUFFT.Kd: Tuple, the dimensions of the oversampled k-space
 
 
-**The life-cycle of an NUFFT_cpu object**
+**The life-cycle of an NUFFT object**
 
 
-NUFFT_cpu employs the plan-execution two-stage model.
+NUFFT employs the plan-execution two-stage model.
 This can maximize the runtime speed, at the cost of the extra precomputation times and extra memory.
 
 
-Instantiating an NUFFT_cpu instance defines only some instance attributes. Instance attributes will be replaced later once the method plan() is called.
+Instantiating an NUFFT instance defines only some instance attributes. Instance attributes will be replaced later once the method plan() is called.
   
 Then the plan() method will call the helper.plan() function, 
 which constructs the scaling factor and the interpolator.  
