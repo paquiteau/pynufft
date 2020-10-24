@@ -1,8 +1,11 @@
 import numpy
-import pynufft.NUFFT_cpu as NUFFT_cpu
-NufftObj = NUFFT_cpu()
+# from pynufft import NUFFT
+import pynufft
+NufftObj = pynufft.NUFFT()
+
 # load the data folder
 import pkg_resources
+
 # find the relative path of data folder
 DATA_PATH = pkg_resources.resource_filename('pynufft', 'data/')
 

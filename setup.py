@@ -19,7 +19,7 @@ setup(name='pynufft',
       long_description_content_type="text/markdown",
       packages=['pynufft'],
       package_dir={'pynufft':'.'},
-      package_data={'pynufft':['nufft','src','tests','linalg','nufft/*','src/*','src/*/*','tests/*','example/*', 'linalg/*']},
+      package_data={'pynufft':['nufft','src','tests','data','linalg','nufft/*','src/*','src/*/*','tests/*','example/*', 'linalg/*']},
       include_package_data=True,
       zip_safe=False)
 	

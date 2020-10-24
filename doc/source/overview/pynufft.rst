@@ -29,9 +29,9 @@ Users of PyNUFFT should be familiar with discrete Fourier transform (DFT).
  
 **Current status of PyNUFFT**
 
-- The current PyNUFFT relies on Numpy/Scipy (NUFFT_cpu) and Reikan/PyCUDA/PyOpenCL (NUFFT_hsa). 
+- The current PyNUFFT offers NUFFT() or Reikan/PyCUDA/PyOpenCL (NUFFT(device), device is in helper.device_list()). 
 
-- A single NUFFT class. Switch between CPU and GPU by selecting device = pynufft.helper.device_list[0]  
+Switch between CPU and GPU by selecting device = pynufft.helper.device_list[0] (0 is the first device in the system) 
 
 - LGPLv3 and AGPL (for web service)
  
