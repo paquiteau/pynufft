@@ -84,4 +84,4 @@ One example of working with multiprocessing (mixed CUDA and OpenCL backends) is 
 In this example, an "atomic_NUFFT" class is created as a high-level wrapper for the creation and execution of NUFFT.
 This example has only been tested in Linux because parallel computing is highly platform dependent.
 
- 
+.. literalinclude::  ../../../tests/parallel_NUFFT.py

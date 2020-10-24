@@ -1501,10 +1501,6 @@ def device_list():
         api = cluda.cuda_api()
         available_cuda_device = cluda.find_devices(api)
         cuda_flag = 1
-    #         if verbosity > 0:
-    #             print("try to load cuda interface:")
-    #             print(api, available_cuda_device)
-    #     print(available_cuda_device.keys())
         for api_n in available_cuda_device.keys():
             cuda_gpus = available_cuda_device[api_n]
     #         print('cuda_gpus = ', cuda_gpus)
