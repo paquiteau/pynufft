@@ -1,9 +1,18 @@
-
 # PyNUFFT: Python non-uniform fast Fourier transform
-
-A minimal "getting start" tutorial is available at http://jyhmiinlin.github.io/pynufft/ .
-
 ![](g5738.jpeg)
+
+A minimal "getting start" tutorial is available at http://jyhmiinlin.github.io/pynufft/ . Use the min-max interpolator.
+
+You can also find other very useful Python nufft/nfft functions at: 
+
+1. SigPy (note the order starts from the last axis), https://sigpy.readthedocs.io/en/latest/generated/sigpy.nufft.html?highlight=nufft
+2. The Python wrapper of gpuNUFFT: https://github.com/andyschwarzl/gpuNUFFT/tree/master/python
+3. mrrt.nufft (with customized cuda kernels): https://github.com/mritools/mrrt.nufft
+4. pyNFFT (The python wrapper of NFFT): https://pythonhosted.org/pyNFFT/tutorial.html
+5. finufft (exponential semicircle kernel): https://finufft.readthedocs.io/en/latest/python.html
+6. torchkbnufft (written in Pytorch): https://github.com/mmuckley/torchkbnufft
+7. tfkbnufft (written in TensorFlow): https://github.com/zaccharieramzi/tfkbnufft
+8. TFNUFFT (also the min-max interpolator in tensorflow): https://github.com/yf0726/TFNUFFT
 
 ## Installation
 
