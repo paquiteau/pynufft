@@ -1,7 +1,7 @@
 # PyNUFFT: Python non-uniform fast Fourier transform
 ![](g5738.jpeg)
 
-A minimal "getting start" tutorial is available at http://jyhmiinlin.github.io/pynufft/ . Reimplement the min-max interpolator (Fessler, Jeffrey A., and Bradley P. Sutton. "Nonuniform fast Fourier transforms using min-max interpolation." IEEE transactions on signal processing 51.2 (2003): 560-574.) for Python.
+A minimal "getting start" tutorial is available at http://jyhmiinlin.github.io/pynufft/ . This package reimplements the min-max interpolator (Fessler, Jeffrey A., and Bradley P. Sutton. "Nonuniform fast Fourier transforms using min-max interpolation." IEEE transactions on signal processing 51.2 (2003): 560-574.) for Python.
 
 Please cite Lin, Jyh-Miin. "Python non-uniform fast Fourier transform (PyNUFFT): An accelerated non-Cartesian MRI package on a heterogeneous platform (CPU/GPU)." Journal of Imaging 4.3 (2018): 51.
 
