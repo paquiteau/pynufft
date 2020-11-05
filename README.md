@@ -1,7 +1,7 @@
 # PyNUFFT: Python non-uniform fast Fourier transform
 ![](g5738.jpeg)
 
-A minimal "getting start" tutorial is available at http://jyhmiinlin.github.io/pynufft/ . Use the min-max interpolator.
+A minimal "getting start" tutorial is available at http://jyhmiinlin.github.io/pynufft/ . Use the min-max interpolator (Fessler, Jeffrey A., and Bradley P. Sutton. "Nonuniform fast Fourier transforms using min-max interpolation." IEEE transactions on signal processing 51.2 (2003): 560-574.).
 
 You can also find other very useful Python nufft/nfft functions at: 
 
