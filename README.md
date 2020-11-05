@@ -103,6 +103,7 @@ acceleration in solver= 6.634211944790991
 ![](Figure_1.png)
 
 
+
 ### On the RRSG challenge of reproducible research in ISMRM 2019
 
 The RRSG Challenge aims to reproduce the CG-SENSE paper (Pruessmann KP, Weiger M, Börnert P, Boesiger P. Advances in Sensitivity Encoding With Arbitrary k-Space Trajectories.
