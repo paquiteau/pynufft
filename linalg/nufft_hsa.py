@@ -8,7 +8,7 @@ import numpy
 import warnings
 import scipy.sparse
 import numpy.fft
-import scipy.signal
+#import scipy.signal
 import scipy.linalg
 import scipy.special
 from functools import wraps as _wraps

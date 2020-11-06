@@ -16,6 +16,7 @@ def test_init(device_indx=0):
 #     import matplotlib.pyplot
     
     import scipy
+    import scipy.misc
 
     image = scipy.misc.ascent()[::2,::2]
     image=image.astype(numpy.float)/numpy.max(image[...])
