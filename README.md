@@ -12,7 +12,7 @@ Jyh-Miin Lin and Hsiao-Wen. Chung, Pynufft: python non-uniform fast Fourier tran
 You can also find other very useful Python nufft/nfft functions at: 
 
 1. SigPy (Ong, F., and M. Lustig. "SigPy: a python package for high performance iterative reconstruction." Proceedings of the ISMRM 27th Annual Meeting, Montreal, Quebec, Canada. Vol. 4819. 2019. Note the order starts from the last axis), https://sigpy.readthedocs.io/en/latest/generated/sigpy.nufft.html?highlight=nufft
-2. The Python wrapper of gpuNUFFT (Knoll, Florian, et al. "gpuNUFFT-an open source GPU library for 3D regridding with direct Matlab interface." Proceedings of the 22nd annual meeting of ISMRM, Milan, Italy. 2014.): https://github.com/andyschwarzl/gpuNUFFT/tree/master/python
+2. gpuNUFFT: (Knoll, Florian, et al. "gpuNUFFT-an open source GPU library for 3D regridding with direct Matlab interface." Proceedings of the 22nd annual meeting of ISMRM, Milan, Italy. 2014.): https://github.com/andyschwarzl/gpuNUFFT/tree/master/python
 3. mrrt.nufft (mrrt.mri demos for the ISMRM 2020 Data Sampling Workshop in Sedona, AZwith customized cuda kernels): https://github.com/mritools/mrrt.nufft
 4. pyNFFT (Keiner, J., Kunis, S., and Potts, D. ''Using NFFT 3 - a software library for various nonequispaced fast Fourier transforms'' ACM Trans. Math. Software,36, Article 19, 1-30, 2009. The python wrapper of NFFT): https://pythonhosted.org/pyNFFT/tutorial.html
 5. finufft (Barnett, Alexander H., Jeremy Magland, and Ludvig af Klinteberg. "A Parallel Nonuniform Fast Fourier Transform Library Based on an “Exponential of Semicircle" Kernel." SIAM Journal on Scientific Computing 41.5 (2019): C479-C504., exponential semicircle kernel): https://finufft.readthedocs.io/en/latest/python.html
