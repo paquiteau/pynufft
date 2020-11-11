@@ -121,6 +121,13 @@ This LinearOperator allows the problem to be solved by scipy.sparse.linalg.lsmr 
 
 ![](with_espirit.png)
 
+### Cartesian k-space?
+
+If you insist to use NUFFT, please see https://jyhmiinlin.github.io/pynufft/manu/realistic_om.html#cartesian-k-space
+
+The numerical accuracy is 6.0265739765301084e-06 for single-precision. 
+
+Other methods may cause suboptimal results.
 
 ### Contact information
 J.-M. Lin
