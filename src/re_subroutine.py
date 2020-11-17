@@ -29,6 +29,7 @@ def create_kernel_sets(API):
                         cDiff() + 
                         cSqrt() + 
                         cAnisoShrink() +  
+                        cRealShrink() +
                         cSpmv() + 
                         cSpmvh() + 
                         cHadamard())
@@ -1011,6 +1012,28 @@ def cDiff():
         };
         """
     return R
+
+def cRealShrink():
+    """
+    Return the kernel source of xAnisoShrink
+    """
+    R="""
+    KERNEL void xRealShrink(const  float2 threshold,
+                                    GLOBAL_MEM const float2 *indata,
+                                    GLOBAL_MEM float2 *outdata)
+    {
+    const unsigned int gid =  get_global_id(0); 
+    float2 tmp; // temporay register
+    tmp = indata[gid];
+    //float zero = 0.0;
+    //tmp.x=sign(tmp.x)*max(fabs(tmp.x)-threshold.x, zero); 
+    //tmp.y=sign(tmp.y)*max(fabs(tmp.y)-threshold.y, zero); 
+    tmp.x =  (tmp.x > threshold.x)*(tmp.x - threshold.x) ; //+ (tmp.x <= - threshold.x)*(tmp.x + threshold.x);
+    tmp.y =  (tmp.y > threshold.x)*(tmp.y - threshold.x) ; //+ (tmp.y <= - threshold.x)*(tmp.y + threshold.x);
+    outdata[gid]=tmp;
+    };
+    """
+    return R
 def cAnisoShrink():
     """
     Return the kernel source of cAnisoShrink
@@ -1026,8 +1049,8 @@ def cAnisoShrink():
     //float zero = 0.0;
     //tmp.x=sign(tmp.x)*max(fabs(tmp.x)-threshold.x, zero); 
     //tmp.y=sign(tmp.y)*max(fabs(tmp.y)-threshold.y, zero); 
-    tmp.x =  (tmp.x > threshold.x)*(tmp.x - threshold.x) ;//+ (tmp.x < - threshold.x)*(tmp.x + threshold.x);
-    tmp.y =  (tmp.y > threshold.x)*(tmp.y - threshold.x) ;//+ (tmp.y < - threshold.x)*(tmp.y + threshold.x);
+    tmp.x =  (tmp.x > threshold.x)*(tmp.x - threshold.x) + (tmp.x < - threshold.x)*(tmp.x + threshold.x);
+    tmp.y =  (tmp.y > threshold.x)*(tmp.y - threshold.x) + (tmp.y < - threshold.x)*(tmp.y + threshold.x);
     outdata[gid]=tmp;
     };
     """
