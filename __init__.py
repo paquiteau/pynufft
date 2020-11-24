@@ -14,11 +14,11 @@ from .linalg.nudft_cpu import NUDFT
 #     pass
 #     print("Failed to import NUFFT_hsa (deprecated).  ")
 
-try:
-    from .linalg.nudft_cupy import NUDFT_cupy
-except:
-    pass
-    print("Failed to import NUDFT_cupy (experimental). Use NUDFT() instead. ")
+#try:
+#    from .linalg.nudft_cupy import NUDFT_cupy
+#except:
+#    pass
+#    print("Failed to import NUDFT_cupy (experimental). Use NUDFT() instead. ")
 #from .linalg.nufft_hsa import NUFFT_hsa
 #from .linalg.nufft_hsa_legacy import NUFFT_hsa_legacy
 from .src._helper import helper

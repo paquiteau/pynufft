@@ -32,6 +32,7 @@ def create_kernel_sets(API):
                         cRealShrink() +
                         cSpmv() + 
                         cSpmvh() + 
+                        cCopyColumn()+
                         cHadamard())
 #     if 'cuda' is API:
 #         print('Select cuda interface')
@@ -60,7 +61,22 @@ def cMultiplyScalar():
         };           
         """
     return code_text
-
+def cCopyColumn():
+    code_text = """
+    KERNEL void cCopyColumn( 
+            const unsigned int n, // start
+            const unsigned int m, // step
+             GLOBAL_MEM  const float2 *CX,
+             GLOBAL_MEM             float2 *CY)
+    {
+    // Copy x to y: y = x;
+    //CX: input array (float2)
+    // CY output array (float2)
+    unsigned long gid=get_global_id(0);  
+    CY[gid]=CX[n+m*gid];
+    };
+    """  
+    return code_text    
 def cCopy():
     """
     Return the kernel source for cCopy

@@ -4,6 +4,7 @@ CPU solvers
 """
 
 import scipy
+import scipy.sparse.linalg
 import numpy
 from ..src._helper import helper
 
