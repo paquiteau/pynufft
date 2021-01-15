@@ -130,6 +130,6 @@ The numerical accuracy is 6.0265739765301084e-06 for single-precision.
 Other methods may cause suboptimal results.
 
 ### Contact information
-J.-M. Lin
+If you have publication related to the project, please contact
 email: pynufft@gamil.com
 
