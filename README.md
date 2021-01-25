@@ -128,7 +128,7 @@ If you insist to use NUFFT, please see https://jyhmiinlin.github.io/pynufft/manu
 
 The numerical accuracy is 6.0265739765301084e-06 for single-precision. 
 
-Other methods may cause suboptimal results.
+Other methods may cause suboptimal results, which may still be useful for them (by "deliberately" lowering the performance of PyNUFFT).
 
 ### Contact information
 If you have publication related to the project, please contact
