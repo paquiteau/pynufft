@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='pynufft',
-      version='2021.0.0rc1',
+      version='2021.0.1',
       description='Python non-uniform fast Fourier transform (PyNUFFT)',
       author='PyNUFFT',
       author_email='pynufft@gmail.com',
