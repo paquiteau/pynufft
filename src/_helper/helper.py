@@ -191,7 +191,7 @@ def OMEGA_k(J,K, omd, Kd, dimid, dd, ft_flag):
     """
         JML: For GPU computing, indexing must be C-order (row-major)
         Multi-dimensional cuda or opencl arrays are row-major (order="C"), which  starts from the higher dimension.
-        Note: This is different from the MATLAB indexing(for fortran order, colum major, low-dimension first
+        Note: This is different from the MATLAB indexing(for fortran order, column major, low-dimension first
     """
 
     if dimid < dd - 1:  # trick: pre-convert these indices into offsets!
