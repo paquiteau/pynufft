@@ -396,7 +396,7 @@ def _y2k_device(self, y):
 #         kx = self.thr.array(self.multi_Kd, dtype=numpy.float32).fill(0.0)
 #         ky = self.thr.array(self.multi_Kd, dtype=numpy.float32).fill(0.0)
     k = self.thr.array(self.Kd, dtype=numpy.complex64).fill(0.0)
-    res = self.thr.array(self.Kd, dtype=numpy.complex64).fill(0.0)
+#     res = self.thr.array(self.Kd, dtype=numpy.complex64).fill(0.0)
     # array which saves the residue of two sum
     
     self.prg.pELL_spmvh_mCoil(
@@ -411,14 +411,14 @@ def _y2k_device(self, y):
                         self.pELL['udata'],
 #                             kx, ky,
                         k,
-                        res,
+#                         res,
                         y,
                         local_size=int(self.wavefront),
                         global_size=int(self.pELL['nRow'] *self.wavefront)#*
 #                                             int(self.pELL['prodJd']) * int(self.batch))
                         )
 
-    return k + res    
+    return k# + res    
 
 
 @push_cuda_context
