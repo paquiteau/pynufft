@@ -413,8 +413,8 @@ def _y2k_device(self, y):
                         k,
                         res,
                         y,
-                        local_size=None,
-                        global_size=int(self.pELL['nRow'] )#*
+                        local_size=int(self.wavefront),
+                        global_size=int(self.pELL['nRow'] *self.wavefront)#*
 #                                             int(self.pELL['prodJd']) * int(self.batch))
                         )
 
