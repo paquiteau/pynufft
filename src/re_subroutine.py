@@ -563,6 +563,7 @@ def cSpmvh():
                         u.y =  - spdata.y*ydata.x + spdata.x*ydata.y;
                         
                         atomic_add_float2(k + col*Reps + nc, u);//, res + col*Reps + nc);
+                        LOCAL_BARRIER;
                         // atomic_add_float2(k + col*Reps + nc, u, res + col*Reps + nc);
                         }; // Iterate for (unsigned int j = 0;  j  <  prodJd; j ++)
         };  // if (m < nRow)
