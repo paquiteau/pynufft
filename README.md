@@ -23,7 +23,7 @@ You can also find other very useful Python nufft/nfft functions at:
 
 ## Installation
 
-$ pip install pynufft --user
+$ pip3 install pynufft --user
 
 
 ### Using Numpy/Scipy
