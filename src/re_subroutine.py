@@ -210,6 +210,31 @@ def atomic_add(API):
     ocl_add = """
     // #pragma OPENCL EXTENSION cl_khr_int64_base_atomics : enable
  
+    KERNEL void atomic_add_float2_typen( 
+            GLOBAL_MEM float2 *ptr, 
+            const float2 temp) 
+        { // Add atomic two sum for real/imaginary parts
+        
+        __global const float * realptr = ( __global float *)ptr;
+        __global const float * imagptr = ( __global float *)ptr + 1;
+        float prevVal;
+        float newVal;
+        do { // atomic add of the value
+            prevVal = *realptr ;
+            newVal = prevVal + temp.x;
+        } while (atomic_cmpxchg((__global volatile unsigned int *)realptr, as_int(prevVal), as_int(newVal)) != as_int(prevVal));
+ 
+        // End of real part
+        
+        // Now do the imaginary part
+        
+        do { // atomic add of the value
+            prevVal = *imaglptr ;
+            newVal = prevVal + temp.y;
+        } while (atomic_cmpxchg((__global volatile unsigned int *)imagptr, as_int(prevVal), as_int(newVal)) != as_int(prevVal));
+ 
+    };   
+ 
     KERNEL void atomic_add_float2( 
             GLOBAL_MEM float2 *ptr, 
             const float2 temp) 
