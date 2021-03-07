@@ -81,9 +81,9 @@ class NUFFT_hsa:
         self.cuda_flag, self.ocl_flag = helper.diagnose(
             verbosity=self.verbosity)
         if None is API:
-            if self.cuda_flag is 1:
+            if self.cuda_flag == 1:
                 API = 'cuda'
-            elif self.ocl_flag is 1:
+            elif self.ocl_flag == 1:
                 API = 'ocl'
             else:
                 warnings.warn('No parallelization will be made since no GPU '

@@ -4,9 +4,10 @@ Helper functions
 """
 
 
+import scipy
 import numpy
 dtype = numpy.complex64
-import scipy
+
 
 def create_laplacian_kernel(nufft):
     """
@@ -16,33 +17,36 @@ def create_laplacian_kernel(nufft):
     :return: uker: the multi-dimensional laplacian kernel in k-space (no fft shift used)
     :rtype: numpy ndarray
     """
-#===============================================================================
+# ===============================================================================
 # #        # Laplacian oeprator, convolution kernel in spatial domain
 #         # related to constraint
-#===============================================================================
-    uker = numpy.zeros(nufft.st['Kd'][:],dtype=numpy.complex64,order='C')
-    n_dims= numpy.size(nufft.st['Nd'])
+# ===============================================================================
+    uker = numpy.zeros(nufft.st['Kd'][:], dtype=numpy.complex64, order='C')
+    n_dims = numpy.size(nufft.st['Nd'])
 
     ################################
     #    Multi-dimensional laplacian kernel (generalize the above 1D - 3D to multi-dimensional arrays)
     ################################
 
-    indx = [slice(0, 1) for ss in range(0, n_dims)] # create the n_dims dimensional slice which are all zeros
-    uker[tuple(indx)] = - 2.0*n_dims # Equivalent to  uker[0,0,0] = -6.0
-    for pp in range(0,n_dims):
-#         indx1 = indx.copy() # indexing the 1 Only for Python3
-        indx1 = list(indx)# indexing; adding list() for Python2/3 compatibility
+    # create the n_dims dimensional slice which are all zeros
+    indx = [slice(0, 1) for ss in range(0, n_dims)]
+    uker[tuple(indx)] = - 2.0*n_dims  # Equivalent to  uker[0,0,0] = -6.0
+    for pp in range(0, n_dims):
+        #         indx1 = indx.copy() # indexing the 1 Only for Python3
+        indx1 = list(indx)  # indexing; adding list() for Python2/3 compatibility
         indx1[pp] = 1
         uker[tuple(indx1)] = 1
 #         indx1 = indx.copy() # indexing the -1  Only for Python3
-        indx1 = list(indx)# indexing the 1 Python2/3 compatible
+        indx1 = list(indx)  # indexing the 1 Python2/3 compatible
         indx1[pp] = -1
         uker[tuple(indx1)] = 1
     ################################
     #    FFT of the multi-dimensional laplacian kernel
     ################################
-    uker =numpy.fft.fftn(uker) #, self.nufftobj.st['Kd'], range(0,numpy.ndim(uker)))
+    uker = numpy.fft.fftn(uker)  # , self.nufftobj.st['Kd'], range(0,numpy.ndim(uker)))
     return uker
+
+
 def indxmap_diff(Nd):
     """
     Preindixing for rapid image gradient.
@@ -64,10 +68,13 @@ def indxmap_diff(Nd):
     d_indx = []
     dt_indx = []
     for pp in range(0, ndims):
-        d_indx = d_indx + [ numpy.reshape(   numpy.roll(  mylist, +1 , pp  ), (Ndprod,)  ,order='C').astype(numpy.int32) ,]
-        dt_indx = dt_indx + [ numpy.reshape(   numpy.roll(  mylist, -1 , pp  ) , (Ndprod,) ,order='C').astype(numpy.int32) ,]
+        d_indx = d_indx + [numpy.reshape(numpy.roll(mylist, +1, pp),
+                                         (Ndprod,), order='C').astype(numpy.int32), ]
+        dt_indx = dt_indx + [numpy.reshape(numpy.roll(mylist, -1, pp),
+                                           (Ndprod,), order='C').astype(numpy.int32), ]
 
     return d_indx,  dt_indx
+
 
 def QR_process(om, N, J, K, sn):
     """
@@ -90,18 +97,17 @@ def QR_process(om, N, J, K, sn):
     nufft_offset0 = nufft_offset(om, J, K)  # om/gam -  nufft_offset , [M,1]
     dk = 1.0 * om / gam - nufft_offset0  # om/gam -  nufft_offset , [M,1]
 
-
-    arg = outer_sum(-numpy.arange(1, J + 1) * 1.0, dk) #[J, M]
-    C_0 =numpy.outer(numpy.arange(0, N) - N/2,  numpy.arange(1, J + 1))
+    arg = outer_sum(-numpy.arange(1, J + 1) * 1.0, dk)  # [J, M]
+    C_0 = numpy.outer(numpy.arange(0, N) - N/2,  numpy.arange(1, J + 1))
 
     C = numpy.exp(1.0j * gam*C_0)
 
-
     sn2 = numpy.reshape(sn, (N, 1))
     C = C*sn2
-    bn =numpy.exp(1.0j*gam* numpy.outer(numpy.arange(0, N) - N/2, dk))
+    bn = numpy.exp(1.0j*gam * numpy.outer(numpy.arange(0, N) - N/2, dk))
 
     return C, arg, bn
+
 
 def solve_c(C, bn):
     CH = C.T.conj()
@@ -112,13 +118,13 @@ def solve_c(C, bn):
     c = C.dot(bn)
     return c
 
+
 def QR2(om, N, J, K, sn, ft_flag):
     C, arg, bn = QR_process(om, N, J, K, sn)
     c = solve_c(C, bn)
     u2 = OMEGA_u(c, N, K, om, arg, ft_flag).T.conj()
 
     return u2
-
 
 
 def get_sn(J, K, N):
@@ -139,38 +145,40 @@ def get_sn(J, K, N):
     nlist = numpy.arange(0, N) * 1.0 - Nmid
     (kb_a, kb_m) = kaiser_bessel('string', J, 'best', 0, K / N)
     if J > 1:
-        sn = 1.0/ kaiser_bessel_ft(nlist / K, J, kb_a, kb_m, 1.0)
+        sn = 1.0 / kaiser_bessel_ft(nlist / K, J, kb_a, kb_m, 1.0)
     #                 sn = 1.0 / kaiser_bessel_ft(nlist / K, J, kb_a, kb_m, 1.0)
     elif J == 1:  # The case when samples are on regular grids
         sn = numpy.ones((1, N), dtype=dtype)
     return sn
 
+
 def OMEGA_u(c, N, K, omd, arg, ft_flag):
 
     gam = 2.0 * numpy.pi / (K * 1.0)
 
-    phase_scale =  1.0j * gam * (N*1.0 - 1.0) / 2.0
+    phase_scale = 1.0j * gam * (N*1.0 - 1.0) / 2.0
     phase = numpy.exp(phase_scale * arg)  # [J? M] linear phase
 
     if ft_flag is True:
         u = phase * c
-        phase0= numpy.exp( - 1.0j*omd*N/2.0)
+        phase0 = numpy.exp(- 1.0j*omd*N/2.0)
         u = phase0 * u
 
     else:
         u = c
     return u
 
-def OMEGA_k(J,K, omd, Kd, dimid, dd, ft_flag):
+
+def OMEGA_k(J, K, omd, Kd, dimid, dd, ft_flag):
     """
     Compute the index of k-space k_indx
     """
-        # indices into oversampled FFT components
+    # indices into oversampled FFT components
     # FORMULA 7
     M = omd.shape[0]
     koff = nufft_offset(omd, J, K)
     # FORMULA 9, find the indexes on Kd grids, of each M point
-    if ft_flag is True: # tensor
+    if ft_flag is True:  # tensor
         k_indx = numpy.mod(
             outer_sum(
                 numpy.arange(
@@ -179,7 +187,7 @@ def OMEGA_k(J,K, omd, Kd, dimid, dd, ft_flag):
                 koff),
             K)
     else:
-        k_indx =  numpy.reshape(omd, (1, M)).astype(numpy.int)
+        k_indx = numpy.reshape(omd, (1, M)).astype(numpy.int)
     #         k_indx = numpy.mod(
     #             outer_sum(
     #                 numpy.arange(
@@ -196,7 +204,7 @@ def OMEGA_k(J,K, omd, Kd, dimid, dd, ft_flag):
 
     if dimid < dd - 1:  # trick: pre-convert these indices into offsets!
         #            ('trick: pre-convert these indices into offsets!')
-        k_indx = k_indx * numpy.prod(Kd[dimid+1:dd])# - 1
+        k_indx = k_indx * numpy.prod(Kd[dimid+1:dd])  # - 1
 #     print(dimid, k_indx[0,0])
     """
     Note: F-order matrices must be reshaped into an 1D array before sparse matrix-vector multiplication.
@@ -209,10 +217,12 @@ def OMEGA_k(J,K, omd, Kd, dimid, dd, ft_flag):
     #                 kd[dimid] = kd[dimid] * numpy.prod(Kd[0:dimid]) - 1
     return k_indx
 
+
 class pELL:
     """
     class pELL: partial ELL format
     """
+
     def __init__(self, M,  Jd, curr_sumJd, meshindex, kindx, udata):
         """
         Constructor
@@ -237,28 +247,27 @@ class pELL:
         self.prodJd = numpy.prod(Jd)
         self.dim = len(Jd)
         self.sumJd = numpy.sum(Jd)
-        self.Jd =  numpy.array(Jd).astype(numpy.uint32)
+        self.Jd = numpy.array(Jd).astype(numpy.uint32)
         self.curr_sumJd = curr_sumJd
         self.meshindex = numpy.array(meshindex, order='C')
         self.kindx = numpy.array(kindx, order='C')
         self.udata = udata.astype(numpy.complex64)
 
+
 class Tensor_sn:
     '''
     Not implemented:
     '''
+
     def __init__(self, snd, radix):
-#         raise NotImplementedError
+        #         raise NotImplementedError
         self.radix = radix
         Ndims = len(snd)
         Nd = ()
         for n in range(0, Ndims):
             Nd += (snd[n].shape[0], )
 
-
-
-        Tdims = int(numpy.ceil(Ndims / radix)) # the final tensor dimension
-
+        Tdims = int(numpy.ceil(Ndims / radix))  # the final tensor dimension
 
         self.Tdims = Tdims
         Td = ()
@@ -270,11 +279,10 @@ class Tensor_sn:
                 d_end = Ndims
             Td += (numpy.prod(Nd[d_start:d_end]), )
 
-
             Tsn = kronecker_scale(snd[d_start:d_end]).real.flatten()
-            snd2 += (Tsn.reshape((Tsn.shape[0],1)), )
+            snd2 += (Tsn.reshape((Tsn.shape[0], 1)), )
 
-        tensor_sn = cat_snd(snd2) # Borrow the 1D method to concatenate the radix snds
+        tensor_sn = cat_snd(snd2)  # Borrow the 1D method to concatenate the radix snds
         self.Td = Td
 #         print('Td = ', Td)
         self.Td_elements, self.invTd_elements = strides_divide_itemsize(Td)
@@ -283,12 +291,12 @@ class Tensor_sn:
 
 
 def create_csr(uu, kk, Kd, Jd, M):
-#     Jprod = numpy.prod(Jd)
-#     mm = numpy.arange(0, M).reshape( (1, M), order='C')  # indices from 0 to M-1
-#     mm_rep = numpy.ones(( Jprod, 1))
-#     mm = mm * mm_rep
     #     Jprod = numpy.prod(Jd)
-    csrdata =uu.ravel(order='C')#numpy.reshape(uu.T, (Jprod * M, ), order='C')
+    #     mm = numpy.arange(0, M).reshape( (1, M), order='C')  # indices from 0 to M-1
+    #     mm_rep = numpy.ones(( Jprod, 1))
+    #     mm = mm * mm_rep
+    #     Jprod = numpy.prod(Jd)
+    csrdata = uu.ravel(order='C')  # numpy.reshape(uu.T, (Jprod * M, ), order='C')
 
     # row indices, from 1 to M convert array to list
 #     rowindx = mm.ravel(order='C') #numpy.reshape(mm.T, (Jprod * M, ), order='C')
@@ -296,7 +304,7 @@ def create_csr(uu, kk, Kd, Jd, M):
     Jdprod = numpy.prod(Jd)
     rowptr = numpy.arange(0, (M+1)*Jdprod, Jdprod)
     # colume indices, from 1 to prod(Kd), convert array to list
-    colindx =kk.ravel(order='C')#numpy.reshape(kk.T, (Jprod * M, ), order='C')
+    colindx = kk.ravel(order='C')  # numpy.reshape(kk.T, (Jprod * M, ), order='C')
 
     # The shape of sparse matrix
     csrshape = (M, numpy.prod(Kd))
@@ -305,21 +313,25 @@ def create_csr(uu, kk, Kd, Jd, M):
 #     csr = scipy.sparse.csr_matrix((csrdata, (rowindx, colindx)),
 #                                        shape=csrshape)
     csr = scipy.sparse.csr_matrix((csrdata, colindx, rowptr),
-                                       shape=csrshape)
+                                  shape=csrshape)
 #     csr.has_sorted_indices = False
 #     csr.sort_indices() # sort the indices in-place
     return csr
+
+
 class ELL:
     """
     ELL is slow on a single core CPU
     """
+
     def __init__(self, elldata, ellcol):
 
-#         self.shape = shape
+        #         self.shape = shape
         self.colWidth = ellcol.shape[1]
         self.nRow = ellcol.shape[0]
-        self.data = elldata.reshape((self.nRow, self.colWidth),order='C')
-        self.col = ellcol.astype(numpy.int32).reshape((self.nRow, self.colWidth),order='C')
+        self.data = elldata.reshape((self.nRow, self.colWidth), order='C')
+        self.col = ellcol.astype(numpy.int32).reshape((self.nRow, self.colWidth), order='C')
+
     def spmv(self, x):
         y = numpy.einsum('ij,ij->i', self.data, x[self.col])
 #         y = self.data * x[self.col]
@@ -327,22 +339,26 @@ class ELL:
         return y
 
     def spmvH(self, y):
-        x = numpy.zeros(self.shape[1],  dtype = numpy.complex64)
+        x = numpy.zeros(self.shape[1],  dtype=numpy.complex64)
         x[self.col.ravel()] += numpy.einsum('ij,i->ij', self.data.conj(), y).ravel()
         return x
+
+
 def create_ell(uu, kk):
-#     Jprod = numpy.prod(Jd)
+    #     Jprod = numpy.prod(Jd)
 
     # The shape of sparse matrix
-#     ellshape = (M, numpy.prod(Kd))
+    #     ellshape = (M, numpy.prod(Kd))
 
     # Build sparse matrix (interpolator)
-#     csr = scipy.sparse.csr_matrix((csrdata, (rowindx, colindx)),
-#                                        shape=csrshape)
+    #     csr = scipy.sparse.csr_matrix((csrdata, (rowindx, colindx)),
+    #                                        shape=csrshape)
     ell = ELL(uu, kk)
 #     csr.has_sorted_indices = False
 #     csr.sort_indices() # sort the indices in-place
     return ell
+
+
 def create_partialELL(ud, kd, Jd, M):
     """
 
@@ -358,19 +374,19 @@ def create_partialELL(ud, kd, Jd, M):
     :rtype: partialELL: pELL instance
     """
     dd = len(Jd)
-    curr_sumJd = numpy.zeros( ( dd, ), dtype = numpy.uint32)
-    kindx = numpy.zeros( ( M, numpy.sum(Jd)), dtype = numpy.uint32)
-    udata = numpy.zeros( ( M, numpy.sum(Jd)), dtype = numpy.complex128)
+    curr_sumJd = numpy.zeros((dd, ), dtype=numpy.uint32)
+    kindx = numpy.zeros((M, numpy.sum(Jd)), dtype=numpy.uint32)
+    udata = numpy.zeros((M, numpy.sum(Jd)), dtype=numpy.complex128)
 
-    meshindex = numpy.zeros(  (numpy.prod(Jd),  dd), dtype = numpy.uint32)
+    meshindex = numpy.zeros((numpy.prod(Jd),  dd), dtype=numpy.uint32)
 
     tmp_curr_sumJd = 0
     for dimid in range(0, dd):
         J = Jd[dimid]
         curr_sumJd[dimid] = tmp_curr_sumJd
-        tmp_curr_sumJd +=int( J) # for next loop
-        kindx[:, int(curr_sumJd[dimid] ): int(curr_sumJd[dimid]  + J)] = numpy.array(kd[dimid], order='C')
-        udata[:, int(curr_sumJd[dimid] ): int(curr_sumJd[dimid]  + J)] = numpy.array(ud[dimid], order='C')
+        tmp_curr_sumJd += int(J)  # for next loop
+        kindx[:, int(curr_sumJd[dimid]): int(curr_sumJd[dimid] + J)] = numpy.array(kd[dimid], order='C')
+        udata[:, int(curr_sumJd[dimid]): int(curr_sumJd[dimid] + J)] = numpy.array(ud[dimid], order='C')
 
     series_prodJd = numpy.arange(0, numpy.prod(Jd))
     del ud, kd
@@ -378,8 +394,8 @@ def create_partialELL(ud, kd, Jd, M):
 
         J = Jd[dimid]
         xx = series_prodJd % J
-        yy = numpy.floor(series_prodJd/ J)
-        series_prodJd =  yy
+        yy = numpy.floor(series_prodJd / J)
+        series_prodJd = yy
         meshindex[:, dimid] = xx.astype(numpy.uint32)
 #         else:
 #             meshindex[:, dimid] = yy.astype(numpy.uint32)
@@ -427,25 +443,31 @@ def create_partialELL(ud, kd, Jd, M):
 #     ud2 = (uu, )
 #     Jd2 = (Jprod, )
 #     return ud2, kd2, Jd2
+
+
 def rdx_N(ud, kd, Jd):
     ud2 = (khatri_rao_u(ud), )
     kd2 = (khatri_rao_k(kd), )
     Jd2 = (numpy.prod(Jd), )
 
     return ud2, kd2, Jd2
-def full_kron(ud, kd, Jd, Kd, M):
-#     (udata, kindx)=khatri_rao(ud, kd, Jd)
 
-#     udata = khatri_rao_u(ud)
-#     kindx = khatri_rao_k(kd)
+
+def full_kron(ud, kd, Jd, Kd, M):
+    #     (udata, kindx)=khatri_rao(ud, kd, Jd)
+
+    #     udata = khatri_rao_u(ud)
+    #     kindx = khatri_rao_k(kd)
     ud2, kd2, Jd2 = rdx_N(ud, kd, Jd)
-    CSR  = create_csr(ud2[0], kd2[0], Kd, Jd, M) # must have
+    CSR = create_csr(ud2[0], kd2[0], Kd, Jd, M)  # must have
     # Dimension reduction: Nd -> 1
     # Tuple (Nd) -> array (shape = M*prodJd)
 
 #     Note: the shape of uu and kk is (M, prodJd)
 #     ELL = create_ell(   udata,  kindx)#, Kd, Jd, M)
-    return CSR#, ELL
+    return CSR  # , ELL
+
+
 def khatri_rao_k(kd):
     dd = len(kd)
 
@@ -454,15 +476,17 @@ def khatri_rao_k(kd):
 #     uu = ud[0]  # [M, J1]
     Jprod = kd[0].shape[1]
     for dimid in range(1, dd):
-        Jprod *= kd[dimid].shape[1] #numpy.prod(Jd[:dimid + 1])
+        Jprod *= kd[dimid].shape[1]  # numpy.prod(Jd[:dimid + 1])
 
-        kk = block_outer_sum(kk, kd[dimid]) #+ 1  # outer sum of indices
+        kk = block_outer_sum(kk, kd[dimid])  # + 1  # outer sum of indices
         kk = kk.reshape((M, Jprod), order='C')
 #         uu = numpy.einsum('mi,mj->mij', uu, ud[dimid])
 #         uu = uu.reshape((M, Jprod), order='C')
 
     return kk
-def khatri_rao_u( ud):
+
+
+def khatri_rao_u(ud):
     dd = len(ud)
 
 #     kk = kd[0]  # [M, J1] # pointers to indices
@@ -470,7 +494,7 @@ def khatri_rao_u( ud):
     uu = ud[0]  # [M, J1]
     Jprod = ud[0].shape[1]
     for dimid in range(1, dd):
-        Jprod *=ud[dimid].shape[1]#numpy.prod(Jd[:dimid + 1])
+        Jprod *= ud[dimid].shape[1]  # numpy.prod(Jd[:dimid + 1])
 
 #         kk = block_outer_sum(kk, kd[dimid]) + 1  # outer sum of indices
 #         kk = kk.reshape((M, Jprod), order='C')
@@ -494,6 +518,8 @@ def khatri_rao_u( ud):
 #         uu = uu.reshape((M, Jprod), order='C')
 #
 #     return uu, kk
+
+
 def rdx_kron(ud, kd, Jd, radix=None):
     """
     Radix-n Kronecker product of multi-dimensional array
@@ -528,11 +554,11 @@ def rdx_kron(ud, kd, Jd, radix=None):
 #     uu = ud[0]  # [J1 M]
 #     Jprod = Jd[0]
     for count in range(0, int(numpy.ceil(dd/radix)), ):
-#         kk = kd[count]  # [J1 M] # pointers to indices
-#         uu = ud[count]  # [J1 M]
-#         Jprod = Jd[count]
-#         uu = numpy.ones((M, 1), dtype = numpy.complex64)
-#         Jprod = 1
+        #         kk = kd[count]  # [J1 M] # pointers to indices
+        #         uu = ud[count]  # [J1 M]
+        #         Jprod = Jd[count]
+        #         uu = numpy.ones((M, 1), dtype = numpy.complex64)
+        #         Jprod = 1
         d_start = count*radix
         d_end = (count + 1)*radix
         if d_end > dd:
@@ -553,7 +579,8 @@ def rdx_kron(ud, kd, Jd, radix=None):
 #         ud2 += (uu, )
 #         kd2 += (kk, )
 #         Jd2 += (Jprod, )
-    return ud2, kd2, Jd2 #(uu, ), (kk, ), (Jprod, )#, Jprod
+    return ud2, kd2, Jd2  # (uu, ), (kk, ), (Jprod, )#, Jprod
+
 
 def kronecker_scale(snd):
     """
@@ -571,7 +598,7 @@ def kronecker_scale(snd):
     for dimid in range(0, dd):
         shape_broadcasting += (1, )
 #     sn = numpy.array(1.0 + 0.0j)
-    sn= numpy.reshape(1.0, shape_broadcasting)
+    sn = numpy.reshape(1.0, shape_broadcasting)
     for dimid in range(0, dd):
         sn_shape = list(shape_broadcasting)
         sn_shape[dimid] = snd[dimid].shape[0]
@@ -580,8 +607,9 @@ def kronecker_scale(snd):
         ###############################################################
         # higher dimension implementation: multiply over all dimension
         ###############################################################
-        sn = sn  * tmp # multiply using broadcasting
+        sn = sn * tmp  # multiply using broadcasting
     return sn
+
 
 def cat_snd(snd):
     """
@@ -599,17 +627,18 @@ def cat_snd(snd):
     shift = 0
     for dimid in range(0, len(Nd)):
 
-        tensor_sn[shift :shift + Nd[dimid]] = snd[dimid][:,0].real
+        tensor_sn[shift:shift + Nd[dimid]] = snd[dimid][:, 0].real
         shift = shift + Nd[dimid]
     return tensor_sn
 
+
 def min_max(N, J, K, alpha, beta, om, ft_flag):
-    T = nufft_T(    N,  J,  K,  alpha,  beta)
+    T = nufft_T(N,  J,  K,  alpha,  beta)
     ###############################################################
     # formula 30  of Fessler's paper
     ###############################################################
-    (r, arg) = nufft_r( om,   N,  J,
-                   K,   alpha,  beta)  # large N approx [J? M]
+    (r, arg) = nufft_r(om,   N,  J,
+                       K,   alpha,  beta)  # large N approx [J? M]
     ###############################################################
     # Min-max interpolator
     ###############################################################
@@ -617,7 +646,8 @@ def min_max(N, J, K, alpha, beta, om, ft_flag):
     u2 = OMEGA_u(c, N, K, om, arg, ft_flag).T.conj()
     return u2
 
-def plan(om, Nd, Kd, Jd, ft_axes = None, format='CSR', radix = None):
+
+def plan(om, Nd, Kd, Jd, ft_axes=None, format='CSR', radix=None):
     """
     Plan for the NUFFT object.
 
@@ -650,7 +680,7 @@ def plan(om, Nd, Kd, Jd, ft_axes = None, format='CSR', radix = None):
     if type(Jd) != tuple:
         raise TypeError('Jd must be tuple, e.g. (6, 6)')
 
-    if (len(Nd) != len(Kd)) | (len(Nd) != len(Jd))  | len(Kd) != len(Jd):
+    if (len(Nd) != len(Kd)) | (len(Nd) != len(Jd)) | len(Kd) != len(Jd):
         raise KeyError('Nd, Kd, Jd must be in the same length, e.g. Nd=(256,256),Kd=(512,512),Jd=(6,6)')
 
     dd = numpy.size(Nd)
@@ -659,7 +689,7 @@ def plan(om, Nd, Kd, Jd, ft_axes = None, format='CSR', radix = None):
         ft_axes = tuple(xx for xx in range(0, dd))
 
 #     print('ft_axes = ', ft_axes)
-    ft_flag = () # tensor
+    ft_flag = ()  # tensor
 
     for pp in range(0, dd):
         if pp in ft_axes:
@@ -737,28 +767,27 @@ def plan(om, Nd, Kd, Jd, ft_axes = None, format='CSR', radix = None):
         # pseudo-inverse of CSSC using large N approx [J? J?]
         if ft_flag[dimid] is True:
 
-#         ###############################################################
-#         # formula 30  of Fessler's paper
-#         ###############################################################
+            #         ###############################################################
+            #         # formula 30  of Fessler's paper
+            #         ###############################################################
 
-#         ###############################################################
-#         # fast approximation to min-max interpolator
-#         ###############################################################
+            #         ###############################################################
+            #         # fast approximation to min-max interpolator
+            #         ###############################################################
 
-#             c, arg = min_max(N, J, K, alpha, beta, om[:, dimid])
-#         ###############################################################
-#        # QR: a more accurate solution but slower than above fast approximation
-#        ###############################################################
+            #             c, arg = min_max(N, J, K, alpha, beta, om[:, dimid])
+            #         ###############################################################
+            #        # QR: a more accurate solution but slower than above fast approximation
+            #        ###############################################################
 
-#             c, arg = QR_process(om[:,dimid], N, J, K, snd[dimid])
+            #             c, arg = QR_process(om[:,dimid], N, J, K, snd[dimid])
 
-            #### phase shift
-#             ud += [QR2(om[:,dimid], N, J, K, snd[dimid], ft_flag[dimid]),]
-            ud += [min_max(N, J, K, alpha, beta, om[:, dimid], ft_flag[dimid]),]
+            # phase shift
+            #             ud += [QR2(om[:,dimid], N, J, K, snd[dimid], ft_flag[dimid]),]
+            ud += [min_max(N, J, K, alpha, beta, om[:, dimid], ft_flag[dimid]), ]
 
         else:
-            ud += [numpy.ones((1, M), dtype = dtype).T, ]
-
+            ud += [numpy.ones((1, M), dtype=dtype).T, ]
 
     """
     Now compute the column indices for 1D interpolators
@@ -769,18 +798,17 @@ def plan(om, Nd, Kd, Jd, ft_axes = None, format='CSR', radix = None):
     kd = []
     for dimid in range(0, dd):  # iterate over all dimensions
 
-        kd += [OMEGA_k(Jd[dimid],Kd[dimid], om[:,dimid], Kd, dimid, dd, ft_flag[dimid]).T, ]
+        kd += [OMEGA_k(Jd[dimid], Kd[dimid], om[:, dimid], Kd, dimid, dd, ft_flag[dimid]).T, ]
 
-
-    if format is 'CSR':
+    if format == 'CSR':
 
         CSR = full_kron(ud, kd, Jd, Kd, M)
         st['p'] = CSR
 #     st['ell'] = ELL
-        st['sn'] = kronecker_scale(snd).real # only real scaling is relevant
+        st['sn'] = kronecker_scale(snd).real  # only real scaling is relevant
         st['tSN'] = Tensor_sn(snd, len(Kd))
 #     ud2, kd2, Jd2 = partial_combination(ud, kd, Jd)
-    elif format is 'pELL':
+    elif format == 'pELL':
         if radix is None:
             radix = 1
         ud2, kd2, Jd2 = rdx_kron(ud, kd, Jd, radix=radix)
@@ -799,9 +827,10 @@ def plan(om, Nd, Kd, Jd, ft_axes = None, format='CSR', radix = None):
     # no dimension-reduction Nd -> Nd
     # Tuple (Nd) -> array (shape = M*sumJd)
 
-    return st #new
+    return st  # new
 
-def plan1(om, Nd, Kd, Jd, ft_axes = None):
+
+def plan1(om, Nd, Kd, Jd, ft_axes=None):
     """
     Compute the coil sensitivity aware interpolator
     """
@@ -816,7 +845,7 @@ def plan1(om, Nd, Kd, Jd, ft_axes = None):
     if type(Jd) != tuple:
         raise TypeError('Jd must be tuple, e.g. (6, 6)')
 
-    if (len(Nd) != len(Kd)) | (len(Nd) != len(Jd))  | len(Kd) != len(Jd):
+    if (len(Nd) != len(Kd)) | (len(Nd) != len(Jd)) | len(Kd) != len(Jd):
         raise KeyError('Nd, Kd, Jd must be in the same length, e.g. Nd=(256,256),Kd=(512,512),Jd=(6,6)')
 
     dd = numpy.size(Nd)
@@ -825,7 +854,7 @@ def plan1(om, Nd, Kd, Jd, ft_axes = None):
         ft_axes = tuple(xx for xx in range(0, dd))
 
 #     print('ft_axes = ', ft_axes)
-    ft_flag = () # tensor
+    ft_flag = ()  # tensor
 
     for pp in range(0, dd):
         if pp in ft_axes:
@@ -835,7 +864,6 @@ def plan1(om, Nd, Kd, Jd, ft_axes = None):
 
     st = {}
 
-
     st['tol'] = 0
     st['Jd'] = Jd
     st['Nd'] = Nd
@@ -843,7 +871,6 @@ def plan1(om, Nd, Kd, Jd, ft_axes = None):
     M = om.shape[0]
     st['M'] = numpy.int32(M)
     st['om'] = om
-
 
     for dimid in range(0, dd):
 
@@ -869,7 +896,7 @@ def plan1(om, Nd, Kd, Jd, ft_axes = None):
         list_C += [C, ]
         list_arg += [arg, ]
         list_bn += [bn, ]
-    st['sn'] = kronecker_scale(snd).real # only real scaling is relevant
+    st['sn'] = kronecker_scale(snd).real  # only real scaling is relevant
 
     # [J? M] interpolation coefficient vectors.
     # Iterate over all dimensions and
@@ -889,18 +916,18 @@ def plan1(om, Nd, Kd, Jd, ft_axes = None):
 
         if ft_flag[dimid] is True:
 
-            c = solve_c( list_C[dimid],  list_bn[dimid])
+            c = solve_c(list_C[dimid],  list_bn[dimid])
             # C: NxJ,
             # bn: NxM (xr)
             # c: J x M    (x    r)
 
-            u2 = OMEGA_u( c, N, K, om[:, dimid], list_arg[dimid], ft_flag[dimid]).T.conj()
+            u2 = OMEGA_u(c, N, K, om[:, dimid], list_arg[dimid], ft_flag[dimid]).T.conj()
             # u2: J x M    (x    r)
 
-            ud += [u2,]
+            ud += [u2, ]
 
         else:
-            ud += (numpy.ones((1, M), dtype = dtype).T, )
+            ud += (numpy.ones((1, M), dtype=dtype).T, )
 
     """
     Now compute the column indeces for 1D interpolators
@@ -911,15 +938,16 @@ def plan1(om, Nd, Kd, Jd, ft_axes = None):
 
     kd = []
     for dimid in range(0, dd):  # iterate over all dimensions
-        kd += (OMEGA_k(J,K, om[:,dimid], Kd, dimid, dd, ft_flag[dimid]).T, )
+        kd += (OMEGA_k(J, K, om[:, dimid], Kd, dimid, dd, ft_flag[dimid]).T, )
 
     CSR, ELL = full_kron(ud, kd, Jd, Kd, M)
     st['p'] = CSR
 
-    return st #new
+    return st  # new
+
 
 def plan0(om, Nd, Kd, Jd):
-#         self.debug = 0  # debug
+    #         self.debug = 0  # debug
 
     if type(Nd) != tuple:
         raise TypeError('Nd must be tuple, e.g. (256, 256)')
@@ -930,7 +958,7 @@ def plan0(om, Nd, Kd, Jd):
     if type(Jd) != tuple:
         raise TypeError('Jd must be tuple, e.g. (6, 6)')
 
-    if (len(Nd) != len(Kd)) | (len(Nd) != len(Jd))  | len(Kd) != len(Jd):
+    if (len(Nd) != len(Kd)) | (len(Nd) != len(Jd)) | len(Kd) != len(Jd):
         raise KeyError('Nd, Kd, Jd must be in the same length, e.g. Nd=(256,256),Kd=(512,512),Jd=(6,6)')
 
     dd = numpy.size(Nd)
@@ -1088,7 +1116,7 @@ def plan0(om, Nd, Kd, Jd):
 
     # Build sparse matrix (interpolator)
     st['p'] = scipy.sparse.csr_matrix((csrdata, (rowindx, colindx)),
-                                       shape=csrshape)
+                                      shape=csrshape)
     # Note: the sparse matrix requires the following linear phase,
     #       which moves the image to the center of the image
 
@@ -1119,7 +1147,8 @@ def plan0(om, Nd, Kd, Jd):
 
 #     st['p0'].prune() # Scipy sparse: removing empty space after all non-zero elements.
 
-    return st # plan0()
+    return st  # plan0()
+
 
 def strides_divide_itemsize(Nd):
     """
@@ -1139,19 +1168,18 @@ def strides_divide_itemsize(Nd):
 
     """
 
-    Nd_elements = tuple(numpy.prod(Nd[dd+1:]) for dd in range(0,len(Nd)))
+    Nd_elements = tuple(numpy.prod(Nd[dd+1:]) for dd in range(0, len(Nd)))
 #     Kd_elements = tuple(numpy.prod(Kd[dd+1:]) for dd in range(0,len(Kd)))
-    invNd_elements = 1/numpy.array(Nd_elements, dtype = numpy.float32)
+    invNd_elements = 1/numpy.array(Nd_elements, dtype=numpy.float32)
 
     return Nd_elements, invNd_elements
-
 
 
 def preindex_copy(Nd, Kd):
     """
     Building the array index for copying two arrays of sizes Nd and Kd.
     Only the front parts of the input/output arrays are copied.
-    The oversize  parts of the input array are truncated (if Nd > Kd), 
+    The oversize  parts of the input array are truncated (if Nd > Kd),
     and the smaller size are zero-padded (if Nd < Kd)
 
     :param Nd: tuple, the dimensions of array1
@@ -1174,23 +1202,23 @@ def preindex_copy(Nd, Kd):
     else:
         nelem = 1
         min_dim = ()
-        for pp in range(ndim - 1, -1,-1):
+        for pp in range(ndim - 1, -1, -1):
             YY = numpy.minimum(Nd[pp], Kd[pp])
             nelem *= YY
             min_dim = (YY,) + min_dim
         mylist = numpy.arange(0, nelem).astype(numpy.int32)
 #             a=mylist
-        BB=()
+        BB = ()
         for pp in range(ndim - 1, 0, -1):
-             a = numpy.floor(mylist/min_dim[pp])
-             b = mylist%min_dim[pp]
-             mylist = a
-             BB=(b,) + BB
+            a = numpy.floor(mylist/min_dim[pp])
+            b = mylist % min_dim[pp]
+            mylist = a
+            BB = (b,) + BB
 
         if ndim == 1:
-            mylist =  numpy.arange(0, nelem).astype(numpy.int32)
+            mylist = numpy.arange(0, nelem).astype(numpy.int32)
         else:
-            mylist = numpy.floor( numpy.arange(0, nelem).astype(numpy.int32)/ numpy.prod(min_dim[1:]))
+            mylist = numpy.floor(numpy.arange(0, nelem).astype(numpy.int32) / numpy.prod(min_dim[1:]))
 
         inlist = mylist
         outlist = mylist
@@ -1200,15 +1228,17 @@ def preindex_copy(Nd, Kd):
 
     return inlist.astype(numpy.int32), outlist.astype(numpy.int32), nelem.astype(numpy.int32)
 
+
 def dirichlet(x):
     return numpy.sinc(x)
+
 
 def outer_sum(xx, yy):
     """
     Superseded by numpy.add.outer() function
     """
 
-    return numpy.add.outer(xx,yy)
+    return numpy.add.outer(xx, yy)
 #     nx = numpy.size(xx)
 #     ny = numpy.size(yy)
 #
@@ -1266,7 +1296,7 @@ def nufft_alpha_kb_fit(N, J, K):
     sn_kaiser = sn_kaiser.reshape((N, 1), order='F').conj()
     X = numpy.array(X, dtype=dtype)
     sn_kaiser = numpy.array(sn_kaiser, dtype=dtype)
-    coef = numpy.linalg.lstsq(numpy.nan_to_num(X), numpy.nan_to_num(sn_kaiser), rcond = -1)[0]
+    coef = numpy.linalg.lstsq(numpy.nan_to_num(X), numpy.nan_to_num(sn_kaiser), rcond=-1)[0]
     alphas = coef
     if J > 1:
         alphas[0] = alphas[0]
@@ -1371,7 +1401,7 @@ def nufft_scale(Nd, Kd, alpha, beta):
 
 
 def mat_inv(A):
-#     I = numpy.eye(A.shape[0], A.shape[1])
+    #     I = numpy.eye(A.shape[0], A.shape[1])
     B = scipy.linalg.pinv2(A)
     return B
 
@@ -1410,10 +1440,11 @@ def nufft_r(om, N, J, K, alpha, beta):
     def iterate_sum(rr, alf, r1):
         rr = rr + alf * r1
         return rr
+
     def iterate_l1(L, alpha, arg, beta, K, N, rr):
         oversample_ratio = (1.0 * K / N)
         import time
-        t0=time.time()
+        t0 = time.time()
         for l1 in range(-L, L + 1):
             alf = alpha[abs(l1)] * 1.0
     #         if l1 < 0:
@@ -1452,6 +1483,7 @@ def block_outer_sum0(x1, x2):
 #     y = numpy.einsum('ik, jk->ijk', x1, x2)
     return y  # [J1 J2 M]
 
+
 def block_outer_prod(x1, x2):
     '''
     Multiply x1 (J1 x M) and x2 (J2xM) and extend the dimensions to 3D (J1xJ2xM)
@@ -1488,10 +1520,12 @@ def crop_slice_ind(Nd):
     This function is superseded by preindex_copy(), which avoid run-time indexing.
     '''
     return [slice(0, Nd[ss]) for ss in range(0, len(Nd))]
+
+
 def device_list():
     """
     device_list() returns available devices for acceleration as a tuple.
-    If no device is available, it returns an empty tuple. 
+    If no device is available, it returns an empty tuple.
     """
     from reikna import cluda
     import reikna.transformations
@@ -1505,7 +1539,7 @@ def device_list():
             cuda_gpus = available_cuda_device[api_n]
     #         print('cuda_gpus = ', cuda_gpus)
             for dev_num in cuda_gpus:
-                
+
                 id = available_cuda_device[api_n][dev_num]
                 platform = api.get_platforms()[api_n]
                 device = platform.get_devices()[id]
@@ -1526,7 +1560,7 @@ def device_list():
             ocl_gpus = available_ocl_device[api_n]
     #         print('cuda_gpus = ', cuda_gpus)
             for dev_num in ocl_gpus:
-                
+
                 id = available_ocl_device[api_n][dev_num]
                 platform = api.get_platforms()[api_n]
                 device = platform.get_devices()[id]
@@ -1534,13 +1568,14 @@ def device_list():
                 wavefront = api.DeviceParameters(device).warp_size
                 devices_list += (('ocl',  api_n, dev_num, platform, device, thr, wavefront),)
     except:
-        pass    
+        pass
 #             print("API='cuda',  ", "platform_number=", api_n,
 #                   ", device_number=", available_cuda_device[api_n][0])
 #     except:
 #         pass
-    
+
     return devices_list
+
 
 def diagnose(verbosity=0):
     """
@@ -1581,6 +1616,8 @@ def diagnose(verbosity=0):
         print('ocl interface is not available')
         ocl_flag = 0
     return cuda_flag, ocl_flag
+
+
 if __name__ == '__main__':
     devices = device_list()
     for pp in range(0, len(devices)):

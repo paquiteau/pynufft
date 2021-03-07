@@ -10,13 +10,14 @@ import numpy.fft
 import scipy.linalg
 import scipy.special
 
-from ..src._helper import helper#helper1
+from ..src._helper import helper  # helper1
 
 
 class NUFFT_cpu:
     """
     Class NUFFT_cpu
    """
+
     def __init__(self):
         """
         Constructor.
@@ -109,7 +110,7 @@ class NUFFT_cpu:
 #             self.parallel_flag = 1
 #             self.batch = batch
 
-        if self.parallel_flag is 1:
+        if self.parallel_flag == 1:
             self.multi_Nd = self.Nd + (self.batch, )
             self.uni_Nd = self.Nd + (1, )
             self.multi_Kd = self.Kd + (self.batch, )
@@ -117,7 +118,7 @@ class NUFFT_cpu:
             self.multi_prodKd = (numpy.prod(self.Kd), self.batch)
             self.sn = numpy.reshape(self.sn, self.Nd + (1,))
 
-        elif self.parallel_flag is 0:
+        elif self.parallel_flag == 0:
             self.multi_Nd = self.Nd  # + (self.Reps, )
             self.uni_Nd = self.Nd
             self.multi_Kd = self.Kd  # + (self.Reps, )
@@ -126,9 +127,9 @@ class NUFFT_cpu:
 
         # Calculate the density compensation function
         self.sp = self.st['p'].copy().tocsr()
-        
+
         self.spH = (self.st['p'].getH().copy()).tocsr()
-        
+
         self.Kdprod = numpy.int32(numpy.prod(self.st['Kd']))
         self.Jdprod = numpy.int32(numpy.prod(self.st['Jd']))
         del self.st['p'], self.st['sn']
@@ -292,7 +293,7 @@ class NUFFT_cpu:
         Second, copy self.x_Nd array to self.k_Kd array by cSelect
         Third, inplace FFT
         """
-        
+
         output_x = numpy.zeros(self.multi_Kd, dtype=self.dtype, order='C')
 
         for bat in range(0, self.batch):
@@ -300,7 +301,7 @@ class NUFFT_cpu:
                 self.NdCPUorder * self.batch + bat]
 
         k = numpy.fft.fftn(output_x, axes=self.ft_axes)
-        
+
         return k
 
     def xx2k_one2one(self, xx):
@@ -311,14 +312,14 @@ class NUFFT_cpu:
         Second, copy self.x_Nd array to self.k_Kd array by cSelect
         Third, inplace FFT
         """
-        
+
         output_x = numpy.zeros(self.st['Kd'], dtype=self.dtype, order='C')
 
         # for bat in range(0, self.batch):
         output_x.ravel()[self.KdCPUorder] = xx.ravel()[self.NdCPUorder]
 
         k = numpy.fft.fftn(output_x, axes=self.ft_axes)
-        
+
         return k
 
     def k2vec(self, k):

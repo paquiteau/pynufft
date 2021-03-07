@@ -73,9 +73,9 @@ class NUFFT_hsa_legacy:
         print('API = ', API)
         self.cuda_flag, self.ocl_flag = helper.diagnose()
         if None is API:
-            if self.cuda_flag is 1:
+            if self.cuda_flag == 1:
                 API = 'cuda'
-            elif self.ocl_flag is 1:
+            elif self.ocl_flag == 1:
                 API = 'ocl'
             else:
                 print('No accelerator is available.')

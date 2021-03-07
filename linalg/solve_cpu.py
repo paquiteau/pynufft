@@ -29,7 +29,7 @@ def _create_kspace_sampling_density(nufft):
         y = numpy.ones(nufft.st['M'],dtype = numpy.complex64)
 #         w = numpy.abs(nufft.xx2k(nufft.adjoint(y)))
         
-        if nufft.parallel_flag is 1:
+        if nufft.parallel_flag == 1:
             w =  numpy.abs( nufft.xx2k(nufft.adjoint(y)))[..., 0]#**2) ))
         else:
             w =  numpy.abs( nufft.xx2k(nufft.adjoint(y)))#**2) ))
